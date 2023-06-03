@@ -1,0 +1,256 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+:root {
+	--primary: rgb(60, 65, 133);
+	--brown: rgb(66, 66, 66);
+	--red: rgb(80, 86, 168);
+	--hover: #027be9 ;
+	--White: #eee ;
+}
+body {
+	background: linear-gradient(90deg, #0f0c29, #302b63, #24243e);
+	/* background: linear-gradient(90deg, var(--brown), var(--primary));	 */
+	font-size: 16px;	
+}
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;	
+	font-family: Raleway, sans-serif;
+}
+/* end navbar */
+
+.main-table{
+	-webkit-box-shadow: 0px 1px 12px var(--hover);
+	-moz-box-shadow: 0px 1px 12px var(--hover);
+  box-shadow: 0px 1px 12px var(--hover);
+	
+}
+.container td:first-child { color: #FB667A; }
+.container td:hover {
+background-color:#2d2a60a2;
+color: #000000;
+font-weight: bold;
+
+transition-delay: 0s;
+	transition-duration: 0.4s;
+	transition-property: all;
+transition-timing-function: line;
+}
+a.nav-link:hover{
+	color: var(--hover);
+}
+.dropdown-menu {
+	top: 117% !important;
+	left: -11% !important;
+	background-color: var(--hover);
+}
+.navbar-toggler {
+	padding: 0.25rem 0.75rem;
+	font-size: 1.25rem;
+	line-height: 1;
+	border: 1px solid #eee !important;
+	border-radius: 0.25rem;
+}
+a.nav-link {
+	color: white;
+}
+a.dropdown-item {
+	color: #eee;
+}
+/* end navbar */
+/* Start Dashboard Page */
+
+.home-stats .stat {
+	padding: 20px;
+	font-size: 15px;
+	color: #FFF;
+	border-radius: 10px;
+	position: relative;
+	overflow: hidden;
+}
+
+.home-stats .stat i {
+    position: absolute;
+    font-size: 80px;
+    top: 35px;
+    left: 30px;
+}
+
+.home-stats .stat .info {
+	float: right;
+}
+
+.home-stats .stat a {
+	color: #FFF;
+}
+
+.home-stats .stat a:hover {
+	text-decoration: none;
+}
+
+.home-stats .stat span {
+	display: block;
+	font-size: 60px;
+}
+
+.home-stats .st-members {
+	background-color: #4b50da;
+}
+
+.home-stats .st-pending {
+	background-color: #c0392b;
+}
+
+.home-stats .st-items {
+	background-color: #0f525e;
+}
+
+.home-stats .st-comments {
+	background-color: #760ba0;
+}
+
+/* .latest {
+	margin-top: 30px;
+}
+
+.latest .toggle-info {
+	color: #999;
+	cursor: pointer
+}
+
+.latest .toggle-info:hover {
+	color: #444;
+}
+
+.latest-users {
+	margin-bottom: 0;
+}
+
+.latest-users li {
+	padding: 10px;
+	overflow: hidden;
+}
+
+.latest-users li:nth-child(odd) {
+	background-color: #EEE;
+}
+
+.latest-users .btn-success,
+.latest-users .btn-info {
+	padding: 2px 8px;
+}
+
+.latest-users .btn-info {
+	margin-right: 5px;
+}
+
+.latest .comment-box {
+	margin: 5px 0 10px;
+}
+
+.latest .comment-box .member-n,
+.latest .comment-box .member-c {
+	float: left;
+}
+
+.latest .comment-box .member-n {
+	width: 80px;
+	text-align: center;
+	margin-right: 20px;
+	position: relative;
+	top: 10px;
+}
+
+.latest .comment-box .member-c {
+    width: calc(100% - 100px);
+    background-color: #EFEFEF;
+    padding: 10px;
+    position: relative;
+}
+
+.latest .comment-box .member-c:before {
+	content: "";
+	display: block;
+	position: absolute;
+	left: -28px;
+	top: 5px;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-color: transparent #EFEFEF transparent transparent;
+	border-width: 15px;
+} */
+
+/* End Dashboard Page */
+/* Start edit form */
+*{
+	box-sizing: border-box;
+
+}
+
+body{
+	background-color: #f1f1f1;
+}
+h1{
+	font-family: 'Raleway', sans-serif;
+	color: var(--White);
+	font-weight: 900;
+	letter-spacing: -4px;
+	font-size: 56px;
+}
+.btn{
+	PADDING: 2PX 10px;
+}
+.alert{
+	margin-bottom: 10px;
+}
+.contact-form {
+	max-width: 400px ;
+	margin: 10px auto;
+	position: relative;
+}
+.contact-form .custom-alert{
+	padding: 5px 10px;
+}
+.contact-form .form-group {
+	margin-bottom: 0px;
+	position: relative;
+}
+.contact-form .axstrisx {
+	position: absolute;
+	font-size: 22px;
+	top: 5px;
+	color: #ff7272;
+	right: 5px;
+}
+input{
+	transition: 1.5s ease-in-out;
+}
+textarea,input:hover{
+	border: 1px solid var(--primary);
+}
+.contact-form input , textarea{
+	margin-bottom: 10px;
+}
+.btn-success {
+	color: #fff;
+	background-color: var(--primary);
+	border-color: var(--red);
+}
+.btn-success:hover {
+	color: #fff;
+	background-color: var(--hover);
+	border-color: #484c8c;
+}
+/* End edit form */
+/* Start  Table  edit */
+.main-table td{
+	background-color: #2e2a60;
+}
+.main-table tr:first-child td{
+
+	color: #eee;
+	background-color: #007bff;
+
+}
+/* END  Table  edit */
