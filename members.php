@@ -219,17 +219,28 @@ if(isset($_SESSION['Username'])){
             }
         }//End Insert page.
     elseif($do == "Edit"){  //Edit page
+
           // Chek if  Get Request is numaric & Get the integer value of it
+
           $userid = isset($_GET['ID'])&& is_numeric($_GET['ID']) ? intval($_GET['ID']) : 0 ;
+
           //Select all data Depend On this ID
+
           $stetment = $connection->prepare("SELECT *  FROM users  WHERE UserID = ?");
+
           //Execute query
+
           $stetment ->execute(array($userid));
+
           //If the entered data exists, it will be stored here/ Fetch the data
+
           $row = $stetment->fetch();
+
           //The Row Count
           $count = $stetment->rowcount();
+
           if($count > 0) { ?>
+
               <!--start Edit Form-->
               <div class="continyer">
                   <h1 class="text-center"><?php echo lang("EditMemper")?></h1>
@@ -302,36 +313,55 @@ if(isset($_SESSION['Username'])){
                 redirect_home($errormsg);
               }
     }elseif($do == "Update"){// Start The Update page....
+
         echo      "<h1 class='text-center'>". lang("EditMemper")."</h1>";
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
           //Get  Variabels from the from....
           $userid     = $_POST['userid'];
+
           $user = filter_var($_POST['username'],FILTER_SANITIZE_STRING);
+
           $email = filter_var($_POST ['email'],FILTER_SANITIZE_EMAIL);
+
           $full  = filter_var($_POST['fullname'],FILTER_SANITIZE_STRING);
+
           //The password Trik....
           // if condition....
           $pass = empty($_POST['newpassword']) ? $pass = $_POST['oldpassword'] : sha1($_POST['newpassword']);
+
           //Start Check the data sent....
               //Creatinh Array of errors
               $formNameError = array() ;
+
               if(empty($user)){
+
                 $formNameError[] = "Username Cant Be Empty..!";
+
               }
               if(strlen($user) < 3 ){
+
                 $formNameError[] = "Username Nust  be Lareger Than <strong>5</strong> Characters..!";
+
               }
               if(strlen($pass) < 2  ){
+
                 $formNameError[] = "cellnumper Nust be Larger Then <strong>8</strong> Numper..!";
+
               }
               if(empty($full) ){
+
                 $formNameError[] = "Fullname Cant Be Empty..!";
+
               }
               if(strlen($full) <= 1 ){
+
                 $formNameError[] = "Message Nust be Lareger Then  <strong> 10</strong> Characters..!";
+
               }
               if( ! empty($formNameError)) { ?>
+
                   <div class="alert alert-danger" role="alert">
 
                     <?php
@@ -356,8 +386,8 @@ if(isset($_SESSION['Username'])){
         }
         //End Update page
     }elseif ($do == 'Delete'){
-          // Chek if  Get Request is numeric & Get the integer value of it
-            $userid = isset($_GET['ID'])&& is_numeric($_GET['ID']) ? intval($_GET['ID']) : 0 ;
+            // Chek if  Get Request is numeric & Get the integer value of it
+            $userid = isset($_GET['catid'])&& is_numeric($_GET['ID']) ? intval($_GET['ID']) : 0 ;
 
             $chek = chekitem('UserID' , 'users' , $userid);
 

@@ -395,5 +395,9 @@ textarea,input:hover{
 	color: #F00;
 	display: none;
 }
+.margin-categories{
+	margin: 6px  5px;
+
+}
 
 /* End Category Page */

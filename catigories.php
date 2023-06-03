@@ -5,7 +5,7 @@
     ======== This page you Can Add/Edit.Delete Member From here=
     =============================================================
     */
-global $connection, $do;
+global $connection, $do, $temp;
 session_start();
      if(isset($_SESSION['Username'])){
 
@@ -60,7 +60,7 @@ session_start();
                                 echo "<div class='cat'>";
                                 echo "<div class='hidden-buttons'>";
                                 echo "<a href='catigories.php?do=Edit&catid=".$cat['ID']."' class='btn btn-xs btn-primary'><i class='fa fa-edit'></i> Edit</a>";
-                                echo "<a href='catigories.php?do=Delete&catid=" . $cat['ID'] . "' class='confirm btn btn-xs btn-danger'><i class='fa fa-close'></i> Delete</a>";
+                                echo "<a href='catigories.php?do=Delete&catid=" . $cat['ID'] . "' class=' btn btn-xs btn-danger confirm'><i class='fa fa-close'></i> Delete</a>";
                                 echo "</div>";
                                 echo "<h3>" . $cat['Name'] . '</h3>';
                                 echo "<div class='full-view'>";
@@ -76,6 +76,8 @@ session_start();
                          ?>
                      </div>
                  </div>
+                 <a class=" margin-categories btn btn-primary btn-lg" href="?do=Add" role="button"><i class="fa-solid fa-plus"></i>     Add Member    </a>
+
              </div>
 
 
@@ -237,7 +239,7 @@ session_start();
                      </div>
                      <div class="row">
                          <div class="col-md-6 offset-md-3">
-                             <form class="form-horizontal" action="?do=Insert" method="POST">
+                             <form class="form-horizontal" action="?do=Update" method="POST">
 
                                  <!-- Start cat name field -->
                                  <div class="form-group">
@@ -337,18 +339,89 @@ session_start();
 
              echo  '<h1 class="text-center">'.lang("INSERTMEMBER").'</h1>';
 
+             if($_SERVER['REQUEST_METHOD'] == "POST"){
+                 //Check the category name
+                 $cat_id          = $_POST['cat_id'];
+                 $name            = $_POST['name'];
+                 $description     = $_POST['description'];
+//                 $parent          = $_POST['parent'];
+                 $ordering        = $_POST['ordering'];
+                 $visibility      = $_POST['visibility'];
+                 $commenting      = $_POST['commenting'];
+                 $ads             = $_POST['ads'];
+                 //Check the category name
+
+                     //Update the  database with This Information
+                     $statement=$connection->prepare(
+                         "UPDATE categories SET 
+                                                      Name          = ? ,
+                                                      Description   = ?  ,
+                                                      Ordering      = ?, 
+                                                      Visibility    = ? ,
+                                                      Allow_Comment = ? , 
+                                                      Allow_Ads     = ? 
+                                                    WHERE ID = ?");
+
+                     $statement->execute(array($name , $description , $ordering , $visibility , $commenting , $ads ,$cat_id));
+                     $count = $statement->rowCount();
+                     if($count > 0){
+
+                         //End Update the  database with This Information
+                         echo '<div class="container">' ;
+                         $themesg     ='<div class=" alert alert-info">'.$statement->rowCount().'Record updated...</div>' ;
+                         $page_adress = 'catigories.php?Edit';
+                         redirect_home($themesg,2,$page_adress);
+                     }
+
+
+
+                 echo '</div>';
+
+             }else{ // error page
+                 header('Location:members.php');
+                 exit();
+             }
+
 
          }elseif ($do == 'Delete'){
 
              echo  '<h1 class="text-center">'.lang("DELETEMEMBER").'</h1>';
 
-         }else{
+             $catid = isset($_GET['catid']) && is_numeric($_GET['catid']) ? intval($_GET['catid']) : 0 ;
+
+             $check = chekitem('ID' , 'categories' ,$catid );
+
+             if($check  > 0 ){
+
+                 $statement=$connection->prepare("DELETE  FROM categories  WHERE ID = ?  ");
+
+                 $statement->execute(array($catid));
+
+                 // Redirect to another page
+                 echo '<div class="container">' ;
+                 $page_adress = 'catigories.php';
+                 $themesg ='<div class="alert alert-info">The deletion was completed successfully...!</div>';
+                 redirect_home($themesg,1,$page_adress);
+                 echo '</div>' ;
+             }else{
+                 echo '<div class="container">' ;
+                 $page_adress = 'catigories.php';
+                 $themesg ='<div class="alert alert-danger">This user does not exist...!</div>';
+                 redirect_home($themesg,1,$page_adress);
+                 echo '</div>' ;
+             }
+
+         }//End Delete  page...
+         else{//End categories  page...
 
              header('Location:index.php'); // This page does not exist. Invalid login
              exit();
 
          }
 
+
+         //End manage page...
+         include $temp."footer.php";
     }else{
         header('Location:index.php'); // user is not admin  Around the index.php page
         exit();
