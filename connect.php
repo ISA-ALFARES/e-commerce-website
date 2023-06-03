@@ -9,6 +9,7 @@
     try                                           //exception system
     {
         $connection = new PDO( $dsn,$user,$pass,$optaion);    //Start A new connection with Pdo class
+
         $connection ->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
         // echo "You Are connected..";                  //try condation  
     }

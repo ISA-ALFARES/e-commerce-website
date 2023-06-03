@@ -1,9 +1,23 @@
 <?php
-session_start();
-if(isset($_SESSION['Username'])){
 
-      $page_title = 'DASHBORD'; // The page name
-      include 'init.php'; 
+    global $temp;
+    session_start();
+
+    if(isset($_SESSION['Username'])){
+
+      $page_title = 'DASHBOARD'; // The page name
+
+       include 'init.php';
+
+      /* Start Dashboard Page */
+
+        // This function shows me a list of the data I want from the database
+
+        $numUsers = 6;  // Number Of Latest Users
+
+        $theLatest = getLatest('*' ,'users' , 'Username' , $numUsers );
+
+
       ?>
 		<div class="home-stats">
 			<div class="container text-center">
@@ -15,7 +29,7 @@ if(isset($_SESSION['Username'])){
 							<div class="info">
 								Total Members
 								<span>
-									<a href="members.php"> <?php echo count_items('UserID' ,'users'); ?> </a>
+									<a href="members.php"> <?= count_items('UserID' ,'users') ?> </a>
 								</span>
 							</div>
 						</div>
@@ -26,9 +40,7 @@ if(isset($_SESSION['Username'])){
 							<div class="info">
 								Pending Members
 								<span>
-									<a href="members.php?do=Manage&page=Pending">
-										13
-									</a>
+									<a href="members.php?do=Mangae&page=pending"><?= count_items('UserID' ,'users' , 'WHERE RegStatus = 0 ') ?></a>
 								</span>
 							</div>
 						</div>
@@ -39,7 +51,7 @@ if(isset($_SESSION['Username'])){
 							<div class="info">
 								Total Items
 								<span>
-									<a href="items.php">12</a>
+									<a href="#">12</a>
 								</span>
 							</div>
 						</div>
@@ -50,7 +62,7 @@ if(isset($_SESSION['Username'])){
 							<div class="info">
 								Total Comments
 								<span>
-									<a href="comments.php">15</a>
+									<a href="#">15</a>
 								</span>
 							</div>
 						</div>
@@ -58,10 +70,85 @@ if(isset($_SESSION['Username'])){
 				</div>
 			</div>
 		</div>
-      <?php
-      include $temp."footer.php";
+        <div class="latest">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <i class="fa fa-users"></i>
+                                Latest <?php echo 6 ?>  Registerd Users
+                                <span class="toggle-info pull-right">
+									<i class="fa fa-plus fa-lg"></i>
+								</span>
+                            </div>
+                            <div class="panel-body">
+                                <ul class="list-group latest-users">
+                                    <?php
+                                    if (! empty($theLatest)) {
+                                        foreach ($theLatest as $user) {
+                                            echo '<li class="list-group-item">';
+                                            echo $user['Username'];
+                                            echo '<a href="members.php?do=Edit&ID=' . $user['UserID'] . '">';
+                                            echo '<span class="btn btn-success pull-right">';
+                                            echo '<i class="fa fa-edit"></i> Edit';
+                                            if ($user['RegStatus'] == 0) {
+                                                echo "<a 
+																	href='members.php?do=activate&ID=" . $user['UserID'] . "' 
+																	class='btn btn-info pull-right activate'>
+																	<i class='fa fa-check'></i> Activate</a>";
+                                            }
+                                            echo '</span>';
+                                            echo '</a>';
+                                            echo '</li>';
+                                        }
+                                    } else {
+                                        echo 'There\'s No Members To Show';
+                                    }
+                                    ?>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <i class="fa fa-tag"></i> Latest  Items
+                                <span class="toggle-info pull-right">
+									<i class="fa fa-plus fa-lg"></i>
+								</span>
+                            </div>
+                            <div class="panel-body">
+                                <ul class="list-unstyled latest-users">
 
-}else{
-  header('Location:index.php');// user is not admin  Around the index.php page 
-  exit();
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Start Latest Comments -->
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <i class="fa fa-comments-o"></i>
+                                Latest Comments
+                                <span class="toggle-info pull-right">
+									<i class="fa fa-plus fa-lg"></i>
+								</span>
+                            </div>
+                            <div class="panel-body">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Latest Comments -->
+            </div>
+        </div>
+		<?php
+        include $temp."footer.php";
+    }else{
+      header('Location:index.php');// user is not admin  Around the index.php page
+      exit();
 }
+

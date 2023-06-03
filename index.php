@@ -1,7 +1,6 @@
-
-
 <?php
-    session_start();
+global $temp;
+session_start();
     $no_navbar =''; //On the login (index.php) page, the navbar should not appear
     $page_title = 'LOGIN';
     //If the user is already logged in, direct them to the appropriate page
@@ -19,7 +18,7 @@
         $hashedpass = sha1($password);
 
         //chek if the user exist in databases
-        $stetment = $connection->prepare("SELECT
+        $stetment =  $connection->prepare("SELECT
                           UserID , 
                           Username,
                           Email,
@@ -89,4 +88,4 @@
 			</div>
 	</div>
 <!-- partial -->
-<?php include $temp."footer.php"; ?>
+ <?php include $temp."footer.php"; ?>
