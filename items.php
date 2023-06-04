@@ -65,13 +65,45 @@ session_start();
                     </div>
                     <!-- End username field -->
                     <!-- Start Status Field -->
-                    <div class="form-group">
-                        <select  class="form-control" name="status">
+                    <div class="form-group ">
+                        <select  class="form-control selection " name="status">
                             <option value="0">Status</option>
                             <option value="1">New</option>
                             <option value="2">Like New</option>
                             <option value="3">Used</option>
                             <option value="4">Very Old</option>
+                        </select>
+                    </div>
+                    <!-- End Status Field -->
+                    <!-- Start Status Field -->
+                    <div class="form-group">
+                        <select  class="form-control selection" name="status">
+                            <option value="0">Member</option>
+                            <?php
+                            $stetment=$connection->prepare("SELECT * FROM users");
+                            $stetment ->execute();
+                            $users =$stetment ->fetchAll();
+                            foreach ($users as $user ){
+                                echo  "<option value='".$user['UserID']."'>" . $user['Username'] . "</option>";
+                            }
+                            ?>
+
+                        </select>
+                    </div>
+                    <!-- End Status Field -->
+                    <!-- Start Status Field -->
+                    <div class="form-group">
+                        <select  class="form-control selection " name="status">
+                            <option value="0">Member</option>
+                            <?php
+                            $stetment=$connection->prepare("SELECT * FROM categories");
+                            $stetment ->execute();
+                            $cats =$stetment ->fetchAll();
+                            foreach ($cats as $cat ){
+                                echo  "<option value='".$cat['ID']."'>" . $cat['Name'] . "</option>";
+                            }
+                            ?>
+
                         </select>
                     </div>
                     <!-- End Status Field -->
