@@ -323,7 +323,7 @@ session_start();
                                          <input type="submit" value="Save Category" class="btn btn-primary">
                                      </div>
                                  </div>
-                                 <!-- End  Ads field -->
+                                 <!-- End  saeve field -->
                              </form>
                          </div>
                      </div>

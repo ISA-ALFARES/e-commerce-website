@@ -11,6 +11,7 @@
         <li class="nav-item"><a class="nav-link" href="catigories.php"><?php echo lang('CATIGORIES')?></a></li>
           <li class="nav-item"><a class="nav-link" href="dashbord.php"><?php echo lang('DASHBOARD')?></a></li>
           <li class="nav-item"><a class="nav-link" href="members.php"><?php echo lang('MEMBERS')?></a></li>
+          <li class="nav-item"><a class="nav-link" href="items.php"><?php echo lang('ITEMS')?></a></li>
             <li class="nav-item dropdown   ">
                   <a class="nav-link dropdown-toggle"
                     href="#"

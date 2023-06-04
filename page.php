@@ -1,4 +1,5 @@
 <?php
+global $temp;
 $do = '';
 
 if(isset($_GET['do'])){
@@ -13,16 +14,21 @@ if(isset($_GET['do'])){
     echo '<a href="page.php?do=Edit">Edit  ..<br></a>';
     echo '<a href="page.php?do=Update">Update  ..<br></a>';
   }elseif($do == 'Edit'){
+
     echo 'Welcome  you are in Edit  category';
   }elseif($do == 'Add'){
+
     echo 'Welcome  you are in Add  category';
   }elseif($do == 'Delete'){
+
     echo 'Welcome  you are in Delete  category';
+
   }elseif($do == 'Update'){
+
     echo 'Welcome  you are in Update  category';
   }else{
     echo 'Error  There\'s no page with the name...';
   }
 
-
-?>
+//End manage page...
+include $temp."footer.php";

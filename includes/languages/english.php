@@ -8,6 +8,7 @@
             'LANGUAGE'       => "Language" ,
             'CATIGORIES'    => "Catigories",
             'DASHBOARD'     => "Dashboard" ,
+            'ITEMS'         => "Items" ,
             'ACCOUNT'          => "my account",
                 'EDIT'      => "Edit Profile",
                     'ADDMEMBER'      => "Add page" ,
