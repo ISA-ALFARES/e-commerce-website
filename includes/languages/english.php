@@ -19,6 +19,8 @@
                     'UPDATE-MEMBER'   => "Update Member" ,
                 'SITTING'    => "Sittings",
                 'LOGOUT'     => "Logout" ,
+                    'MANAGE_ITEMS'   =>  "Manage items" ,
+                    'ADD_ITEMS'   =>  "Add Items" ,
 
                 //End  NavbarPages
 

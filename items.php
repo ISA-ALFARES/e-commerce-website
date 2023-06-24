@@ -9,8 +9,11 @@ session_start();
         $do =    isset($_GET['do'])  ?    $_GET['do']    :  'Manage';
         if($do == "Manage"){
 
-                $stetment=$connection->prepare("SELECT * FROM  items ");
-
+                $stetment=$connection->prepare("SELECT items.* , categories.Name AS 'Catigore Name ',users.Username 
+                            FROM items 
+                            INNER JOIN categories ON categories.ID = items.Cat_ID 
+                            INNER JOIN users ON users.UserID =items.Member_ID ;
+                            ");
                 //execute the data entered by the user
                 $stetment->execute();
 
@@ -19,7 +22,7 @@ session_start();
                 ?>
                 <div class="container">
                     <div class="table-responsive">
-                        <h1 class="text-center"><?php echo lang("MANAGEMEMBER")?></h1>
+                        <h1 class="text-center"><?php echo lang("MANAGE_ITEMS")?></h1>
                         <table class="main-table text-center table text-white table-bordered border-danger ">
                             <tr>
                                 <td>ID</td>
@@ -27,6 +30,8 @@ session_start();
                                 <td>Description</td>
                                 <td>Price</td>
                                 <td>Adding Date</td>
+                                <td>Catigore name</td>
+                                <td>User name</td>
                                 <td>Control</td>
                             </tr>
                             <tr>
@@ -38,6 +43,8 @@ session_start();
                                     echo "<td>" . $row['Description'] . "</td>";
                                     echo "<td>" . $row['Price'] . "</td>";
                                     echo "<td>" . $row['Add_Data']."</td>";
+                                    echo "<td>" . $row['Name']."</td>";
+                                    echo "<td>" . $row['Username']."</td>";
                                     echo "<td>
                               <a class='btn btn-success' href='items.php?do=Edit&ID=".$row['Item_ID']."' role='button'><i class='fa-solid fa-pen-to-square'> </i> Edit </a>
                               <a  href='items.php?do=Delete&ID=".$row['Item_ID']."' role='button' class='btn btn-danger confirm' ><i class='fa-regular fa-trash-can'> </i> Delete </a>";
@@ -58,7 +65,7 @@ session_start();
             ?>
             <!--start Add Form-->
             <div class="continyer">
-                <h1 class="text-center"><?php echo lang("ADDMEMBER")?></h1>
+                <h1 class="text-center"><?php echo lang("ADD_ITEMS")?></h1>
                 <form class="contact-form" action="<?php echo "?do=Insert" ?>" method="POST">
                     <!-- Start item name field -->
                     <i class="fa-solid fa-caret-right icons"></i>
