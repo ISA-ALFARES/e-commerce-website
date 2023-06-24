@@ -8,12 +8,48 @@ session_start();
 
         $do =    isset($_GET['do'])  ?    $_GET['do']    :  'Manage';
         if($do == "Manage"){
-            echo "hello isa";
-            echo 'Welcome  you are in manage  category<br>';
-            echo '<a href="items.php?do=Add">Add New Category..<br></a>';
-            echo '<a href="items.php?do=Edit">Edit  ..<br></a>';
-            echo '<a href="items.php?do=Update">Update  ..<br></a>';
 
+                $stetment=$connection->prepare("SELECT * FROM  items ");
+
+                //execute the data entered by the user
+                $stetment->execute();
+
+                //Assign to variable...
+                $rows = $stetment->fetchAll();
+                ?>
+                <div class="container">
+                    <div class="table-responsive">
+                        <h1 class="text-center"><?php echo lang("MANAGEMEMBER")?></h1>
+                        <table class="main-table text-center table text-white table-bordered border-danger ">
+                            <tr>
+                                <td>ID</td>
+                                <td>Name</td>
+                                <td>Description</td>
+                                <td>Price</td>
+                                <td>Adding Date</td>
+                                <td>Control</td>
+                            </tr>
+                            <tr>
+                                <?php
+                                foreach($rows as $row){
+                                    echo "<tr>";
+                                    echo "<td>" . $row['Item_ID'] . "</td>";
+                                    echo "<td>" . $row['Name'] . "</td>";
+                                    echo "<td>" . $row['Description'] . "</td>";
+                                    echo "<td>" . $row['Price'] . "</td>";
+                                    echo "<td>" . $row['Add_Data']."</td>";
+                                    echo "<td>
+                              <a class='btn btn-success' href='items.php?do=Edit&ID=".$row['Item_ID']."' role='button'><i class='fa-solid fa-pen-to-square'> </i> Edit </a>
+                              <a  href='items.php?do=Delete&ID=".$row['Item_ID']."' role='button' class='btn btn-danger confirm' ><i class='fa-regular fa-trash-can'> </i> Delete </a>";
+
+                                }
+                                ?>
+                            </tr>
+                        </table>
+                        <a class="btn btn-primary btn-lg" href="?do=Add" role="button"><i class="fa-solid fa-plus"></i>     Add Item    </a>
+                    </div>
+                </div>
+        <?php
         }elseif($do == 'Edit'){
 
             echo 'Welcome  you are in Edit  category';
@@ -180,7 +216,7 @@ session_start();
                 else{
 
                     $stetment=$connection->prepare("INSERT INTO 
-                        items(Name , Description , Price , Status , Country  , ADD_Data  , Cat_ID , Member_ID )
+                        items(Name , Description , Price , Status , Country  , Add_Data  , Cat_ID , Member_ID )
                         VALUES (:zname ,:zdescription ,:zprice ,:zstatus, :zcountry ,now()  ,:zcatigores ,:zmember)");
                     $stetment->execute(array(
 
