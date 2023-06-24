@@ -75,9 +75,39 @@ session_start();
                         </select>
                     </div>
                     <!-- End Status Field -->
-                    <!-- Start Status Field -->
+                    <!-- Start Country name field -->
+                    <i class="fa-solid fa-caret-right icons"></i>
                     <div class="form-group">
-                        <select  class="form-control selection" name="status">
+                        <input
+
+                                class="form-control"
+                                type="text"
+                                name="country"
+                                placeholder="    Enter the Country name...! "
+                                value=""
+                                required="required">
+                        <span class="axstrisx">*</span>
+                    </div>
+                    <!-- End Country field -->
+                    <!-- Start Catigore Field -->
+                    <div class="form-group">
+                        <select  class="form-control selection " name="catigore">
+                            <option value="0">Catigore</option>
+                            <?php
+                            $stetment=$connection->prepare("SELECT * FROM categories");
+                            $stetment ->execute();
+                            $cats =$stetment ->fetchAll();
+                            foreach ($cats as $cat ){
+                                echo  "<option value='".$cat['ID']."'>" . $cat['Name'] . "</option>";
+                            }
+                            ?>
+
+                        </select>
+                    </div>
+                    <!-- End Catigore Field -->
+                    <!-- Start Member Field -->
+                    <div class="form-group">
+                        <select  class="form-control selection" name="member">
                             <option value="0">Member</option>
                             <?php
                             $stetment=$connection->prepare("SELECT * FROM users");
@@ -90,37 +120,7 @@ session_start();
 
                         </select>
                     </div>
-                    <!-- End Status Field -->
-                    <!-- Start Status Field -->
-                    <div class="form-group">
-                        <select  class="form-control selection " name="status">
-                            <option value="0">Member</option>
-                            <?php
-                            $stetment=$connection->prepare("SELECT * FROM categories");
-                            $stetment ->execute();
-                            $cats =$stetment ->fetchAll();
-                            foreach ($cats as $cat ){
-                                echo  "<option value='".$cat['ID']."'>" . $cat['Name'] . "</option>";
-                            }
-                            ?>
-
-                        </select>
-                    </div>
-                    <!-- End Status Field -->
-                    <!-- Start Country name field -->
-                    <i class="fa-solid fa-caret-right icons"></i>
-                    <div class="form-group">
-                        <input
-
-                            class="form-control"
-                            type="text"
-                            name="country"
-                            placeholder="    Enter the Country name...! "
-                            value=""
-                            required="required">
-                        <span class="axstrisx">*</span>
-                    </div>
-                    <!-- End Country field -->
+                    <!-- End member Field -->
                     <!-- Start Save  field -->
                     <input
                         class="btn btn-success btn-block"
@@ -142,6 +142,8 @@ session_start();
                 $price           = $_POST['price'];
                 $status          = $_POST['status'];
                 $country         = $_POST['country'];
+                $cat             = $_POST['catigore'];
+                $user            = $_POST['member'];
 
                 $fromError = array();
 
@@ -154,27 +156,32 @@ session_start();
                 if(empty($price)){
                     $fromError [] = 'price Can\'t be <sronge>Empty</sronge>';
                 }
-                if(empty($status)){
+                if($status == 0 ){
                     $fromError [] = 'Status Can\'t be <sronge>Empty</sronge>';
                 }
                 if(empty($country)){
                     $fromError [] = 'country Can\'t be <sronge>Empty</sronge>';
+                }
+                if($cat == 0 ){
+                    $fromError [] = 'CAtigore Can\'t be <sronge>Empty</sronge>';
+                }
+                if($user == 0 ){
+                    $fromError [] = 'memper Can\'t be <sronge>Empty</sronge>';
                 }
 
                 if (!empty($fromError)){
 
                     foreach ($fromError as $error){
 
-                        echo  '<div class="alert alert-danger">'.$error.'</div>' ;
+                        echo  '<div class="alert alert-danger ">'.$error.'</div>' ;
                     }
                 }
 
                 else{
 
                     $stetment=$connection->prepare("INSERT INTO 
-                        
-                        items(Name , Description , Price , Status , Country  , ADD_Data  )
-                        VALUES (:zname ,:zdescription ,:zprice ,:zstatus, :zcountry ,now() )");
+                        items(Name , Description , Price , Status , Country  , ADD_Data  , Cat_ID , Member_ID )
+                        VALUES (:zname ,:zdescription ,:zprice ,:zstatus, :zcountry ,now()  ,:zcatigores ,:zmember)");
                     $stetment->execute(array(
 
                         'zname'          =>  $name ,
@@ -182,6 +189,8 @@ session_start();
                         'zprice'         =>  $price ,
                         'zstatus'        =>  $status ,
                         'zcountry'       =>  $country ,
+                        'zcatigores'      => $cat ,
+                        'zmember'      => $user
                     ));
                     echo '<div class="container">' ;
                     $themesg     ='<div class=" alert alert-info">'.$stetment->rowCount().'Record updated...</div>' ;
