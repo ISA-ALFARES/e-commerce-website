@@ -7,11 +7,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#"><?php echo lang('HOME')?></a></li>
-        <li class="nav-item"><a class="nav-link" href="catigories.php"><?php echo lang('CATIGORIES')?></a></li>
           <li class="nav-item"><a class="nav-link" href="dashbord.php"><?php echo lang('DASHBOARD')?></a></li>
+          <li class="nav-item"><a class="nav-link" href="catigories.php"><?php echo lang('CATIGORIES')?></a></li>
           <li class="nav-item"><a class="nav-link" href="members.php"><?php echo lang('MEMBERS')?></a></li>
           <li class="nav-item"><a class="nav-link" href="items.php"><?php echo lang('ITEMS')?></a></li>
+          <li class="nav-item"><a class="nav-link" href="comments.php"><?php echo lang('COMMENTS')?></a></li>
             <li class="nav-item dropdown   ">
                   <a class="nav-link dropdown-toggle"
                     href="#"

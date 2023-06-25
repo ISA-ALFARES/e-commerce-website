@@ -3,7 +3,7 @@
 	--primary: rgb(60, 65, 133);
 	--brown: rgb(66, 66, 66);
 	--red: rgb(80, 86, 168);
-	--hover: #027be9 ;
+	--hover: #009aef;
 	--White: #eee ;
 }
 body {
@@ -51,7 +51,7 @@ a.nav-link:hover{
 .dropdown-menu {
 	top: 117% !important;
 	left: -11% !important;
-	background-color: var(--hover);
+	background-color: #123354;
 }
 .navbar-toggler {
 	padding: 0.25rem 0.75rem;
@@ -409,7 +409,9 @@ textarea,input:hover{
 	margin: 6px  5px;
 
 }
-
+.control-label{
+	color: #ffffff;
+}
 /* End Category Page */
 /* Start items Page */
 .selection{
