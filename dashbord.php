@@ -25,7 +25,7 @@
 				<div class="row">
 					<div class="col-md-3">
 						<div class="stat st-members">
-							<i class="fa fa-users"></i>
+                            <a href="members.php"><i class="fa fa-users"></i></a>
 							<div class="info">
 								Total Members
 								<span>
@@ -36,7 +36,7 @@
 					</div>
 					<div class="col-md-3">
 						<div class="stat st-pending">
-							<i class="fa fa-user-plus"></i>
+                            <a href="members.php?do=Mangae&page=pending"><i class="fa fa-user-plus"></i></a>
 							<div class="info">
 								Pending Members
 								<span>
@@ -47,11 +47,11 @@
 					</div>
 					<div class="col-md-3">
 						<div class="stat st-items">
-							<i class="fa fa-tag"></i>
+                            <a href="items.php"><i class="fa fa-tag"></i></a>
 							<div class="info">
 								Total Items
 								<span>
-									<a href="#">12</a>
+									<a href="items.php"> <?= count_items('Item_ID' ,'items') ?> </a>
 								</span>
 							</div>
 						</div>

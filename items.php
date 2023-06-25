@@ -9,6 +9,12 @@ session_start();
         $do =    isset($_GET['do'])  ?    $_GET['do']    :  'Manage';
         if($do == "Manage"){
 
+
+                $query = '';
+                if (isset($_GET['page']) && $_GET['page'] == 'pending'){
+
+                    $query  = ' AND RegStatus =  0';
+                }
                 $stetment=$connection->prepare("SELECT items.* , categories.Name AS 'Catigore Name ',users.Username 
                             FROM items 
                             INNER JOIN categories ON categories.ID = items.Cat_ID 
@@ -48,7 +54,10 @@ session_start();
                                     echo "<td>
                               <a class='btn btn-success' href='items.php?do=Edit&ID=".$row['Item_ID']."' role='button'><i class='fa-solid fa-pen-to-square'> </i> Edit </a>
                               <a  href='items.php?do=Delete&ID=".$row['Item_ID']."' role='button' class='btn btn-danger confirm' ><i class='fa-regular fa-trash-can'> </i> Delete </a>";
+                                    if($row['Approve'] == 0 ){
 
+                                        echo "<a  href='items.php?do=Approve&item_id=".$row['Item_ID']."' role='button' class='btn btn-info confirm Activate' ><i class='fa-solid fa-circle-check''></i> Approve </a>";
+                                    }
                                 }
                                 ?>
                             </tr>
@@ -475,8 +484,35 @@ session_start();
                 redirect_home($themesg,1,$page_adress);
                 echo '</div>' ;
             }
+        }elseif ($do == "Approve"){ //start items activation page
+
+
+            // Chek if  Get Request is numeric & Get the integer value of it
+            $item_ID = isset($_GET['item_id'])&& is_numeric($_GET['item_id']) ? intval($_GET['item_id']) : 0 ;
+            //Verify that the item number exists IN database
+            $chek = chekitem('Item_ID' , 'items' ,  $item_ID);
+            if($chek > 0 ) {
+                $stetment = $connection->prepare("UPDATE items SET Approve = 1 WHERE Item_ID = ?");
+                $stetment->execute(array($item_ID));
+                // Redirect to another page
+                echo '<div class="container">';
+
+                $page_adress = 'items.php';
+
+                $themesg = '<div class="alert alert-success">Approve completed successfully...!</div>';
+
+                redirect_home($themesg, 1, $page_adress);
+
+                echo '</div>';
+            }
+
         }else{
-            echo 'Error  There\'s no page with the name...';
+
+            echo '<div class="container">' ;
+            $page_adress = 'items.php';
+            $themesg ='<div class="alert alert-danger">We do not have this items in our records...!</div>';
+            redirect_home($themesg,1,$page_adress);
+            echo '</div>' ;
         }
         //End manage page...
         include $temp."footer.php";
