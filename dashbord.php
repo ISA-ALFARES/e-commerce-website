@@ -15,8 +15,9 @@
 
         $numUsers = 6;  // Number Of Latest Users
 
-        $theLatest = getLatest('*' ,'users' , 'Username' , $numUsers );
-
+        $user_Latest = getLatest('*' ,'users' , 'Username' , $numUsers );
+        $num_items = 6 ;
+        $item_latest = getLatest("*" , 'items' ,'Name' ,$num_items);
 
       ?>
 		<div class="home-stats">
@@ -83,10 +84,10 @@
 								</span>
                             </div>
                             <div class="panel-body">
-                                <ul class="list-group latest-users">
+                                <ul class="list-group latest-users ">
                                     <?php
-                                    if (! empty($theLatest)) {
-                                        foreach ($theLatest as $user) {
+                                    if (! empty($user_Latest)) {
+                                        foreach ($user_Latest as $user) {
                                             echo '<li class="list-group-item">';
                                             echo $user['Username'];
                                             echo '<a href="members.php?do=Edit&ID=' . $user['UserID'] . '">';
@@ -119,8 +120,29 @@
 								</span>
                             </div>
                             <div class="panel-body">
-                                <ul class="list-unstyled latest-users">
-
+                                <ul class="list-group latest-users ">
+                                    <?php
+                                    if (! empty($item_latest)) {
+                                        foreach ($item_latest as $item) {
+                                            echo '<li class="list-group-item">';
+                                            echo $user['Username'];
+                                            echo '<a href="items.php?do=Edit&item_id=' . $item['Item_ID'] . '">';
+                                            echo '<span class="btn btn-success pull-right">';
+                                            echo '<i class="fa fa-edit"></i> Edit';
+                                            if ($item['Approve'] == 0) {
+                                                echo "<a 
+																	href='items.php?do=Approve&item_id=" . $item['Item_ID'] . "' 
+																	class='btn btn-info pull-right activate'>
+																	<i class='fa fa-check'></i> Approve</a>";
+                                            }
+                                            echo '</span>';
+                                            echo '</a>';
+                                            echo '</li>';
+                                        }
+                                    } else {
+                                        echo 'There\'s No Members To Show';
+                                    }
+                                    ?>
                                 </ul>
                             </div>
                         </div>
