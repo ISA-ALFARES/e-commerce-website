@@ -14,7 +14,7 @@ session_start();
                             INNER JOIN categories ON categories.ID = items.Cat_ID 
                             INNER JOIN users ON users.UserID =items.Member_ID ;
                             ");
-                //execute the data entered by the user
+                //execute the data entered by the items
                 $stetment->execute();
 
                 //Assign to variable...
@@ -57,9 +57,6 @@ session_start();
                     </div>
                 </div>
         <?php
-        }elseif($do == 'Edit'){
-
-            echo 'Welcome  you are in Edit  category';
         }elseif($do == 'Add'){
 
             ?>
@@ -175,6 +172,147 @@ session_start();
 
             <?php
 
+        }elseif($do == 'Edit'){
+            // Chek if  Get Request is numaric & Get the integer value of it
+            $item_ID = isset($_GET['ID'])&& is_numeric($_GET['ID']) ? intval($_GET['ID']) : 0 ;
+
+            //Select all data Depend On this ID
+
+            $stetment = $connection->prepare("SELECT *  FROM items  WHERE Item_ID = ?");
+            //Execute query
+
+            $stetment ->execute(array($item_ID));
+
+            //If the entered data exists, it will be stored here/ Fetch the data
+
+            $items = $stetment->fetch();
+
+            //The Row Count
+            $count = $stetment->rowcount();
+
+            if($count > 0) { ?>
+
+                <!--start Edit Form-->
+                <div class="continyer">
+                    <h1 class="text-center"><?php echo lang("EDIT_ITEMS")?></h1>
+                    <form class="contact-form" action="<?php echo "?do=Update" ?>" method="POST">
+                        <!-- Start item name field -->
+                        <i class="fa-solid fa-caret-right icons"></i>
+                        <div class="form-group">
+                            <input
+
+                                    class="form-control"
+                                    type="text"
+                                    name="name"
+                                    placeholder="    Enter the Item Name...! "
+                                    value="<?php echo $items['Name'] ?>"
+                                    required="required">
+                            <span class="axstrisx">*</span>
+                        </div>
+                        <!-- End username field -->
+                        <!-- Start Description Field -->
+                        <i class="fa-solid fa-caret-right icons"></i>
+                        <div class="form-group ">
+                            <input
+                                    type="text"
+                                    name="description"
+                                    class="form-control"
+                                    required="required"
+                                    placeholder="   Description of The Item"
+                                    value="<?php echo $items['Description'] ?>"
+
+                            />
+                            <span class="axstrisx">*</span>
+                        </div>
+                        <!-- End Description Field -->
+                        <!-- Start item name field -->
+                        <i class="fa-solid fa-caret-right icons"></i>
+                        <div class="form-group">
+                            <input
+
+                                    class="form-control"
+                                    type="text"
+                                    name="price"
+                                    placeholder="    Enter the Price...! "
+                                    value="<?php echo $items['Price'] ?>"
+                                    required="required">
+                            <span class="axstrisx">*</span>
+                        </div>
+                        <!-- End username field -->
+                        <!-- Start Status Field -->
+                        <div class="form-group ">
+                            <select  class="form-control selection " name="status">
+                                <option value="1" <?php  if($items['Status'] == 1){ echo  'selected' ; } ?>>New</option>
+                                <option value="2" <?php  if($items['Status'] == 2){ echo  'selected' ; } ?>>Like New</option>
+                                <option value="3" <?php  if($items['Status'] == 3){ echo  'selected' ; } ?>>Used</option>
+                                <option value="4" <?php  if($items['Status'] == 4){ echo  'selected' ; } ?>>Very Old</option>
+                            </select>
+                        </div>
+                        <!-- End Status Field -->
+                        <!-- Start Country name field -->
+                        <i class="fa-solid fa-caret-right icons"></i>
+                        <div class="form-group">
+                            <input
+
+                                    class="form-control"
+                                    type="text"
+                                    name="country"
+                                    placeholder="    Enter the Country name...! "
+                                    value="<?php echo $items['Country'] ?>"
+                                    required="required">
+                            <span class="axstrisx">*</span>
+                        </div>
+                        <!-- End Country field -->
+                        <!-- Start Catigore Field -->
+                        <div class="form-group">
+                            <select  class="form-control selection " name="catigore">
+                                <option value="0">Catigore</option>
+                                <?php
+                                $stetment=$connection->prepare("SELECT * FROM categories");
+                                $stetment ->execute();
+                                $cats =$stetment ->fetchAll();
+                                foreach ($cats as $cat ){
+                                    echo  "<option value='".$cat['ID']."'";
+                                    if($items['Cat_ID'] == $cat['ID']){ echo "selected" ;}
+                                    echo ">". $cat['Name'] . "</option>";
+                                }
+                                ?>
+
+                            </select>
+                        </div>
+                        <!-- End Catigore Field -->
+                        <!-- Start Member Field -->
+                        <div class="form-group">
+                            <select  class="form-control selection" name="member">
+                                <option value="0">Member</option>
+                                <?php
+                                $stetment=$connection->prepare("SELECT * FROM users");
+                                $stetment ->execute();
+                                $users =$stetment ->fetchAll();
+                                foreach ($users as $user ){
+                                    echo  "<option value='".$user['UserID']."'" ;
+                                    if($items['Member_ID'] == $user['UserID']){ echo "selected" ;}
+                                    echo     ">" . $user['Username'] . "</option>";
+                                }
+                                ?>
+
+                            </select>
+                        </div>
+                        <!-- End member Field -->
+                        <!-- Start Save  field -->
+                        <input
+                                class="btn btn-success btn-block"
+                                type="submit"
+                                value="Save Item">
+                        <!-- End Save  field -->
+                    </form>
+                </div>
+                <!--End Form-->
+            <?php }
+            else{//Enter a user ID that does not exist
+                $errormsg = "Sorry You Enter a user ID that does not exist";
+                redirect_home($errormsg);
+            }
         }elseif($do == 'Insert'){
 
 

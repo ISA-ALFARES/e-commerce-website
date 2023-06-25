@@ -21,6 +21,7 @@
                 'LOGOUT'     => "Logout" ,
                     'MANAGE_ITEMS'   =>  "Manage items" ,
                     'ADD_ITEMS'   =>  "Add Items" ,
+                    'EDIT_ITEMS'   =>  "Edit Items" ,
 
                 //End  NavbarPages
 
