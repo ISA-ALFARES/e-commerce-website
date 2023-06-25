@@ -197,6 +197,7 @@ session_start();
                     <h1 class="text-center"><?php echo lang("EDIT_ITEMS")?></h1>
                     <form class="contact-form" action="<?php echo "?do=Update" ?>" method="POST">
                         <!-- Start item name field -->
+                        <input type="hidden" name="item_ID" value="<?php echo $item_ID ; ?>">
                         <i class="fa-solid fa-caret-right icons"></i>
                         <div class="form-group">
                             <input
@@ -313,6 +314,69 @@ session_start();
                 $errormsg = "Sorry You Enter a user ID that does not exist";
                 redirect_home($errormsg);
             }
+        }elseif($do == 'Update'){
+
+            if ($_SERVER['REQUEST_METHOD']  ==  "POST"){
+
+                $item_ID         = $_POST['item_ID'];
+                $name            = $_POST['name'];
+                $description     = $_POST['description'];
+                $price           = $_POST['price'];
+                $status          = $_POST['status'];
+                $country         = $_POST['country'];
+                $cat             = $_POST['catigore'];
+                $user            = $_POST['member'];
+
+                $fromError = array();
+
+                if(empty($name)){
+                    $fromError [] =  "Name Can\'t be <sronge>Empty</sronge>" ;
+                }
+                if(empty($description)){
+                    $fromError [] = 'Description Can\'t be <sronge>Empty</sronge>';
+                }
+                if(empty($price)){
+                    $fromError [] = 'price Can\'t be <sronge>Empty</sronge>';
+                }
+                if($status == 0 ){
+                    $fromError [] = 'Status Can\'t be <sronge>Empty</sronge>';
+                }
+                if(empty($country)){
+                    $fromError [] = 'country Can\'t be <sronge>Empty</sronge>';
+                }
+                if($cat == 0 ){
+                    $fromError [] = 'CAtigore Can\'t be <sronge>Empty</sronge>';
+                }
+                if($user == 0 ){
+                    $fromError [] = 'memper Can\'t be <sronge>Empty</sronge>';
+                }
+
+                if (!empty($fromError)){
+
+                    foreach ($fromError as $error){
+
+                        echo  '<div class="alert alert-danger ">'.$error.'</div>' ;
+                    }
+                }else{
+                    $stetment=$connection->prepare("UPDATE
+                                                                    items
+                                                               SET
+                                                                   Name = ? ,
+                                                                   Description = ? ,
+                                                                   Price = ? ,
+                                                                   Status = ? ,
+                                                                   Country = ? ,
+                                                                   Cat_ID = ? ,
+                                                                   Member_ID = ? 
+                                                               WHERE Item_ID = ?");
+                    $stetment->execute(array($name,$description,$price,$status,$country,$cat,$user,$item_ID));
+                    echo '<div class="container">' ;
+                    $themesg     ='<div class=" alert alert-info">'.$stetment->rowCount().'Record updated...</div>' ;
+                    $page_adress = 'items.php';
+                    redirect_home($themesg,2,$page_adress);
+                    echo '</div>';
+                }
+            }
         }elseif($do == 'Insert'){
 
 
@@ -387,9 +451,30 @@ session_start();
                 exit();
             }
 
-        }elseif($do == 'Update'){
+        }elseif ($do == "Delete") {
+            // Chek if  Get Request is numeric & Get the integer value of it
+            $item_ID = isset($_GET['ID'])&& is_numeric($_GET['ID']) ? intval($_GET['ID']) : 0 ;
 
-            echo 'Welcome  you are in Update  category';
+            $chek = chekitem('Item_ID' , 'items' , $item_ID);
+
+            if($chek > 0 ){
+
+                $stetment = $connection->prepare("DELETE FROM items WHERE Item_ID = ?");
+                $stetment ->execute(array($item_ID));
+                // Redirect to another page
+                echo '<div class="container">' ;
+                $page_adress = 'items.php';
+                $themesg ='<div class="alert alert-info">The deletion was completed successfully...!</div>';
+                redirect_home($themesg,1,$page_adress);
+                echo '</div>' ;
+            }
+            else{
+                echo '<div class="container">' ;
+                $page_adress = 'items.php';
+                $themesg ='<div class="alert alert-danger">This user does not exist...!</div>';
+                redirect_home($themesg,1,$page_adress);
+                echo '</div>' ;
+            }
         }else{
             echo 'Error  There\'s no page with the name...';
         }

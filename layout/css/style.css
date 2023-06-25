@@ -7,8 +7,8 @@
 	--White: #eee ;
 }
 body {
-	/*background: linear-gradient(90deg, #0f0c29, #302b63, #24243e);*/
-	background: linear-gradient(90deg, #ffffff, #fdfdff, #f3f3ff);
+	background: linear-gradient(90deg, #0f0c29, #302b63, #24243e);
+	/*background: linear-gradient(90deg, #ffffff, #fdfdff, #f3f3ff);*/
 
 	/* background: linear-gradient(90deg, var(--brown), var(--primary));	 */
 	font-size: 16px;	
@@ -20,7 +20,9 @@ body {
 	font-family: Raleway, sans-serif;
 }
 /* end navbar */
-
+.panel-heading {
+	color: wheat;
+}
 .main-table{
 	-webkit-box-shadow: 0px 1px 12px var(--hover);
 	-moz-box-shadow: 0px 1px 12px var(--hover);
@@ -105,11 +107,11 @@ a.dropdown-item {
 }
 
 .home-stats .st-pending {
-	background-color: #c0392b;
+	background-color: #49268ff2;
 }
 
 .home-stats .st-items {
-	background-color: #0f525e;
+	background-color: #1bff00b0;
 }
 
 .home-stats .st-comments {
@@ -140,7 +142,15 @@ a.dropdown-item {
 }
 
 .latest-users li:nth-child(odd) {
-	background-color: #EEE;
+	background-color: #1bff00b0;
+
+}
+li.list-group-item {
+	background-color: #49268ff2;
+}
+li.list-group-item {
+	color: wheat;
+	font-weight: bold;
 }
 
 .latest-users .btn-success,
