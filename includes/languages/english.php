@@ -9,7 +9,7 @@
             'CATIGORIES'    => "Catigories",
             'DASHBOARD'     => "Dashboard" ,
             'ITEMS'         => "ITEMS" ,
-            'COMMENTS'         => "comments" ,
+            'COMMENTS'         => "Comments" ,
             'ACCOUNT'          => "my account",
                 'EDIT'      => "Edit Profile",
                     'ADDMEMBER'      => "Add page" ,
