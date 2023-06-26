@@ -71,7 +71,11 @@ if(isset($_SESSION['Username'])){
                 </div>
                 <?php
             }else{
-                echo  '<div class="alert alert-danger">Sorry This page is empty, there is nothing to display...!</div>';
+                echo '<div class="container">';
+                    echo  '<div class="alert alert-danger">Sorry This page is empty, there is nothing to display...!</div>';
+                    echo  '<a class="btn btn-primary btn-lg add_null " href="?do=Add" role="button"><i class="fa-solid fa-plus"></i>     Add Member    </a>';
+                echo '<div>';
+
             }
 
     }elseif($do== "Add"){?>
@@ -287,7 +291,7 @@ if(isset($_SESSION['Username'])){
                                 type="email"
                                 name="email"
                                 placeholder="      Please Type a valid email"
-                                value="<?php echo '&nbsp &nbsp &nbsp '.$row['Email'] ; ?>">
+                                value="<?php echo $row['Email'];?>">
                                 <span class="axstrisx">*</span>
                         </div>
                         <!-- End mail name field -->
@@ -380,10 +384,28 @@ if(isset($_SESSION['Username'])){
           //End Error checking the data sent...!
           //If there are no errors, perform the update process
             else{
-              //Update the  database with This Information
-              $stetment = $connection->prepare("UPDATE users SET Username = ? , Email = ? , Fullname = ? , Password = ? WHERE UserID = ?");
-              $stetment->execute(array($user,$email,$full,$pass,$userid));
-                echo $stetment->rowCount()." Record updated...";
+                $stetment = $connection->prepare("SELECT  *
+                                                        FROM users
+                                                        WHERE Username = ?
+                                                        AND UserID != ?");
+                $stetment->execute(array($user ,$userid));
+                $count = $stetment->rowCount();
+                if ($count > 0){
+                    $themesg='<div class="alert alert-danger">Sorry Invalid username...!</div>';
+                    $page_adress = 'members.php';
+                    redirect_home($themesg,2,$page_adress);
+                    echo '</div>';
+                }else{
+
+                    //Update the  database with This Information
+                    $stetment = $connection->prepare("UPDATE users SET Username = ? , Email = ? , Fullname = ? , Password = ? WHERE UserID = ?");
+                    $stetment->execute(array($user,$email,$full,$pass,$userid));
+                    echo '<div class="container">' ;
+                    $themesg     ='<div class=" alert alert-info">'.$stetment->rowCount().'Record updated...</div>' ;
+                    $page_adress = 'members.php';
+                    redirect_home($themesg,2,$page_adress);
+                    echo '</div>';
+                }
             }
         }else{ // error page
           $errormsg = "Sorry You Cant Browse Tihs Page Directry";

@@ -84,3 +84,18 @@
 
         return $statement->fetchAll();
     }
+    function getCount($column , $table){
+
+        global $connection ;
+
+        $statement = $connection->prepare("SELECT $column AS number FROM $table");
+        $statement->execute();
+        $result = $statement->fetch();
+        if ($result) {
+            echo $result['number'];
+        } else {
+            echo "No data found.";
+        }
+
+    }
+

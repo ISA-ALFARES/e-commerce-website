@@ -425,4 +425,16 @@ textarea,input:hover{
 .alert-danger {
 	margin: 71px 109px;
 }
+.alert-info {
+	margin: 71px 109px;
+}
+.add_null{
+	position: absolute;
+	left: 152px;
+	top: 256px;
+}
 /* End items Page */
+input.form-control::placeholder{
+	position: absolute;
+	margin-left: 10px;
+}

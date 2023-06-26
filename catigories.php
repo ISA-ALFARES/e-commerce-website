@@ -75,11 +75,15 @@ session_start();
                             ?>
                         </div>
                     </div>
-                    <a class=" margin-categories btn btn-primary btn-lg" href="?do=Add" role="button"><i class="fa-solid fa-plus"></i>     Add Member    </a>
+                    <a class=" margin-categories btn btn-primary btn-lg" href="?do=Add" role="button"><i class="fa-solid fa-plus"></i>     Add Catigory    </a>
                 </div>
                 <?php
             }else{
-               echo  '<div class="alert alert-danger">Sorry This page is empty, there is nothing to display...!</div>';
+
+                echo '<div class="container">';
+                echo  '<div class="alert alert-danger">Sorry This page is empty, there is nothing to display...!</div>';
+                echo '<a class=" margin-categories btn btn-primary btn-lg add_null" href="?do=Add" role="button"><i class="fa-solid fa-plus"></i>     Add Catigory    </a>';
+                echo '<div>';
             }
          }elseif ($do == 'Add'){
              ?>

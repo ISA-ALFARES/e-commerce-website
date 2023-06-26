@@ -69,7 +69,10 @@ session_start();
                     </div>
                     <?php
                 }else{
+                    echo '<div class="container">';
                     echo  '<div class="alert alert-danger">Sorry This page is empty, there is nothing to display...!</div>';
+                    echo  '<a class="btn btn-primary btn-lg add_null" href="?do=Add" role="button"><i class="fa-solid fa-plus"></i>     Add Item    </a>';
+                    echo '<div>';
                 }
         }elseif($do == 'Add'){
 

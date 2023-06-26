@@ -13,11 +13,12 @@
 
         // This function shows me a list of the data I want from the database
 
-        $numUsers = 6;  // Number Of Latest Users
-
+        $numUsers = 6 ;  // Number Of Latest Users
         $user_Latest = getLatest('*' ,'users' , 'Username' , $numUsers );
+        $num_comment = 3 ;
         $num_items = 6 ;
-        $item_latest = getLatest("*" , 'items' ,'Name' ,$num_items);
+        $item_latest = getLatest('*' ,'items' , 'Name' , $num_items );
+
 
 
       ?>
@@ -79,7 +80,7 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <i class="fa fa-users"></i>
-                                Latest <?php echo 6 ?>  Registerd Users
+                                Latest <?php echo $numUsers ?>  Registerd Users
                                 <span class="toggle-info pull-right">
 									<i class="fa fa-plus fa-lg"></i>
 								</span>
@@ -115,7 +116,7 @@
                     <div class="col-sm-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <i class="fa fa-tag"></i> Latest  Items
+                                <i class="fa fa-tag"></i> Latest <?php echo $num_items ?> Items
                                 <span class="toggle-info pull-right">
 									<i class="fa fa-plus fa-lg"></i>
 								</span>
@@ -126,7 +127,7 @@
                                     if (! empty($item_latest)) {
                                         foreach ($item_latest as $item) {
                                             echo '<li class="list-group-item">';
-                                            echo $user['Username'];
+                                            echo $item['Name'];
                                             echo '<a href="items.php?do=Edit&item_id=' . $item['Item_ID'] . '">';
                                             echo '<span class="btn btn-success pull-right">';
                                             echo '<i class="fa fa-edit"></i> Edit';
@@ -153,7 +154,7 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <i class="fa fa-comments-o"></i>
-                                Latest Comments
+                                Latest  <?php echo $num_comment ?> Comments
                                 <span class="toggle-info pull-right">
 									<i class="fa fa-plus fa-lg"></i>
 								</span>
@@ -165,6 +166,8 @@
                                               FROM comments
                                               INNER JOIN users
                                               ON users.UserID  = comments.user_id 
+                                              ORDER BY  comment_ID DESC 
+                                              LIMIT $num_comment
                                               ");
                                     //execute the data entered by the user
                                     $stetment->execute();
