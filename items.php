@@ -25,47 +25,52 @@ session_start();
 
                 //Assign to variable...
                 $rows = $stetment->fetchAll();
-                ?>
-                <div class="container">
-                    <div class="table-responsive">
-                        <h1 class="text-center"><?php echo lang("MANAGE_ITEMS")?></h1>
-                        <table class="main-table text-center table text-white table-bordered border-danger ">
-                            <tr>
-                                <td>ID</td>
-                                <td>Name</td>
-                                <td>Description</td>
-                                <td>Price</td>
-                                <td>Adding Date</td>
-                                <td>Catigore name</td>
-                                <td>User name</td>
-                                <td>Control</td>
-                            </tr>
-                            <tr>
-                                <?php
-                                foreach($rows as $row){
-                                    echo "<tr>";
-                                    echo "<td>" . $row['Item_ID'] . "</td>";
-                                    echo "<td>" . $row['Name'] . "</td>";
-                                    echo "<td>" . $row['Description'] . "</td>";
-                                    echo "<td>" . $row['Price'] . "</td>";
-                                    echo "<td>" . $row['Add_Data']."</td>";
-                                    echo "<td>" . $row['Name']."</td>";
-                                    echo "<td>" . $row['Username']."</td>";
-                                    echo "<td>
+                echo '<h1 class="text-center">'.  lang("MANAGE_ITEMS").'</h1>';
+                if (! empty($rows)){
+                    ?>
+                    <div class="container">
+                        <div class="table-responsive">
+
+                            <table class="main-table text-center table text-white table-bordered border-danger ">
+                                <tr>
+                                    <td>ID</td>
+                                    <td>Name</td>
+                                    <td>Description</td>
+                                    <td>Price</td>
+                                    <td>Adding Date</td>
+                                    <td>Catigore name</td>
+                                    <td>User name</td>
+                                    <td>Control</td>
+                                </tr>
+                                <tr>
+                                    <?php
+                                    foreach($rows as $row){
+                                        echo "<tr>";
+                                        echo "<td>" . $row['Item_ID'] . "</td>";
+                                        echo "<td>" . $row['Name'] . "</td>";
+                                        echo "<td>" . $row['Description'] . "</td>";
+                                        echo "<td>" . $row['Price'] . "</td>";
+                                        echo "<td>" . $row['Add_Data']."</td>";
+                                        echo "<td>" . $row['Name']."</td>";
+                                        echo "<td>" . $row['Username']."</td>";
+                                        echo "<td>
                               <a class='btn btn-success' href='items.php?do=Edit&ID=".$row['Item_ID']."' role='button'><i class='fa-solid fa-pen-to-square'> </i> Edit </a>
                               <a  href='items.php?do=Delete&ID=".$row['Item_ID']."' role='button' class='btn btn-danger confirm' ><i class='fa-regular fa-trash-can'> </i> Delete </a>";
-                                    if($row['Approve'] == 0 ){
+                                        if($row['Approve'] == 0 ){
 
-                                        echo "<a  href='items.php?do=Approve&item_id=".$row['Item_ID']."' role='button' class='btn btn-info confirm Activate' ><i class='fa-solid fa-circle-check''></i> Approve </a>";
+                                            echo "<a  href='items.php?do=Approve&item_id=".$row['Item_ID']."' role='button' class='btn btn-info confirm Activate' ><i class='fa-solid fa-circle-check''></i> Approve </a>";
+                                        }
                                     }
-                                }
-                                ?>
-                            </tr>
-                        </table>
-                        <a class="btn btn-primary btn-lg" href="?do=Add" role="button"><i class="fa-solid fa-plus"></i>     Add Item    </a>
+                                    ?>
+                                </tr>
+                            </table>
+                            <a class="btn btn-primary btn-lg" href="?do=Add" role="button"><i class="fa-solid fa-plus"></i>     Add Item    </a>
+                        </div>
                     </div>
-                </div>
-        <?php
+                    <?php
+                }else{
+                    echo  '<div class="alert alert-danger">Sorry This page is empty, there is nothing to display...!</div>';
+                }
         }elseif($do == 'Add'){
 
             ?>
@@ -323,6 +328,58 @@ session_start();
                 $errormsg = "Sorry You Enter a user ID that does not exist";
                 redirect_home($errormsg);
             }
+        /*************************************/
+
+            $stetment=$connection->prepare("SELECT comments.*, users.Username AS username
+                                              FROM comments
+                                              INNER JOIN users
+                                              ON users.UserID  = comments.user_id 
+                                              where  item_id = ?
+                                              ");
+
+            //execute the data entered by the user
+            $stetment->execute(array($item_ID));
+
+            //Assign to variable...
+            $comments = $stetment->fetchAll();
+                if (! empty($comments)){
+                    ?>
+                    <div class="container">
+                        <div class="table-responsive">
+                            <h1 class="text-center"><?php echo lang("MANAGECOMMENTS");  echo "   ( ".$items['Name']." )" ?></h1>
+                            <table class="main-table text-center table text-white table-bordered border-danger ">
+                                <tr>
+                                    <td>ID</td>
+                                    <td>Comment</td>
+                                    <td>User Name</td>
+                                    <td>Comment_data</td>
+                                    <td>Control</td>
+                                </tr>
+                                <tr>
+                                    <?php
+                                    foreach($comments as $comment){
+                                        echo "<tr>";
+                                        echo "<td>" . $comment['comment_ID'] . "</td>";
+                                        echo "<td>" . $comment['Comment'] . "</td>";
+                                        echo "<td>" . $comment['username']   . "</td>";
+                                        echo "<td>" . $comment['Comment_data']."</td>";
+                                        echo "<td>
+                              <a class='btn btn-success' href='comments.php?do=Edit&comment_id=".$comment['comment_ID']."' role='button'><i class='fa-solid fa-pen-to-square'> </i> Edit </a>
+                              <a  href='comments.php?do=Delete&comment_id=".$comment['comment_ID']."' role='button' class='btn btn-danger confirm' ><i class='fa-regular fa-trash-can'> </i> Delete </a>";
+                                        if($comment['Status'] == 0 ){
+
+                                            echo "<a  href='comments.php?do=activate&comment_id=".$comment['comment_ID']."' role='button' class='btn btn-info confirm Activate' ><i class='fa-solid fa-circle-check''></i> Activate </a>";
+                                        }
+                                        echo  "</td>";
+                                        echo "<tr>";
+                                    }
+                                    ?>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <?php
+                }
         }elseif($do == 'Update'){
 
             if ($_SERVER['REQUEST_METHOD']  ==  "POST"){

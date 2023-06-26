@@ -31,44 +31,49 @@ if(isset($_SESSION['Username'])){
 
         //Assign to variable...
         $comments = $stetment->fetchAll();
-        ?>
-        <div class="container">
-            <div class="table-responsive">
-                <h1 class="text-center"><?php echo lang("MANAGEMEMBER")?></h1>
-                <table class="main-table text-center table text-white table-bordered border-danger ">
-                    <tr>
-                        <td>ID</td>
-                        <td>Comment</td>
-                        <td>Item Name</td>
-                        <td>User Name</td>
-                        <td>Comment_data</td>
-                        <td>Control</td>
-                    </tr>
-                    <tr>
-                        <?php
-                        foreach($comments as $comment){
-                            echo "<tr>";
-                            echo "<td>" . $comment['comment_ID'] . "</td>";
-                            echo "<td>" . $comment['Comment'] . "</td>";
-                            echo "<td>" . $comment['Item_Name']   .  "</td>";
-                            echo "<td>" . $comment['username']   . "</td>";
-                            echo "<td>" . $comment['Comment_data']."</td>";
-                            echo "<td>
+        echo '<h1 class="text-center">'. lang("MANAGECOMMENTS").'</h1>';
+        if (! empty($comments)){
+            ?>
+            <div class="container">
+                <div class="table-responsive">
+
+                    <table class="main-table text-center table text-white table-bordered border-danger ">
+                        <tr>
+                            <td>ID</td>
+                            <td>Comment</td>
+                            <td>Item Name</td>
+                            <td>User Name</td>
+                            <td>Comment_data</td>
+                            <td>Control</td>
+                        </tr>
+                        <tr>
+                            <?php
+                            foreach($comments as $comment){
+                                echo "<tr>";
+                                echo "<td>" . $comment['comment_ID'] . "</td>";
+                                echo "<td>" . $comment['Comment'] . "</td>";
+                                echo "<td>" . $comment['Item_Name']   .  "</td>";
+                                echo "<td>" . $comment['username']   . "</td>";
+                                echo "<td>" . $comment['Comment_data']."</td>";
+                                echo "<td>
                               <a class='btn btn-success' href='comments.php?do=Edit&comment_id=".$comment['comment_ID']."' role='button'><i class='fa-solid fa-pen-to-square'> </i> Edit </a>
                               <a  href='comments.php?do=Delete&comment_id=".$comment['comment_ID']."' role='button' class='btn btn-danger confirm' ><i class='fa-regular fa-trash-can'> </i> Delete </a>";
-                            if($comment['Status'] == 0 ){
+                                if($comment['Status'] == 0 ){
 
-                                echo "<a  href='comments.php?do=activate&comment_id=".$comment['comment_ID']."' role='button' class='btn btn-info confirm Activate' ><i class='fa-solid fa-circle-check''></i> Activate </a>";
+                                    echo "<a  href='comments.php?do=activate&comment_id=".$comment['comment_ID']."' role='button' class='btn btn-info confirm Activate' ><i class='fa-solid fa-circle-check''></i> Activate </a>";
+                                }
+                                echo  "</td>";
+                                echo "<tr>";
                             }
-                            echo  "</td>";
-                            echo "<tr>";
-                        }
-                        ?>
-                    </tr>
-                </table>
+                            ?>
+                        </tr>
+                    </table>
+                </div>
             </div>
-        </div>
-    <?php
+            <?php
+        }else{
+            echo  '<div class="alert alert-danger">Sorry This page is empty, there is nothing to display...!</div>';
+        }
     }//End Insert page.
     elseif($do == "Edit"){  //Edit page
 
@@ -94,7 +99,7 @@ if(isset($_SESSION['Username'])){
 
             <!--start Edit Form-->
             <div class="continyer">
-                <h1 class="text-center"><?php echo lang("EditMemper")?></h1>
+                <h1 class="text-center"><?php echo lang("EDIT_COMMENT")?></h1>
                 <form class="contact-form" action="<?php echo "?do=Update" ?>" method="POST">
                     <!-- Start user name field -->
                     <i class="fa-solid fa-user icons"></i>

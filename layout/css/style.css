@@ -155,7 +155,7 @@ li.list-group-item {
 
 .latest-users .btn-success,
 .latest-users .btn-info {
-	padding: 0px 8px;
+	padding: 0px 1px;
 	position: absolute;
 	left: 80%;
 }
@@ -416,5 +416,13 @@ textarea,input:hover{
 /* Start items Page */
 .selection{
 	margin-top: 30px;
+}
+
+.comment_edit{
+	top: 24px;
+
+}
+.alert-danger {
+	margin: 71px 109px;
 }
 /* End items Page */

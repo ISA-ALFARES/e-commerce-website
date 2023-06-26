@@ -1,6 +1,6 @@
 <?php
 
-    global $temp;
+    global $temp, $connection;
     session_start();
 
     if(isset($_SESSION['Username'])){
@@ -18,6 +18,7 @@
         $user_Latest = getLatest('*' ,'users' , 'Username' , $numUsers );
         $num_items = 6 ;
         $item_latest = getLatest("*" , 'items' ,'Name' ,$num_items);
+
 
       ?>
 		<div class="home-stats">
@@ -59,11 +60,11 @@
 					</div>
 					<div class="col-md-3">
 						<div class="stat st-comments">
-							<i class="fa fa-comments"></i>
+                            <a href="comments.php"><i class="fa fa-comments"></i></a>
 							<div class="info">
 								Total Comments
 								<span>
-									<a href="#">15</a>
+                                    <a href="comments.php"> <?= count_items('comment_id' ,'comments') ?> </a>
 								</span>
 							</div>
 						</div>
@@ -130,10 +131,8 @@
                                             echo '<span class="btn btn-success pull-right">';
                                             echo '<i class="fa fa-edit"></i> Edit';
                                             if ($item['Approve'] == 0) {
-                                                echo "<a 
-																	href='items.php?do=Approve&item_id=" . $item['Item_ID'] . "' 
-																	class='btn btn-info pull-right activate'>
-																	<i class='fa fa-check'></i> Approve</a>";
+                                                echo "<a href='items.php?do=Approve&item_id=" . $item['Item_ID'] . "'class='btn btn-info pull-right activate'>
+												<i class='fa fa-check'></i> Approve</a>";
                                             }
                                             echo '</span>';
                                             echo '</a>';
@@ -160,6 +159,42 @@
 								</span>
                             </div>
                             <div class="panel-body">
+                                <ul class="list-group latest-users ">
+                                    <?php
+                                    $stetment=$connection->prepare("SELECT comments.*,users.Username AS username
+                                              FROM comments
+                                              INNER JOIN users
+                                              ON users.UserID  = comments.user_id 
+                                              ");
+                                    //execute the data entered by the user
+                                    $stetment->execute();
+                                    //Assign to variable...
+                                    $comment_latest = $stetment->fetchAll();
+                                    if (! empty($comment_latest)) {
+                                        foreach ($comment_latest as $comment) {
+                                            echo '<li class="list-group-item">';
+                                            echo "<div class='user_comment' >";
+                                                    echo $comment['username'];
+                                                echo "<h5 class='comment'>";
+                                                    echo $comment['Comment'];
+                                                echo "<h5>";
+                                            echo '<a href="comments.php?do=Edit&comment_id=' . $comment['comment_ID'] . '">';
+                                            echo "</div>";
+                                            echo '<span class="btn btn-success pull-right comment_edit ">';
+                                            echo '<i class="fa fa-edit  "></i> Edit';
+                                            if ($comment['Status'] == 0) {
+                                                echo "<a href='comments.php?do=activate&comment_id=" . $comment['comment_ID'] . "'class='btn btn-info pull-right activate comment_edit'>
+												<i class='fa fa-check '></i> Approve</a>";
+                                            }
+                                            echo '</span>';
+                                            echo '</a>';
+                                            echo '</li>';
+                                        }
+                                    } else {
+                                        echo 'There\'s No Comment To Show';
+                                    }
+                                    ?>
+                                </ul>
                             </div>
                         </div>
                     </div>

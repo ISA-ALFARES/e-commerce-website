@@ -30,46 +30,51 @@ if(isset($_SESSION['Username'])){
 
             //Assign to variable...
             $rows = $stetment->fetchAll();
-            ?>
-            <div class="container">
-              <div class="table-responsive">
-              <h1 class="text-center"><?php echo lang("MANAGEMEMBER")?></h1>
-              <table class="main-table text-center table text-white table-bordered border-danger ">
-                <tr>
-                  <td>ID</td>
-                  <td>Username</td>
-                  <td>Email</td>
-                  <td>Fullname</td>
-                  <td>Date</td>
-                  <td>Control</td>
-                </tr>
-                <tr>
-                    <?php
-                    foreach($rows as $row){
-                      echo "<tr>";
-                        echo "<td>" . $row['UserID'] . "</td>";
-                        echo "<td>" . $row['Username'] . "</td>";
-                        echo "<td>" . $row['Email'] . "</td>";
-                        echo "<td>" . $row['Fullname'] . "</td>";
-                        echo "<td>" . $row['Date']."</td>";
-                        echo "<td>
+            echo   '<h1 class="text-center">'. lang("MANAGEMEMBER").'</h1>';
+            if (! empty($rows)){
+                ?>
+                <div class="container">
+                    <div class="table-responsive">
+                        <table class="main-table text-center table text-white table-bordered border-danger ">
+                            <tr>
+                                <td>ID</td>
+                                <td>Username</td>
+                                <td>Email</td>
+                                <td>Fullname</td>
+                                <td>Date</td>
+                                <td>Control</td>
+                            </tr>
+                            <tr>
+                                <?php
+                                foreach($rows as $row){
+                                    echo "<tr>";
+                                    echo "<td>" . $row['UserID'] . "</td>";
+                                    echo "<td>" . $row['Username'] . "</td>";
+                                    echo "<td>" . $row['Email'] . "</td>";
+                                    echo "<td>" . $row['Fullname'] . "</td>";
+                                    echo "<td>" . $row['Date']."</td>";
+                                    echo "<td>
                               <a class='btn btn-success' href='members.php?do=Edit&ID=".$row['UserID']."' role='button'><i class='fa-solid fa-pen-to-square'> </i> Edit </a>
                               <a  href='members.php?do=Delete&ID=".$row['UserID']."' role='button' class='btn btn-danger confirm' ><i class='fa-regular fa-trash-can'> </i> Delete </a>";
-                         if($row['RegStatus'] == 0 ){
+                                    if($row['RegStatus'] == 0 ){
 
-                             echo "<a  href='members.php?do=activate&ID=".$row['UserID']."' role='button' class='btn btn-info confirm Activate' ><i class='fa-solid fa-circle-check''></i> Activate </a>";
-                         }
-                         echo  "</td>";
-                      echo "<tr>";
-                    }
-                    ?>
-                </tr>
-              </table>
-              <a class="btn btn-primary btn-lg" href="?do=Add" role="button"><i class="fa-solid fa-plus"></i>     Add Member    </a>
-            </div>
-          </div>
-        <?php }
-    elseif($do== "Add"){?>
+                                        echo "<a  href='members.php?do=activate&ID=".$row['UserID']."' role='button' class='btn btn-info confirm Activate' ><i class='fa-solid fa-circle-check''></i> Activate </a>";
+                                    }
+                                    echo  "</td>";
+                                    echo "<tr>";
+                                }
+                                ?>
+                            </tr>
+                        </table>
+                        <a class="btn btn-primary btn-lg" href="?do=Add" role="button"><i class="fa-solid fa-plus"></i>     Add Member    </a>
+                    </div>
+                </div>
+                <?php
+            }else{
+                echo  '<div class="alert alert-danger">Sorry This page is empty, there is nothing to display...!</div>';
+            }
+
+    }elseif($do== "Add"){?>
           <!--start Add Form-->
           <div class="continyer">
                 <h1 class="text-center"><?php echo lang("ADDMEMBER")?></h1>

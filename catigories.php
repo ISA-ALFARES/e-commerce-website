@@ -37,24 +37,24 @@ session_start();
              $statement->execute();
 
              $cats = $statement->fetchAll();
-
-
-            echo  '<h1 class="text-center">'.lang("CATIGORIES").'</h1>'; ?>
-             <div class="container categories ">
-                 <div class="card">
-                     <div class="card-header">
-                         <i class="fa fa-edit"></i> Manage Categories
-                         <div class="option float-right text-right">
-                             <i class="fa fa-sort"></i> Ordering: [
-                             <a class="<?php if ($sort == 'ASC') { echo 'active'; } ?>" href="?sort=ASC">asc</a> |
-                             <a class="<?php if ($sort == 'DESC') { echo 'active'; } ?>" href="?sort=DESC">desc</a> ]
-<!--                             <i class="fa fa-eye"></i> View: [-->
-<!--                             <span class="active" data-view="full">Full</span> |-->
-<!--                             <span data-view="classic">Classic</span> ]-->
-                         </div>
-                     </div>
-                     <div class="card-body">
-                         <?php
+             echo  '<h1 class="text-center">'.lang("CATIGORIES").'</h1>';
+            if (! empty($cats)){
+                ?>
+                <div class="container categories ">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-edit"></i> Manage Categories
+                            <div class="option float-right text-right">
+                                <i class="fa fa-sort"></i> Ordering: [
+                                <a class="<?php if ($sort == 'ASC') { echo 'active'; } ?>" href="?sort=ASC">asc</a> |
+                                <a class="<?php if ($sort == 'DESC') { echo 'active'; } ?>" href="?sort=DESC">desc</a> ]
+                                <!--                             <i class="fa fa-eye"></i> View: [-->
+                                <!--                             <span class="active" data-view="full">Full</span> |-->
+                                <!--                             <span data-view="classic">Classic</span> ]-->
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <?php
                             foreach($cats as $cat){
 
                                 echo "<div class='cat'>";
@@ -71,17 +71,16 @@ session_start();
                                 echo "</div>";
                                 echo "</div>";
                                 echo '<hr>';
-
                             }
-                         ?>
-                     </div>
-                 </div>
-                 <a class=" margin-categories btn btn-primary btn-lg" href="?do=Add" role="button"><i class="fa-solid fa-plus"></i>     Add Member    </a>
-
-             </div>
-
-
-         <?php
+                            ?>
+                        </div>
+                    </div>
+                    <a class=" margin-categories btn btn-primary btn-lg" href="?do=Add" role="button"><i class="fa-solid fa-plus"></i>     Add Member    </a>
+                </div>
+                <?php
+            }else{
+               echo  '<div class="alert alert-danger">Sorry This page is empty, there is nothing to display...!</div>';
+            }
          }elseif ($do == 'Add'){
              ?>
              <h1 class="text-center">Add New Category</h1>

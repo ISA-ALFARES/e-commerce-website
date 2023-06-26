@@ -23,6 +23,8 @@
                     'MANAGE_ITEMS'   =>  "Manage items" ,
                     'ADD_ITEMS'   =>  "Add Items" ,
                     'EDIT_ITEMS'   =>  "Edit Items" ,
+                     'MANAGECOMMENTS'   =>  "Manage Comments" ,
+                    'EDIT_COMMENT'   =>  "Edit Comment" ,
 
                 //End  NavbarPages
 
