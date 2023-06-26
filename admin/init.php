@@ -22,3 +22,4 @@
     include   $temp ."header.php";     // 2-header Directory
 
     //include navbar all pages Expect The one with $navbar variable
+    if(!isset($no_navbar)){include $temp."navbar.php";}  // navbar Directory not in the index.php 
