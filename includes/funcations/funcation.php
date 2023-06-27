@@ -1,4 +1,46 @@
 <?php
+    function getCat() {
+
+        global $connection ;
+
+        $statement = $connection->prepare("SELECT * FROM categories ");
+
+        $statement->execute();
+        $cats = $statement->fetchAll();
+
+        return $cats;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     function get_title(){
 

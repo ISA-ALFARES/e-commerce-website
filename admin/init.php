@@ -1,6 +1,6 @@
 <?php
     include   "connect.php";
-
+    global  $temp ;
     //Routes
     $temp  =  "includes/templates/"; // Template Directory
     $lang  =  "includes/languages/"; // Languages Directory

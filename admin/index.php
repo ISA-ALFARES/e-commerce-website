@@ -1,5 +1,5 @@
 <?php
-global $temp;
+global $temp, $connection;
 session_start();
     $no_navbar =''; //On the login (index.php) page, the navbar should not appear
     $page_title = 'LOGIN';
@@ -36,7 +36,7 @@ session_start();
         $count = $stetment->rowcount();                              
         
         //if count > 0 This mean the database record about this
-        if($count >0 ){
+        if($count > 0 ){
 
           $_SESSION['Username'] =$username ;  //Register Session name...
 

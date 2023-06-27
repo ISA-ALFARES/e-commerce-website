@@ -12,6 +12,7 @@
             'COMMENTS'         => "Comments" ,
             'ACCOUNT'          => "my account",
                 'EDIT'      => "Edit Profile",
+                'VISIT_SHOP'      => "Visit Shop",
                     'ADDMEMBER'      => "Add page" ,
                     'EditMemper'     => "Edit Member",
                     'INSERTMEMBER'   => "Insert page" ,

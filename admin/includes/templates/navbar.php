@@ -23,6 +23,7 @@
                   </a>
                   <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="members.php?do=Edit&ID=<?php echo $_SESSION['ID']?>"><?php echo lang('EDIT')?></a></li>
+                    <li><a class="dropdown-item" href="../index.php"><?php echo lang('VISIT_SHOP')?></a></li>
                     <li><a class="dropdown-item" href="#"><?php echo lang('SITTING')?></a></li>
                     <li><a class="dropdown-item" href="logout.php"><?php echo lang('LOGOUT')?></a></li>
                   </ul>

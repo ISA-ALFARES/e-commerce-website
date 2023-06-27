@@ -2,7 +2,7 @@
     function lang($phrase){
         static $lang = array(
 //           Start  NavbarPages
-            'HOME'          => "HOME",
+            'HOMEPAGE'          => "HomePage",
             'LOGIN'         => "Login" ,
             'MEMBERS'       => "Members" ,
             'LANGUAGE'       => "Language" ,
