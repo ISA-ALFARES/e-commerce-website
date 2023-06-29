@@ -7,7 +7,7 @@
 	--White: #eee ;
 }
 body {
-	background: linear-gradient(90deg, #0f0c29, #302b63, #24243e);
+	background: linear-gradient(90deg, #ffffff, #ffffff, #ffffff);
 	font-size: 16px;
 }
 * {
@@ -18,10 +18,10 @@ body {
 }
 /* end navbar */
 .panel-heading {
-	color: wheat;
+	color: black;
 }
 h1{
-	color: white;
+	color: black;
 	font-weight: 700;
 	letter-spacing: 1px;
 	font-size: 60px;
@@ -51,6 +51,9 @@ a.dropdown-item {
 /* End catigories page */
 .item-box{
 	padding-left: 30px;
+	border: 0.001cm solid rgba(0, 0, 0, 0.11);
+	background-color: black;
+	border-radius: 15px ;
 }
 .uber_bar{
 	padding-right: 10%;
@@ -66,9 +69,8 @@ a.dropdown-item {
 .main{
 	width: 350px;
 	height: 500px;
-	background: red;
+	background: #573b8a;
 	overflow: hidden;
-	background: url("https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38") no-repeat center/ cover;
 	border-radius: 10px;
 	box-shadow: 5px 20px 50px #000;
 	margin:  5% 40%;

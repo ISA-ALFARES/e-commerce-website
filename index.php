@@ -3,7 +3,7 @@
     if (isset($_SESSION['user'])){
         global $temp;
         include  "init.php";
-        echo '<a class="uber_bar text-white">hello' .$_SESSION["user"]. '</a>';
+        echo '<a class="uber_bar ">hello' .$_SESSION["user"]. '</a>';
 
     }else{
         header('Location:login.php');

@@ -23,7 +23,7 @@
         echo $userStatus."<br>";
         if ($userStatus  == 1){
 
-            echo "<div class='text-white'>hesabınız ِAktiv değil</div>" ;
+            echo "<div class=''>hesabınız ِAktiv değil...</div>" ;
         }
 
         ?>
@@ -42,7 +42,7 @@
                     <?php echo lang("LOGIN_SIGNUP"); ?></button></a>
         </div>
     <?php } ?>
-    <nav class="navbar navbar-expand-lg nav-bar" style="background-color: #123354;">
+    <nav class="navbar navbar-expand-lg nav-bar" style="background-color: #000000;">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.php"><?php echo lang('HOMEPAGE')?></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,6 +55,7 @@
                         echo '<li class="nav-item dropdown"><a class="nav-link" href="catigories.php?cat_id='.$cat['ID'].'&pageName='.str_replace(' ' , '-' ,$cat['Name']).'">'.$cat['Name'].'</a></li>';
                     } ?>
                     <li class="nav-item dropdown"><a class="nav-link" href="logout.php">Logout</a></li>
+                    <li class="nav-item dropdown"><a class="nav-link" href="myProfile.php">myProfile</a></li>
                 </ul>
             </div>
         </div>
