@@ -22,6 +22,18 @@
 
         return $items;
     }
+    function CheckUserStatus($user) {
+
+    global $connection ;
+
+    $statement = $connection->prepare("SELECT Username , RegStatus FROM users where Username = ? AND RegStatus = 0 ");
+
+    $statement->execute(array($user));
+
+    $status = $statement->rowCount();
+
+    return $status;
+}
 
 
 

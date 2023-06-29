@@ -16,12 +16,21 @@
 </head>
 <body>
     <?php
-    if(isset($_SESSION['user'])){ ?>
+    if(isset($_SESSION['user'])){
 
+
+        $userStatus = CheckUserStatus($_SESSION['user']);
+        echo $userStatus."<br>";
+        if ($userStatus  == 1){
+
+            echo "<div class='text-white'>hesabınız ِAktiv değil</div>" ;
+        }
+
+        ?>
         <div class="d-flex justify-content-end">
             <a class="uber_bar text-white" ><button  class="btn-lg btn btn-primary">
                     <i class="fa-solid fa-user icons"></i>
-                    <?php echo lang("LOGIN_SIGNUP")?></button>
+                    <?php echo lang("MY_ACCOUNT")?></button>
             </a>
         </div>
 
@@ -30,7 +39,7 @@
         <div class="d-flex justify-content-end">
             <a class="uber_bar text-white" ><button  class="btn-lg btn btn-primary">
                     <i class="fa-solid fa-user icons">  </i>
-                    <?php echo lang("MY_ACCOUNT"); ?></button></a>
+                    <?php echo lang("LOGIN_SIGNUP"); ?></button></a>
         </div>
     <?php } ?>
     <nav class="navbar navbar-expand-lg nav-bar" style="background-color: #123354;">
