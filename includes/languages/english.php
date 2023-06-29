@@ -25,6 +25,8 @@
                     'EDIT_ITEMS'   =>  "Edit Items" ,
                      'MANAGECOMMENTS'   =>  "Manage Comments" ,
                     'EDIT_COMMENT'   =>  "Edit Comment" ,
+                    'MY_ACCOUNT'   =>  "  My Account" ,
+                    'LOGIN_SIGNUP'   =>  "Login|Signup" ,
 
                 //End  NavbarPages
 

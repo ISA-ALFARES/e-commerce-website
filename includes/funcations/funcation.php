@@ -10,6 +10,18 @@
 
         return $cats;
     }
+    function getItem($catID) {
+
+        global $connection ;
+
+        $statement = $connection->prepare("SELECT * FROM items where Cat_ID = ? ");
+
+        $statement->execute(array($catID));
+
+        $items = $statement->fetchAll();
+
+        return $items;
+    }
 
 
 

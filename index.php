@@ -1,6 +1,12 @@
 <?php
+    session_start();
+    if (isset($_SESSION['user'])){
+        global $temp;
+        include  "init.php";
+        echo '<a class="uber_bar text-white">hello' .$_SESSION["user"]. '</a>';
 
-    global $temp;
-    include  "init.php";
-      echo "hello";
-  include $temp."footer.php"; 
+    }else{
+        header('Location:login.php');
+    }
+
+include $temp."footer.php";

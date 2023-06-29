@@ -278,6 +278,7 @@ textarea,input:hover{
 /* END  Table  edit */
 .Activate{
 	margin-left: 5px;
+
 }
  /*Start Category Page */
  /*Start Category Page */
@@ -433,4 +434,7 @@ textarea,input:hover{
 input.form-control::placeholder{
 	position: absolute;
 	margin-left: 10px;
+}
+label {
+	color: white;
 }

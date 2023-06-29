@@ -15,22 +15,38 @@
     <title><?php get_title()?></title>
 </head>
 <body>
-<div class="uber_bar">
-    upder_bar...........!!!
-</div>
-<nav class="navbar navbar-expand-lg" style="background-color: #123354;">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="index.php"><?php echo lang('HOMEPAGE')?></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fa-solid fa-bars"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0  ">
-                <?php  foreach (getCat() as  $cat){
+    <?php
+    if(isset($_SESSION['user'])){ ?>
 
-                            echo '<li><a class="nav-link" href="catigories.php?cat_id='.$cat['ID'].'&pageName='.str_replace(' ' , '-' ,$cat['Name']).'">'.$cat['Name'].'</a></li>';
-                        } ?>
-            </ul>
+        <div class="d-flex justify-content-end">
+            <a class="uber_bar text-white" ><button  class="btn-lg btn btn-primary">
+                    <i class="fa-solid fa-user icons"></i>
+                    <?php echo lang("LOGIN_SIGNUP")?></button>
+            </a>
         </div>
-    </div>
-</nav>
+
+    <?php  }
+    else{ ?>
+        <div class="d-flex justify-content-end">
+            <a class="uber_bar text-white" ><button  class="btn-lg btn btn-primary">
+                    <i class="fa-solid fa-user icons">  </i>
+                    <?php echo lang("MY_ACCOUNT"); ?></button></a>
+        </div>
+    <?php } ?>
+    <nav class="navbar navbar-expand-lg nav-bar" style="background-color: #123354;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.php"><?php echo lang('HOMEPAGE')?></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0  ">
+                    <?php  foreach (getCat() as  $cat){
+
+                        echo '<li class="nav-item dropdown"><a class="nav-link" href="catigories.php?cat_id='.$cat['ID'].'&pageName='.str_replace(' ' , '-' ,$cat['Name']).'">'.$cat['Name'].'</a></li>';
+                    } ?>
+                    <li class="nav-item dropdown"><a class="nav-link" href="logout.php">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>

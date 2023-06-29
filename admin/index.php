@@ -15,7 +15,7 @@ session_start();
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $username = $_POST['user'];
         $password = $_POST['pass'];
-        $hashedpass = sha1($password);
+        $hashedpass = sha1($password); //Şifre şifreleme
 
         //chek if the user exist in databases
         $stetment =  $connection->prepare("SELECT
