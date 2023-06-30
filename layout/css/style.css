@@ -115,7 +115,7 @@ input{
 	justify-content: center;
 	display: block;
 	color: #fff;
-	background: #573b8a;
+	background: #844bbd;
 	font-size: 1em;
 	font-weight: bold;
 	margin-top: 20px;
@@ -174,4 +174,31 @@ button:hover{
 
 .social-login__icon:hover {
 	transform: scale(1.5);
+}
+
+.error-msg{
+	width: 349px;
+	height: 40px;
+	text-align: center;
+	padding: 10px 0px;
+	background-color: rgba(236, 0, 0, 0.24);
+	margin: -30px 40%;
+}
+.error-msg:before{
+	content: " ";
+	width: 6px;
+	height: 40px;
+	background-color: red;
+	position: absolute;
+	margin: -10px -63px;
+}
+.succes-msg{
+	width: 349px;
+	height: 40px;
+	text-align: center;
+	padding: 8px 0px;
+	background-color: rgba(0, 255, 4, 0.15);
+	margin: -30px 40%;
+	border: 1px solid rgba(91, 91, 91, 0.2);
+	border-left: 5px solid green ;
 }

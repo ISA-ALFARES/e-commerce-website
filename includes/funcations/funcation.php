@@ -45,6 +45,43 @@
         $items  = $statement->fetchAll();
         return $items ;
     }
+    /*
+    ** Check newUser Function v1.0
+    ** Function to Check Item In Database [ Function Accept Parameters ]
+    ** $select = The Item To Select [ Example: user, item, category ]
+    ** $from = The Table To Select From [ Example: users, items, categories ]
+    ** $where_value = The Value Of Select [ Example: isa, Box, Electronics ]
+    */
+    function chekNewUser($select,$from,$where_value) {
+
+        global $connection ;
+
+        $statement = $connection->prepare("SELECT $select FROM $from  WHERE $select = ? ");
+
+        $statement->execute(array($where_value));
+
+        $count = $statement->rowCount();
+        return $count;
+    }
+
+    /*
+    ** Home Redirect Function v2.0
+    ** This Function Accept Parameters
+    ** $theMsg = Echo The Message [ Error | Success | Warning ]
+    ** $page_adress = The address You Want To Redirect To
+    ** $seconds = Seconds Before Redirecting
+    */
+    function redirect_home($themesg, $seconds = 2, $page_adress = '') {
+        echo $themesg;
+        echo '<div class="alert alert-info"> You will be redirected to the previous page after seconds '.$seconds.'</div>';
+
+        if (empty($page_adress)) {
+            $page_adress = $_SERVER['HTTP_REFERER'];
+        }
+
+        header("refresh:$seconds;url=".$page_adress);
+        exit();
+}
 
 
 
@@ -76,7 +113,7 @@
 
 
 
-    function get_title(){
+function get_title(){
 
               global $page_title ;
 
@@ -89,49 +126,17 @@
                 echo 'Default';
               }
     }
-    /*
-    ** Home Redirect Function v2.0
-    ** This Function Accept Parameters
-    ** $theMsg = Echo The Message [ Error | Success | Warning ]
-    ** $page_adress = The address You Want To Redirect To
-    ** $seconds = Seconds Before Redirecting
-    */
-    function redirect_home($themesg , $secends =3,$page_adress = 'index.php' ){
 
-        echo  $themesg;
 
-        echo '<div class="alert alert-info"> You will be redirected to the previous page after seconds '.$secends.'</div>';
 
-        header("refresh:$secends;url=$page_adress");
 
-        exit();
-    }
-
-    /*
-    ** Check Items Function v1.0
-    ** Function to Check Item In Database [ Function Accept Parameters ]
-    ** $select = The Item To Select [ Example: user, item, category ]
-    ** $from = The Table To Select From [ Example: users, items, categories ]
-    ** $where_value = The Value Of Select [ Example: Osama, Box, Electronics ]
-    */
-    function chekitem($select,$from,$where_value) {
-
-      global $connection ;
-
-      $statement = $connection->prepare("SELECT $select FROM $from  WHERE $select = ? ");
-
-      $statement->execute(array($where_value));
-
-      return $statement->rowCount();
-    }
-
-    /*
-    ** Count Number Of Items Function v1.0
-    ** Function To Count Number Of Items Rows
-    ** $item = The Item To Count
-    ** $table = The Table To Choose From
-     * $condition = The
-    */
+/*
+** Count Number Of Items Function v1.0
+** Function To Count Number Of Items Rows
+** $item = The Item To Count
+** $table = The Table To Choose From
+ * $condition = The
+*/
     function count_items( $item , $table ,$condition = '' ){
 
       global $connection ;
@@ -174,4 +179,5 @@
         }
 
     }
+
 

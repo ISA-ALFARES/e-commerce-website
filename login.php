@@ -1,5 +1,5 @@
 <?php
-global $connection;
+global $connection, $count;
 session_start();
 global $temp;
 include  "init.php";
@@ -68,6 +68,28 @@ $page_title = 'LOGIN';
 
                 $formErrors[] = "This Email Is Not valid..!!";
             }
+            chekNewUser('Username' , 'users','$username');
+            if ($count > 0){
+                $formErrors[] = "Sorry This User Exist..!!";
+            }else{
+
+                $stetment = $connection->prepare("INSERT INTO  users ( Username , Email , Password ,RegStatus, Date ) VALUES( :insert_user , :insert_email  , :insert_pass ,RegStatus = 0 , NOW() ) ");
+
+                $stetment->execute(array(
+                    'insert_user'    =>  $username, // add to array key and value...
+                    'insert_email'   => $email,
+                    'insert_pass'    => $pass1
+
+                ));
+                $newUSercount = $stetment->rowCount();
+
+                if ($newUSercount > 0){
+
+                    $newUserMsg = "Congrats You  Now Registerd User";
+                }
+
+
+            }
 
         }
     }
@@ -134,8 +156,12 @@ $page_title = 'LOGIN';
     echo  '<div class="text-center tge-errors  ">';
         if (!empty($formErrors)){
             foreach ($formErrors as $error){
-                echo   $error .'<br';
+                echo  '<div class="error-msg text-center container ">'.$error.'</div>';
             }
+        }
+        if (isset($newUserMsg)){
+            echo  '<div class="succes-msg text-center  container ">'.$newUserMsg.'</div>';
+
         }
     echo  '</div>';
 include $temp."footer.php"; ?>
