@@ -1,12 +1,20 @@
 <?php
     include   "connect.php";
+
+    // Enable displaying errors
+    ini_set('display_errors', 'on');
+
+    // Set error reporting to display all types of errors
+    error_reporting(E_ALL);
+
     global  $temp ;
     //Routes
     $temp  =  "includes/templates/"; // Template Directory
     $lang  =  "includes/languages/"; // Languages Directory
     $func  =  "includes/funcations/";// Funcations Directory..
     global $userSession ;
-    $userSession = 'nnn';
+    $userSession = '';
+
     if(isset($_SESSION['user'])){
         $userSession = $_SESSION['user'];
     }
