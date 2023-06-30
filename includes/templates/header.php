@@ -17,16 +17,16 @@
 <body>
     <?php
     if(isset($_SESSION['user'])){
-
-
         $userStatus = CheckUserStatus($_SESSION['user']);
-        echo $userStatus."<br>";
-        if ($userStatus  == 1){
+        if ($userStatus  > 0){
 
             echo "<div class=''>hesabınız ِAktiv değil...</div>" ;
+        }else{
+            echo  '<div class="m-5"><a class="nav-link text-dark" href="additem.php">'.lang("ADD_NEW_ITEM").'</a></div>';
         }
 
         ?>
+
         <div class="d-flex justify-content-end">
             <a class="uber_bar text-white" ><button  class="btn-lg btn btn-primary">
                     <i class="fa-solid fa-user icons"></i>

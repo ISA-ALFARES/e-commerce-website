@@ -9,7 +9,6 @@ echo '<div class="categories-title"><h2 >'. str_replace('-' , '' ,$_GET["pageNam
                 echo '<div class="card">';
                     echo '<div class="card-body">';
                     echo '<h4 class="card-title">The product is listed</h4>';
-                            // قم بوضع اختياراتك هنا
                             echo '<ul class="list-group">';
                             echo '<li class="list-group-item">';
                             echo '<input type="checkbox" name="choices[]" value="Lenovo">  Lenovo';
@@ -26,20 +25,23 @@ echo '<div class="categories-title"><h2 >'. str_replace('-' , '' ,$_GET["pageNam
             echo '</div>';
             echo '<div class="col-md-10">';
                     echo '<div class="row">';
-
                             $items = getItem($_GET["cat_id"]) ;
                             foreach ($items as $item) {
                                 echo '<div class="col-sm-12 col-md-6   col-lg-3"">' ;
-                                echo '<div class="card item-box">' ;
-                                echo '<div class="card-bodys">';
-                                echo '<div class="img-box">';
-                                echo '<img class="img-responsive box-image" src="./layout/images/b2.jpg" alt="" >';
-                                echo '</div>';
-                                echo '<h3 class="text-danger">'.$item['Price'].'</h3>';
-                                echo '<h3 class="">'.$item['Name'].'</h3>';
-                                echo '<p class=" ">'.$item['Description'] .'</p>';
-                                echo '</div>';
-                                echo '</div>';
+                                    echo '<div class="card item-box">' ;
+                                        echo '<div class="card-bodys">';
+                                            echo '<div class="img-box">';
+                                                echo '<img class="img-responsive box-image" src="./layout/images/b2.jpg" alt="" >';
+                                                echo '</div>';
+                                                echo '<div class="box-information">';
+                                                    echo '<h5 class="font-weight-bold d-inline-block title-font-size ">'.$item['Name'].'</h5>';
+                                                    echo '<span class=" Description-font-size ">'.$item['Description'] .'</span>';
+                                                    echo '<h4 class="text-dark font-weight-bold  ">'.$item['Price'].'<span class="text-info money">'.lang("MONY").'</span>'.'</h4>';
+
+                                                echo '</div>';
+                                            echo '<input   class="btn btn-primary   add-card  ml-5 " type="submit"  value="'.lang("ADD_TO_CARD").'">';
+                                            echo '</div>';
+                                    echo '</div>';
                                 echo '</div>';
                             }
                     echo '</div>';

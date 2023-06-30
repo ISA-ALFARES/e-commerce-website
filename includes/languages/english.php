@@ -27,6 +27,9 @@
                     'EDIT_COMMENT'   =>  "Edit Comment" ,
                     'MY_ACCOUNT'   =>  "  My Account" ,
                     'LOGIN_SIGNUP'   =>  "Login|Signup" ,
+                    'ADD_NEW_ITEM'   =>  "Add Item" ,
+                    'MONY'   =>  "  $" ,
+                   'ADD_TO_CARD'   =>  "Add To Cart" ,
 
                 //End  NavbarPages
 

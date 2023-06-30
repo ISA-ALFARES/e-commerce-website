@@ -107,6 +107,7 @@ $page_title = 'LOGIN';
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                 <label for="chk" aria-hidden="true">Sign up</label>
                 <input
+                        class="inputs"
                         pattern=".{3,}"
                         title="The name of the user must be more than 4 Chars"
                         type="text"
@@ -114,12 +115,14 @@ $page_title = 'LOGIN';
                         placeholder="User name"
                         required="">
                 <input
+                        class="inputs"
                         type="email"
                         name="email"
                         placeholder="Email"
                         required="">
                 <input
 
+                        class="inputs"
                         pattern=".{4,16}"
                         title="The password must be between 4 and 16  Chars"
                         type="password"
@@ -127,6 +130,7 @@ $page_title = 'LOGIN';
                         placeholder="Password"
                         required="">
                 <input
+                        class="inputs"
                         pattern=".{4,16}"
                         title="The password must be between 4 and 16  Chars"
                         type="password"
@@ -139,8 +143,8 @@ $page_title = 'LOGIN';
         <div class="login">
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                 <label for="chk" aria-hidden="true">Login</label>
-                <input type="text" name="user" placeholder="User name" required="">
-                <input type="password" name="pass"  placeholder="Password" required="">
+                <input  class="inputs" type="text" name="user" placeholder="User name" required="">
+                <input  class="inputs" type="password" name="pass"  placeholder="Password" required="">
                 <button class="login-button" name="login">Login</button>
             </form>
             <div class="social-login">

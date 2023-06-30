@@ -12,4 +12,18 @@ $(function()
   $('.confirm').click(function (){
     return  confirm('Are Your Sure...?');
   });
+
+  $('.live-name').keyup(function () {
+
+      $('.live-preview .box-information h5').text($(this).val());
+  });
+
+  $('.live-description').keyup(function () {
+
+    $('.live-preview .box-information .Description-font-size').text($(this).val());
+  });
+  $('.live-price').keyup(function () {
+
+    $('.live-preview .box-information h4').text($(this).val());
+  });
 });

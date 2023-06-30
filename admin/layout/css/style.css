@@ -264,6 +264,9 @@ textarea,input:hover{
 	background-color: var(--hover);
 	border-color: #484c8c;
 }
+.btn-add-item{
+	margin-top: 20px;
+}
 /* End edit form */
 /* Start  Table  edit */
 .main-table td{

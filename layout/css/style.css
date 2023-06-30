@@ -45,25 +45,44 @@ a.nav-link {
 a.dropdown-item {
 	color: #eee;
 }
-/* Start categories page */
+/* Start categories page                */
 .categores-container{
 	max-width: 90%;
 }
 .box-image{
-	width: 268px ;
+	width: 260px ;
 	height: 250px;
 }
 .item-box{
 	border: 0.001cm solid rgba(0, 0, 0, 0.11);
 	border-radius: 15px ;
 }
+.Description-font-size{
+	font-size: 12px;
+}
+.title-font-size{
+	margin: 0px;
+	padding: 0px;
 
+	color: rgba(0, 0, 0, 0.8);
+}
+.money{
+	font-size: 16px;
+}
+.add-card{
+	margin-bottom: 20px;
+
+}
 /* End categories page */
 /* Start navbar */
 .uber_bar{
 	padding-right: 10%;
 	margin: 20px 0px;
 }
+.box-information {
+	padding: 10px 24px;
+}
+
 
 
 /* end navbar */
@@ -97,15 +116,15 @@ label{
 	cursor: pointer;
 	transition: .5s ease-in-out;
 }
-input{
+.inputs{
 	width: 60%;
-	height: 20px;
+	height: 25px;
 	background: #e0dede;
 	justify-content: center;
 	display: flex;
 	margin: 20px auto;
 	padding: 10px;
-	border: none;
+	border: solid 1px rgba(0, 0, 0, 0.62);
 	outline: none;
 	border-radius: 5px;
 }
@@ -220,3 +239,69 @@ button:hover{
 	width: 120px;
 }
 /* End myProfile page */
+/* Start edit form */
+
+.icons{
+	position: relative;
+	z-index: 3;
+	top: 32px;
+	left: 8px;
+	font-size: 17px;
+	color: #3c4185;
+
+}
+h1{
+	font-family: 'Raleway', sans-serif;
+	color: var(--White);
+	font-weight: 900;
+	letter-spacing: -4px;
+	font-size: 56px;
+}
+.btn{
+	PADDING: 2PX 10px;
+}
+.alert{
+	margin-bottom: 10px;
+}
+.contact-form {
+	max-width: 400px ;
+	margin: 10px auto;
+	position: relative;
+}
+.contact-form .custom-alert{
+	padding: 5px 10px;
+}
+.contact-form .form-group {
+	margin-bottom: 0px;
+	position: relative;
+}
+.contact-form .axstrisx {
+	position: absolute;
+	font-size: 22px;
+	top: 5px;
+	color: #ff7272;
+	right: 5px;
+}
+input{
+	transition: 1.5s ease-in-out;
+}
+textarea,input:hover{
+	border: 1px solid var(--primary);
+}
+.contact-form input , textarea{
+	margin-bottom: 10px;
+}
+.btn-success {
+	color: #fff;
+	background-color: var(--hover);
+	border-color: var(--red);
+}
+.btn-success:hover {
+	color: #fff;
+	background-color: var(--primary);
+	border-color: #484c8c;
+}
+.btn-add-item{
+	margin-top: 20px;
+}
+/* End edit form */
