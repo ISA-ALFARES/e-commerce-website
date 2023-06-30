@@ -71,17 +71,15 @@
     ** $page_adress = The address You Want To Redirect To
     ** $seconds = Seconds Before Redirecting
     */
-    function redirect_home($themesg, $seconds = 2, $page_adress = '') {
-        echo $themesg;
-        echo '<div class="alert alert-info"> You will be redirected to the previous page after seconds '.$seconds.'</div>';
+function redirect_secces($themesg, $seconds = 3) {
+    echo $themesg;
+    echo '<div class="alert alert-info">You will be redirected to the previous page after '.$seconds.' seconds.</div>';
 
-        if (empty($page_adress)) {
-            $page_adress = $_SERVER['HTTP_REFERER'];
-        }
+    header("refresh:$seconds;url=" . $_SERVER['HTTP_REFERER']);
 
-        header("refresh:$seconds;url=".$page_adress);
-        exit();
+    exit();
 }
+
 
 
 

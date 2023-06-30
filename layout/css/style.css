@@ -67,6 +67,7 @@ a.dropdown-item {
 
 
 /* end navbar */
+/* Start login|signup page */
 
 .main{
 	width: 350px;
@@ -202,3 +203,20 @@ button:hover{
 	border: 1px solid rgba(91, 91, 91, 0.2);
 	border-left: 5px solid green ;
 }
+/* end login|signup page */
+/* Start myprofile page */
+.information ul{
+	margin: 0px;
+	padding: 0px;
+}
+.information ul li{
+	padding: 10px;
+}
+.information ul li:nth-child(odd){
+	background-color: #eee;
+}
+.information ul span{
+	display: inline-block;
+	width: 120px;
+}
+/* End myProfile page */

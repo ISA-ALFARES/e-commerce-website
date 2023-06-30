@@ -14,87 +14,89 @@ $page_title = 'LOGIN';
     else{
 
     }
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        if(isset($_POST['login'])){
 
-            $username = $_POST['user'];
-            $password = $_POST['pass'];
-            $hashedpass = sha1($password);
 
-                $statement=$connection->prepare("SELECT Username , Password 
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (isset($_POST['login'])) {
+
+                $username = $_POST['user'];
+                $password = $_POST['pass'];
+                $hashedpass = sha1($password);
+
+                $statement = $connection->prepare("SELECT Username , Password 
                                                        FROM 
                                                            users 
                                                        WHERE 
                                                            Username = ? 
                                                        AND Password = ?");
-                $statement->execute(array($username,$hashedpass));
+                $statement->execute(array($username, $hashedpass));
 
                 $statement->fetch();
 
                 $count = $statement->rowCount();
 
-                if ($count > 0){
+                if ($count > 0) {
 
-                    $_SESSION['user'] = $username ;
+                    $_SESSION['user'] = $username;
                     header("Location: index.php");
                     exit();
-                }else{
+                } else {
                     header('Location: login.php');
                     exit();
                 }
-        }else{
+            } else {
 
-            $username =  filter_var($_POST['user'] ,FILTER_SANITIZE_STRING);
-            $password = $_POST['pass'];
-            $password2 = $_POST['pass2'];
-            $email = filter_var($_POST['email'] , FILTER_SANITIZE_EMAIL);
-            $formErrors  =  array();
-            if ($password !== $password2){
+                $username = filter_var($_POST['user'], FILTER_SANITIZE_STRING);
+                $password = $_POST['pass'];
+                $password2 = $_POST['pass2'];
+                $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+                $formErrors = array();
+                if ($password !== $password2) {
 
-                $formErrors[] = "Sorry  password is not match...!";
+                    $formErrors[] = "Sorry  password is not match...!";
 
-            }
-            if (strlen($username) < 3 or empty($username)){
-
-                $formErrors[] = "Please fill in this field...!";
-
-            }
-            if (isset($password) && isset($password2)){
-
-                $pass1 = sha1($password);
-                $pass2 = sha1($password2);
-
-            }if (filter_var($email,FILTER_VALIDATE_EMAIL) != true){
-
-                $formErrors[] = "This Email Is Not valid..!!";
-            }
-            chekNewUser('Username' , 'users','$username');
-            if ($count > 0){
-                $formErrors[] = "Sorry This User Exist..!!";
-            }else{
-
-                $stetment = $connection->prepare("INSERT INTO  users ( Username , Email , Password ,RegStatus, Date ) VALUES( :insert_user , :insert_email  , :insert_pass ,RegStatus = 0 , NOW() ) ");
-
-                $stetment->execute(array(
-                    'insert_user'    =>  $username, // add to array key and value...
-                    'insert_email'   => $email,
-                    'insert_pass'    => $pass1
-
-                ));
-                $newUSercount = $stetment->rowCount();
-
-                if ($newUSercount > 0){
-
-                    $newUserMsg = "Congrats You  Now Registerd User";
                 }
+                if (strlen($username) < 3 or empty($username)) {
 
+                    $formErrors[] = "Please fill in this field...!";
 
+                }
+                if (isset($password) && isset($password2)) {
+
+                    $pass1 = sha1($password);
+                    $pass2 = sha1($password2);
+
+                }
+                if (filter_var($email, FILTER_VALIDATE_EMAIL) != true) {
+
+                    $formErrors[] = "This Email Is Not valid..!!";
+                }
+                chekNewUser('Username', 'users', '$username');
+                if ($count == 0 && isset($_POST['SignUp'])) {
+
+                    $newUSerstetment = $connection->prepare("INSERT INTO  users ( Username , Email , Password ,RegStatus, Date) VALUES( :insert_user , :insert_email  , :insert_pass ,RegStatus = 0 , NOW() ) ");
+                    $newUSerstetment->execute(array(
+                        'insert_user' => $username, // add to array key and value...
+                        'insert_email' => $email,
+                        'insert_pass' => $pass1
+
+                    ));
+                    $newUSercount = $newUSerstetment->rowCount();
+
+                    if ($newUSercount > 0) {
+
+                        $newUserMsg = "Congrats You  Now Registerd User";
+                    } else {
+                        $formErrors[] = "Sorry An unexpected error occurred..!!";
+                    }
+                } else {
+
+                    $formErrors[] = "Sorry This User Exist..!!";
+
+                }
             }
-
         }
-    }
-
-
 
 ?>
 <div class="main-body">
@@ -118,20 +120,20 @@ $page_title = 'LOGIN';
                         required="">
                 <input
 
-                        pattern=".{8,16}"
-                        title="The password must be between 8 and 16  Chars"
+                        pattern=".{4,16}"
+                        title="The password must be between 4 and 16  Chars"
                         type="password"
                         name="pass"
                         placeholder="Password"
                         required="">
                 <input
-                        pattern=".{8,16}"
-                        title="The password must be between 8 and 16  Chars"
+                        pattern=".{4,16}"
+                        title="The password must be between 4 and 16  Chars"
                         type="password"
                         name="pass2"
                         placeholder="Type password again"
                         required="">
-                <button class="login-button" name="Sign-up" >Sign up</button>
+                <button class="login-button" name="SignUp" >Sign up</button>
             </form>
         </div>
         <div class="login">

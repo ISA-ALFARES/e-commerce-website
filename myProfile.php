@@ -17,33 +17,58 @@ if (isset($_SESSION['user'])){
             <div class="col-md-12">
                 <div class="card  mt-3 mb-3">
                     <div class="card-header bg-primary text-white">My Profile</div>
-                    <div class="card-body">
+                    <div class="card-body information">
                         <?php
+
                         foreach ($information as $info){
-                            echo 'Name :'.$info['Username'].'<br>';
-                            echo 'Email :'.$info['Email'].'<br>';
-                            echo 'Full Name :'.$info['Fullname'].'<br>';
-                            echo 'UserID :'.$info['UserID'].'<br>';
-                        }
-                        ?>
+                            ?>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <i class="fa-solid fa-unlock icons"></i>
+                                    <span>Name</span> :   <?php echo $info['Username']; ?>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-envelope icons"></i>
+                                    <span>Email</span> :   <?php echo $info['Email']; ?>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-user-group icons"></i>
+                                    <span>Full Name</span> :   <?php echo $info['Fullname']; ?>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-calendar icons"></i>
+                                    <span>Ragistered Data</span> :   <?php echo $info['Date']; ?>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-tags icons"></i>
+                                    <span>Fov Category</span> :   <?php echo $info['UserID']; ?>
+                                </li>
+
+                            </ul>
+
+                        <?php } ?>
                     </div>
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="card-header bg-primary text-white ">My ads</div>
-                <div class="d-flex justify-content-start flex-wrap">
-                    <?php
-                    foreach ((getitems('Member_ID' ,$info['UserID'])) as $item){
-                        echo '<div class="col-sm-6 col-md-4 col-lg-3">' ;
-                        echo '<div class="thumbnail item-box">' ;
-                        echo '<img class="img-responsive box-image "  src="./layout/images/b2.jpg" alt="" >';
-                        echo '<h3 class="text-danger">'.$item['Price'].'</h3>';
-                        echo '<h3 class="">'.$item['Name'].'</h3>';
-                        echo '<p class=" ">'.$item['Description'] .'</p>';
-                        echo '</div>';
-                        echo  '</div>';
-                    }
-                    ?>
+                <div class="card mt-3 mb-3">
+                    <div class="card-header bg-primary text-white ">My ads</div>
+                    <div class="card-body ">
+                        <div class="d-flex justify-content-start flex-wrap">
+                            <?php
+                            foreach ((getitems('Member_ID' ,$info['UserID'])) as $item){
+                                echo '<div class="col-sm-6 col-md-4 col-lg-3">' ;
+                                echo '<div class="thumbnail item-box">' ;
+                                echo '<img class="img-responsive box-image "  src="./layout/images/b2.jpg" alt="" >';
+                                echo '<h3 class="text-danger">'.$item['Price'].'</h3>';
+                                echo '<h3 class="">'.$item['Name'].'</h3>';
+                                echo '<p class=" ">'.$item['Description'] .'</p>';
+                                echo '</div>';
+                                echo  '</div>';
+                            }
+                            ?>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-md-12">
