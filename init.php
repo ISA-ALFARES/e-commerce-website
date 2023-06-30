@@ -5,14 +5,16 @@
     $temp  =  "includes/templates/"; // Template Directory
     $lang  =  "includes/languages/"; // Languages Directory
     $func  =  "includes/funcations/";// Funcations Directory..
+    global $userSession ;
+    $userSession = 'nnn';
+    if(isset($_SESSION['user'])){
+        $userSession = $_SESSION['user'];
+    }
     //include The Improtant  files...
     include   $func ."funcation.php";     // 2-header Directory
 
         $language = 'english.php';
-
         $lang_array = array('english.php','turkish.php','arabic.php');
-
-
         if(isset($_GET['language']) && in_array($_GET['language'] ,$lang_array)){
 
             $language = $_GET['language'];

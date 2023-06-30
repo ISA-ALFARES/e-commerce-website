@@ -43,28 +43,28 @@ a.nav-link {
 a.dropdown-item {
 	color: #eee;
 }
-/* Start catigories page */
-.box-image{
-	width: 200px ;
-	height: 200px;
+/* Start categories page */
+.categores-container{
+	max-width: 90%;
 }
-/* End catigories page */
+.box-image{
+	width: 268px ;
+	height: 250px;
+}
 .item-box{
-	padding-left: 30px;
 	border: 0.001cm solid rgba(0, 0, 0, 0.11);
-	background-color: black;
 	border-radius: 15px ;
 }
+
+/* End categories page */
+/* Start navbar */
 .uber_bar{
 	padding-right: 10%;
 	margin: 20px 0px;
 }
-/* Start navbar */
-
 
 
 /* end navbar */
-/*Start login page*/
 
 .main{
 	width: 350px;
@@ -173,5 +173,3 @@ button:hover{
 .social-login__icon:hover {
 	transform: scale(1.5);
 }
-/*end login page*/
-

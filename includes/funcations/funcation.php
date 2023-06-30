@@ -34,7 +34,17 @@
 
     return $status;
 }
+    function getitems($where,$value) {
 
+        global $connection ;
+
+        $statement = $connection->prepare("SELECT * FROM items  WHERE $where = ? ");
+
+        $statement->execute(array($value));
+
+        $items  = $statement->fetchAll();
+        return $items ;
+    }
 
 
 

@@ -27,7 +27,8 @@
                     <li><a class="dropdown-item" href="#"><?php echo lang('SITTING')?></a></li>
                     <li><a class="dropdown-item" href="logout.php"><?php echo lang('LOGOUT')?></a></li>
                   </ul>
-            </li>            <li class="nav-item dropdown   ">
+            </li>
+          <li class="nav-item dropdown   ">
               <a class="nav-link dropdown-toggle"
                  href="#"
                  role="button"
