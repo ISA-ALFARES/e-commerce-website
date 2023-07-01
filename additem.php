@@ -4,6 +4,7 @@ session_start();
 if (isset($_SESSION['user'])){
     global $temp;
     include  "init.php";
+    print_r($_SESSION)  ;
     if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
 
         $fromErrors  = array();
@@ -13,34 +14,47 @@ if (isset($_SESSION['user'])){
         $status      = filter_var($_POST['status'] ,FILTER_SANITIZE_STRING);;
         $country     = filter_var($_POST['country'] ,FILTER_SANITIZE_STRING);
         $catigore    = filter_var($_POST['catigore'] ,FILTER_SANITIZE_STRING);
-        if (empty($name) ){
 
-            $fromErrors[]  = "Name Cant Be <strong>Empty</strong>..!";
+        $fromError = array();
 
+        if(empty($name)){
+            $fromError [] =  "Name Can\'t be <sronge>Empty</sronge>" ;
         }
-        if (empty($description) ){
-
-            $fromErrors[]  = "description Cant Be <strong>Empty</strong>..!";
-
+        if(empty($description)){
+            $fromError [] = 'Description Can\'t be <sronge>Empty</sronge>';
         }
-        if (empty($price) ){
-
-            $fromErrors[]  = "price Cant Be <strong>Empty</strong>..!";
-
+        if(empty($price)){
+            $fromError [] = 'price Can\'t be <sronge>Empty</sronge>';
         }
-        if (empty($status) ){
-
-            $fromErrors[]  = "status Cant Be <strong>Empty</strong>..!";
-
+        if($status == 0 ){
+            $fromError [] = 'Status Can\'t be <sronge>Empty</sronge>';
         }
-        if (empty($country) ){
-
-            $fromErrors[]  = "country Cant Be <strong>Empty</strong>..!";
-
+        if(empty($country)){
+            $fromError [] = 'country Can\'t be <sronge>Empty</sronge>';
         }
-        if (empty($catigore) ){
+        if($catigore == 0 ){
+            $fromError [] = 'CAtigore Can\'t be <sronge>Empty</sronge>';
+        }
+        if (empty($fromErrors)){
 
-            $fromErrors[]  = "catigore Cant Be <strong>Empty</strong>..!";
+            $stetment=$connection->prepare("INSERT INTO 
+                        items(Name , Description , Price , Status , Country  , Add_Data ,Cat_ID ,Member_ID )
+                        VALUES (:zname ,:zdescription ,:zprice ,:zstatus, :zcountry ,now() ,:zcat,:zmember)");
+            $stetment->execute(array(
+
+                'zname'          =>  $name ,
+                'zdescription'   =>  $description ,
+                'zprice'         =>  $price ,
+                'zstatus'        =>  $status ,
+                'zcountry'       =>  $country ,
+                'zcat'           =>  $catigore ,
+                'zmember'       => $_SESSION['usrID']
+            ));
+            if ($stetment) {
+                echo '<div class="container">';
+                echo '<div class=" alert alert-info">' . $stetment->rowCount() . 'Record updated...</div>';
+                echo '</div>';
+            }
 
         }
 

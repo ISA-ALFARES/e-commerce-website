@@ -24,7 +24,7 @@ $page_title = 'LOGIN';
                 $password = $_POST['pass'];
                 $hashedpass = sha1($password);
 
-                $statement = $connection->prepare("SELECT Username , Password 
+                $statement = $connection->prepare("SELECT  UserID, Username , Password 
                                                        FROM 
                                                            users 
                                                        WHERE 
@@ -32,13 +32,15 @@ $page_title = 'LOGIN';
                                                        AND Password = ?");
                 $statement->execute(array($username, $hashedpass));
 
-                $statement->fetch();
+                $getUser = $statement->fetch();
 
                 $count = $statement->rowCount();
 
                 if ($count > 0) {
 
-                    $_SESSION['user'] = $username;
+                    $_SESSION['usrID'] =  $getUser['UserID'];
+                    $_SESSION['user']  = $username;
+
                     header("Location: index.php");
                     exit();
                 } else {
