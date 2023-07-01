@@ -34,11 +34,7 @@ h1{
 a.nav-link:hover{
 	color: var(--hover);
 }
-.dropdown-menu {
-	top: 117% !important;
-	left: -11% !important;
-	background-color: #123354;
-}
+
 a.nav-link {
 	color: white;
 }
@@ -87,6 +83,7 @@ a.dropdown-item {
 
 /* end navbar */
 /* Start login|signup page */
+
 
 .main{
 	width: 350px;
@@ -145,9 +142,7 @@ label{
 	transition: .2s ease-in;
 	cursor: pointer;
 }
-button:hover{
-	background: #6d44b8;
-}
+
 .login{
 	height: 460px;
 	background: #eee;
@@ -392,3 +387,16 @@ textarea,input:hover{
 }
 
 /* End Our Custom */
+/* Start Header */
+
+.upper-bar {
+	padding: 10px;
+	background-color: #FFF
+}
+
+.my-image {
+	width: 32px;
+	height: 32px;
+}
+
+/* End Header */

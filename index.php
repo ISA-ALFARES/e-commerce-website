@@ -10,4 +10,4 @@ session_start();
         header('Location:login.php');
     }
 
-include $temp."footer.php";
+include "includes/templates/footer.php";

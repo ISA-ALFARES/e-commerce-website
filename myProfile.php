@@ -50,6 +50,7 @@ if (isset($_SESSION['user'])){
                     </div>
                 </div>
             </div>
+            <div id="my-ads" class="my-ads block">
             <div class="col-md-12">
                 <div class="card mt-3 mb-3">
                     <div class="card-header bg-primary text-white ">My ads</div>
@@ -73,6 +74,7 @@ if (isset($_SESSION['user'])){
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
             <div class="col-md-12">
                 <div class="card mt-3 mb-3">

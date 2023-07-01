@@ -12,34 +12,43 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,400;0,600;0,700;0,800;1,500;1,600&display=swap" >
     <!-- <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/all.css'>
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css'> -->
+
     <title><?php get_title()?></title>
 </head>
 <body>
     <?php
+
     if(isset($_SESSION['user'])){
-        $userStatus = CheckUserStatus($_SESSION['user']);
-        if ($userStatus  > 0){
+        $sessionUser = $_SESSION['user'];
 
-            echo "<div class=''>hesabınız ِAktiv değil...</div>" ;
-        }else{
-            echo  '<div class="m-5"><a class="nav-link text-dark" href="additem.php">'.lang("ADD_NEW_ITEM").'</a></div>';
-        }
+//            $userStatus = CheckUserStatus($_SESSION['user']);
+            ?>
+            <div class="uber_bar">
 
-        ?>
+                <div class="d-flex justify-content-end">
+                    <div class="dropdown">
+                        <button class="btn bg-transparent dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            <?php echo $sessionUser ?>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <li><a class="dropdown-item text-dark" href="myProfile.php">My Profile</a></li>
+                            <li><a class="dropdown-item  text-dark"" href="additem.php">New Item</a></li>
+                            <li><a class="dropdown-item  text-dark" href="profile.php#my-ads">My Items</a></li>
+                            <li><a class="dropdown-item  text-dark"" href="logout.php">Logout</a></li>
+                        </ul>
+                    </div>
+                    <img class="my-image img-thumbnail rounded-circle" src="../../layout/images/b5.jpg" alt="">
+                </div>
 
-        <div class="d-flex justify-content-end">
-            <a class="uber_bar text-white" ><button  class="btn-lg btn btn-primary">
-                    <i class="fa-solid fa-user "></i>
-                    <?php echo lang("MY_ACCOUNT")?></button>
-            </a>
-        </div>
+            </div>
 
-    <?php  }
-    else{ ?>
+        <?php
+    }else{ ?>
         <div class="d-flex justify-content-end">
             <a class="uber_bar text-white" ><button  class="btn-lg btn btn-primary">
                     <i class="fa-solid fa-user ">  </i>
-                    <?php echo lang("LOGIN_SIGNUP"); ?></button></a>
+                    <?php echo lang("LOGIN_SIGNUP"); ?></button>
+            </a>
         </div>
     <?php } ?>
     <nav class="navbar navbar-expand-lg nav-bar" style="background-color: #000000;">
@@ -53,9 +62,8 @@
                     <?php  foreach (getCat() as  $cat){
 
                         echo '<li class="nav-item dropdown"><a class="nav-link" href="catigories.php?cat_id='.$cat['ID'].'">'.$cat['Name'].'</a></li>';
+
                     } ?>
-                    <li class="nav-item dropdown"><a class="nav-link" href="logout.php">Logout</a></li>
-                    <li class="nav-item dropdown"><a class="nav-link" href="myProfile.php">myProfile</a></li>
                 </ul>
             </div>
         </div>
