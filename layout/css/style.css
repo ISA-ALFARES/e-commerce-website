@@ -385,4 +385,10 @@ textarea,input:hover{
 	top: 10px;
 }
 
-/* End Show Item Page */
+/* End Show Item Page *//* Start Our Custom */
+
+.custom-hr {
+	border-top: 1px solid #c9c9c9;
+}
+
+/* End Our Custom */

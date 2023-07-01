@@ -86,7 +86,6 @@ global $tpl, $connection, $items, $temp;
                     </div>
                 </div>
                 <hr class="custom-hr">
-    <?php } ?>
                 <?php if (isset($_SESSION['user'])) { ?>
                     <!-- Start Add Comment -->
                     <div class="row">
@@ -127,9 +126,58 @@ global $tpl, $connection, $items, $temp;
                         </div>
                     </div>
                     <!-- End Add Comment -->
-                <?php } else {
+                <?php }  else {
                     echo '<a href="login.php">Login</a> or <a href="login.php">Register</a> To Add Comment';
-                }
+                }?>
+                <hr class="custom-hr">
+                <?php
+
+                    // Select All Users Except Admin
+                    $stmt = $connection->prepare("SELECT 
+                                                comments.*, users.Username AS Member  
+                                            FROM 
+                                                comments
+                                            INNER JOIN 
+                                                users 
+                                            ON 
+                                                users.UserID = comments.user_id
+                                            WHERE 
+                                                Item_ID = ?
+                                            AND 
+                                                status = 1
+                                            ORDER BY 
+                                                comment_ID DESC");
+
+                    // Execute The Statement
+
+                    $stmt->execute(array($item['Item_ID']));
+
+                    // Assign To Variable
+
+                    $comments = $stmt->fetchAll();
+
+                ?>
+
+            <?php foreach ($comments as $comment) { ?>
+                <div class="comment-box">
+                    <div class="row">
+                        <div class="col-2 text-center">
+                            <img class="img-fluid img-thumbnail rounded-circle" src="./layout/images/b5.jpg" alt="" />
+                            <p class="mt-2"><?php echo $comment['Member'] ?></p>
+                        </div>
+                        <div class="col-10">
+                            <p class="lead text-dark"><?php echo $comment['Comment'] ?></p>
+                        </div>
+                    </div>
+                </div>
+                <hr class="custom-hr">
+            <?php }
+       echo '</div>';
+	} else {
+		echo '<div class="container">';
+			echo '<div class="alert alert-danger">There\'s no Such ID Or This Item Is Waiting Approval</div>';
+		echo '</div>';
+	}
 
 
 
