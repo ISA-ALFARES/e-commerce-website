@@ -1,7 +1,9 @@
 <?php
-
+session_start();
 global $temp, $userSession;
 include "init.php";
+ $userSession =  $_SESSION['user'] ;
+ echo  $userSession;
 echo '<div class="categories-title"><h2 >Fiyatları ve Modelleri</h2></div>';
     echo '<div class="container categores-container">';
         echo '<div class="row">';
@@ -25,18 +27,18 @@ echo '<div class="categories-title"><h2 >Fiyatları ve Modelleri</h2></div>';
             echo '</div>';
             echo '<div class="col-md-10">';
                     echo '<div class="row">';
-                            $items = getItem($_GET["cat_id"]) ;
+                            $items = getItem($_GET["cat_id"] ) ;
                             foreach ($items as $item) {
                                 echo '<div class="col-sm-12 col-md-6   col-lg-3"">' ;
-                                        echo '<a target="_blank"  href="items.php?item_ID='.$item['Item_ID'].'"><div class="card item-box">';
+                                echo '<a target="_blank" href="items.php?item_ID='.$item['Item_ID'].'" class="text-dark" style="text-decoration: none;"><div class="card item-box">';
                                             echo '<div class="card-bodys">';
                                                 echo '<div class="img-box">';
                                                     echo '<img class="img-responsive box-image" src="./layout/images/b3.jpg" alt="" >';
                                                 echo '</div>';
-                                                echo '<div class="box-information">';
+                                                echo '<div class="box-information ">';
                                                     echo '<h5 class="font-weight-bold d-inline-block title-font-size ">'.$item['Name'].'</h5>';
-                                                    echo '<span class=" Description-font-size ">'.$item['Description'] .'</span>';
-                                                    echo '<h4 class="text-dark font-weight-bold  ">'.$item['Price'].'<span class="text-dark money">'.lang("MONY").'</span>'.'</h4>';
+                                                    echo '<span class=" Description-font-size  ">'.$item['Description'] .'</span>';
+                                                    echo '<h4 class="text-dark font-weight-bold  ">'.$item['Price'].'<span class="text-dark money ">'.lang("MONY").'</span>'.'</h4>';
                                                 echo '</div>';
                                                 echo '<input   class="btn btn-primary   add-card  ml-5 " type="submit"  value="'.lang("ADD_TO_CARD").'">';
                                             echo '</div>';

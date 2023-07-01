@@ -27,14 +27,14 @@
 
                 <div class="d-flex justify-content-end">
                     <div class="dropdown">
-                        <button class="btn bg-transparent dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn  mr-2 bg-transparent dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                             <?php echo $sessionUser ?>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <li><a class="dropdown-item text-dark" href="myProfile.php">My Profile</a></li>
-                            <li><a class="dropdown-item  text-dark"" href="additem.php">New Item</a></li>
+                            <li><a class="dropdown-item  text-dark" href="additem.php">New Item</a></li>
                             <li><a class="dropdown-item  text-dark" href="profile.php#my-ads">My Items</a></li>
-                            <li><a class="dropdown-item  text-dark"" href="logout.php">Logout</a></li>
+                            <li><a class="dropdown-item  text-dark" href="logout.php">Logout</a></li>
                         </ul>
                     </div>
                     <img class="my-image img-thumbnail rounded-circle" src="../../layout/images/b5.jpg" alt="">
@@ -45,7 +45,7 @@
         <?php
     }else{ ?>
         <div class="d-flex justify-content-end">
-            <a class="uber_bar text-white" ><button  class="btn-lg btn btn-primary">
+            <a href="login.php" class="uber_bar text-white" ><button  class="btn-lg btn btn-primary">
                     <i class="fa-solid fa-user ">  </i>
                     <?php echo lang("LOGIN_SIGNUP"); ?></button>
             </a>

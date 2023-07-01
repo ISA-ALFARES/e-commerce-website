@@ -82,7 +82,7 @@ if(isset($_SESSION['Username'])){
           <!--start Add Form-->
           <div class="continyer">
                 <h1 class="text-center"><?php echo lang("ADDMEMBER")?></h1>
-                <form class="contact-form" action="<?php echo "?do=Insert" ?>" method="POST">
+                <form class="contact-form" action="<?php echo "?do=Insert" ?>" method="POST"  enctype="multipart/form-data">
                       <!-- Start user name field -->
                     <i class="fa-solid fa-user icons"></i>
                       <div class="form-group">
@@ -136,6 +136,18 @@ if(isset($_SESSION['Username'])){
                           <span class="axstrisx">*</span>
                       </div>
                       <!-- End Fullname  field -->
+                    <i class="fa-solid fa-photo icons"></i>
+                    <div class="form-group">
+                        <input
+                                class="form-control"
+                                type="file"
+                                name="avatar"
+                                placeholder=""
+                                value=""
+                                required="required">
+                        <span class="axstrisx">*</span>
+                    </div>
+                    <!-- End Fullname  field -->
                       <!-- Start Save  field -->
                       <input
                       class="btn btn-success btn-block"
@@ -150,7 +162,17 @@ if(isset($_SESSION['Username'])){
             <?php
               if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-                    //Get  Variabels from the from....
+                  echo '<pre>';
+                  print_r($_FILES['avatar']);
+                  echo '<pre>';
+                  $avatarName = $_FILES['avatar']['name'] ;
+                  $avatarSize = $_FILES['avatar']['size'] ;
+                  $avatarType = $_FILES['avatar']['type'] ;
+                  $avatarTmp = $_FILES['avatar']['tmp_name'] ;
+
+                  $avatarExtension =   array('jpeg' , 'jpg' , 'png' , 'gif');
+
+                  //Get  Variables from the from....
 
                     $user = filter_var($_POST['username'],FILTER_SANITIZE_STRING);
 
@@ -203,23 +225,23 @@ if(isset($_SESSION['Username'])){
                         echo '</div>' ;
                     }
                   else{
-                    //Update the  database with This Information
-                    $stetment = $connection->prepare("INSERT INTO  users ( Username , Email  , Fullname , Password , Date ) VALUES( :insert_user , :insert_email  , :insert_full , :insert_pass , NOW() ) ");
-                    $stetment->execute(array(
-                      'insert_user'    =>  $user, // add to array key and value...
-                      'insert_email'   => $email,
-                      'insert_full'    => $full,
-                      'insert_pass'    => $pass
-
-                    ));
-                    //End Update the  database with This Information
-                    //When the Update operation succeeds, this sentence will be printed
-
-                        echo '<div class="container">' ;
-                          $themesg     ='<div class=" alert alert-info">'.$stetment->rowCount().'Record updated...</div>' ;
-                          $page_adress = 'members.php';
-                          redirect_home($themesg,2,$page_adress);
-                        echo '</div>';
+//                    //Update the  database with This Information
+//                    $stetment = $connection->prepare("INSERT INTO  users ( Username , Email  , Fullname , Password , Date ) VALUES( :insert_user , :insert_email  , :insert_full , :insert_pass , NOW() ) ");
+//                    $stetment->execute(array(
+//                      'insert_user'    =>  $user, // add to array key and value...
+//                      'insert_email'   => $email,
+//                      'insert_full'    => $full,
+//                      'insert_pass'    => $pass
+//
+//                    ));
+//                    //End Update the  database with This Information
+//                    //When the Update operation succeeds, this sentence will be printed
+//
+//                        echo '<div class="container">' ;
+//                          $themesg     ='<div class=" alert alert-info">'.$stetment->rowCount().'Record updated...</div>' ;
+//                          $page_adress = 'members.php';
+//                          redirect_home($themesg,2,$page_adress);
+//                        echo '</div>';
                   }
                 }
             }else{ // error page

@@ -58,15 +58,15 @@ if (isset($_SESSION['user'])){
                         <div class="d-flex justify-content-start flex-wrap">
                             <?php
                             foreach ((getitems('Member_ID' ,$info['UserID'])) as $item){
-                                echo '<div class="col-sm-6 col-md-4 col-lg-3">' ;
-                                    echo '<a target="_blank"  href="items.php?item_ID='.$item['Item_ID'].'"><div class="thumbnail item-box">';
-                                    echo '<img class="img-responsive box-image "  src="./layout/images/b3.jpg" alt="" >';
-                                    echo '<div class="box-information">';
-                                        echo '<h5 class="font-weight-bold d-inline-block title-font-size ">'.$item['Name'].'</h5>';
-                                        echo '<span class=" Description-font-size ">'.$item['Description'] .'</span>';
-                                        echo '<h4 class="text-dark font-weight-bold  ">'.$item['Price'].'<span class="text-dark money">'.lang("MONY").'</span>'.'</h4>';
-                                    echo '</div>';
-                                echo '</div></a>';
+                                echo '<div class="col-sm-6 col-md-4 col-lg-4">' ;
+                                    echo '<a target="_blank" style="text-decoration: none;  href="items.php?item_ID='.$item['Item_ID'].'"><div class="thumbnail item-box">';
+                                        echo '<img class="img-responsive box-image "  src="./layout/images/b3.jpg" alt="" >';
+                                        echo '<div class="box-information">';
+                                            echo '<h5 class="font-weight-bold d-inline-block title-font-size ">'.$item['Name'].'</h5>';
+                                            echo '<span class=" Description-font-size ">'.$item['Description'] .'</span>';
+                                            echo '<h4 class="text-dark font-weight-bold  ">'.$item['Price'].'<span class="text-dark money">'.lang("MONY").'</span>'.'</h4>';
+                                        echo '</div>';
+                                    echo '</div></a>';
                                 echo  '</div>';
                             }
 

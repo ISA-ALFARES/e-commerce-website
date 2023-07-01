@@ -84,7 +84,24 @@ function redirect_secces($themesg, $seconds = 3) {
 
 
 
+/*
+** Get All Function v2.0
+** Function To Get All Records From Any Database Table
+*/
 
+    function getAllFrom($field, $table, $where = NULL, $and = NULL, $ordering = "DESC") {
+
+    global $connection;
+
+    $getAll = $connection->prepare("SELECT $field FROM $table $where $and ORDER BY  $ordering");
+
+    $getAll->execute();
+
+    $all = $getAll->fetchAll();
+
+    return $all;
+
+}
 
 
 
