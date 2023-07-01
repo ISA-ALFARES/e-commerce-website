@@ -2,7 +2,7 @@
 
 global $temp, $userSession;
 include "init.php";
-echo '<div class="categories-title"><h2 >'. str_replace('-' , '' ,$_GET["pageName"]) .' Fiyatları ve Modelleri</h2></div>';
+echo '<div class="categories-title"><h2 >Fiyatları ve Modelleri</h2></div>';
     echo '<div class="container categores-container">';
         echo '<div class="row">';
             echo '<div class="col-md-2">';
@@ -31,7 +31,7 @@ echo '<div class="categories-title"><h2 >'. str_replace('-' , '' ,$_GET["pageNam
                                         echo '<a target="_blank"  href="items.php?item_ID='.$item['Item_ID'].'"><div class="card item-box">';
                                             echo '<div class="card-bodys">';
                                                 echo '<div class="img-box">';
-                                                    echo '<img class="img-responsive box-image" src="./layout/images/b2.jpg" alt="" >';
+                                                    echo '<img class="img-responsive box-image" src="./layout/images/b3.jpg" alt="" >';
                                                 echo '</div>';
                                                 echo '<div class="box-information">';
                                                     echo '<h5 class="font-weight-bold d-inline-block title-font-size ">'.$item['Name'].'</h5>';

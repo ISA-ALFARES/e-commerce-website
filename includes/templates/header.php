@@ -52,7 +52,7 @@
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0  ">
                     <?php  foreach (getCat() as  $cat){
 
-                        echo '<li class="nav-item dropdown"><a class="nav-link" href="catigories.php?cat_id='.$cat['ID'].'&pageName='.str_replace(' ' , '-' ,$cat['Name']).'">'.$cat['Name'].'</a></li>';
+                        echo '<li class="nav-item dropdown"><a class="nav-link" href="catigories.php?cat_id='.$cat['ID'].'">'.$cat['Name'].'</a></li>';
                     } ?>
                     <li class="nav-item dropdown"><a class="nav-link" href="logout.php">Logout</a></li>
                     <li class="nav-item dropdown"><a class="nav-link" href="myProfile.php">myProfile</a></li>
