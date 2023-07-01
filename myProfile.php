@@ -24,23 +24,23 @@ if (isset($_SESSION['user'])){
                             ?>
                             <ul class="list-unstyled">
                                 <li>
-                                    <i class="fa-solid fa-unlock icons"></i>
+                                    <i class="fa-solid fa-unlock "></i>
                                     <span>Name</span> :   <?php echo $info['Username']; ?>
                                 </li>
                                 <li>
-                                    <i class="fa-solid fa-envelope icons"></i>
+                                    <i class="fa-solid fa-envelope "></i>
                                     <span>Email</span> :   <?php echo $info['Email']; ?>
                                 </li>
                                 <li>
-                                    <i class="fa-solid fa-user-group icons"></i>
+                                    <i class="fa-solid fa-user-group "></i>
                                     <span>Full Name</span> :   <?php echo $info['Fullname']; ?>
                                 </li>
                                 <li>
-                                    <i class="fa-solid fa-calendar icons"></i>
+                                    <i class="fa-solid fa-calendar "></i>
                                     <span>Ragistered Data</span> :   <?php echo $info['Date']; ?>
                                 </li>
                                 <li>
-                                    <i class="fa-solid fa-tags icons"></i>
+                                    <i class="fa-solid fa-tags "></i>
                                     <span>Fov Category</span> :   <?php echo $info['UserID']; ?>
                                 </li>
 

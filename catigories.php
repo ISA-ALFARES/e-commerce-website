@@ -36,7 +36,7 @@ echo '<div class="categories-title"><h2 >'. str_replace('-' , '' ,$_GET["pageNam
                                                 echo '<div class="box-information">';
                                                     echo '<h5 class="font-weight-bold d-inline-block title-font-size ">'.$item['Name'].'</h5>';
                                                     echo '<span class=" Description-font-size ">'.$item['Description'] .'</span>';
-                                                    echo '<h4 class="text-dark font-weight-bold  ">'.$item['Price'].'<span class="text-info money">'.lang("MONY").'</span>'.'</h4>';
+                                                    echo '<h4 class="text-dark font-weight-bold  ">'.$item['Price'].'<span class="text-dark money">'.lang("MONY").'</span>'.'</h4>';
 
                                                 echo '</div>';
                                             echo '<input   class="btn btn-primary   add-card  ml-5 " type="submit"  value="'.lang("ADD_TO_CARD").'">';

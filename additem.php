@@ -4,13 +4,54 @@ session_start();
 if (isset($_SESSION['user'])){
     global $temp;
     include  "init.php";
+    if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
 
+        $fromErrors  = array();
+        $name        = filter_var($_POST['name'] ,FILTER_SANITIZE_STRING);
+        $description = filter_var($_POST['description'] ,FILTER_SANITIZE_STRING);
+        $price       = filter_var($_POST['price'] ,FILTER_SANITIZE_NUMBER_INT);;
+        $status      = filter_var($_POST['status'] ,FILTER_SANITIZE_STRING);;
+        $country     = filter_var($_POST['country'] ,FILTER_SANITIZE_STRING);
+        $catigore    = filter_var($_POST['catigore'] ,FILTER_SANITIZE_STRING);
+        if (empty($name) ){
+
+            $fromErrors[]  = "Name Cant Be <strong>Empty</strong>..!";
+
+        }
+        if (empty($description) ){
+
+            $fromErrors[]  = "description Cant Be <strong>Empty</strong>..!";
+
+        }
+        if (empty($price) ){
+
+            $fromErrors[]  = "price Cant Be <strong>Empty</strong>..!";
+
+        }
+        if (empty($status) ){
+
+            $fromErrors[]  = "status Cant Be <strong>Empty</strong>..!";
+
+        }
+        if (empty($country) ){
+
+            $fromErrors[]  = "country Cant Be <strong>Empty</strong>..!";
+
+        }
+        if (empty($catigore) ){
+
+            $fromErrors[]  = "catigore Cant Be <strong>Empty</strong>..!";
+
+        }
+
+    }
     ?>
     <h1 class="text-center"><?php echo lang("ADD_NEW_ITEM")?></h1>';
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="card  mt-3 mb-3">
+
                     <div class="card-header bg-primary text-white">My Profile</div>
                     <div class="card-body crate-add">
                         <div class="row">
@@ -27,19 +68,17 @@ if (isset($_SESSION['user'])){
                                                     name="name"
                                                     placeholder="    Enter the Item Name...! "
                                                     value=""
-                                                    required="required">
-                                            <span class="axstrisx">*</span>
+                                            <span class="axstrisx"></span>
                                         </div>
                                         <!-- End username field -->
                                         <!-- Start Description Field -->
                                         <i class="fa-solid fa-caret-right icons"></i>
                                         <div class="form-group ">
                                             <input
-
+                                                    value=""
                                                     type="text"
                                                     name="description"
                                                     class="form-control live-description"
-                                                    required="required"
                                                     placeholder="   Description of The Item" />
                                             <span class="axstrisx">*</span>
                                         </div>
@@ -53,9 +92,7 @@ if (isset($_SESSION['user'])){
                                                     type="text"
                                                     name="price"
                                                     placeholder="    Enter the Price...! "
-                                                    value=""
-                                                    required="required">
-                                            <span class="axstrisx">*</span>
+                                            <span class="axstrisx"></span>
                                         </div>
                                         <!-- End Price field -->
                                         <!-- Start Status Field -->
@@ -79,8 +116,7 @@ if (isset($_SESSION['user'])){
                                                     name="country"
                                                     placeholder="    Enter the Country name...! "
                                                     value=""
-                                                    required="required">
-                                            <span class="axstrisx">*</span>
+                                            <span class="axstrisx"></span>
                                         </div>
                                         <!--End Country field-->
                                         <!-- Start Catigore Field -->
@@ -125,8 +161,19 @@ if (isset($_SESSION['user'])){
                                         </div>
                                     </div>
                                 </div>
+
                         </div>
                     </div>
+                    <!-- end form-->
+                    <?php
+                    if (!empty($fromErrors)) {
+                        foreach ($fromErrors as $error) {
+                            echo '<div class="mb-3 mx-5  alert alert-danger ">' . $error . '</div>';
+                        }
+                    }else{
+
+                    }
+                    ?>
                 </div>
             </div>
         </div>

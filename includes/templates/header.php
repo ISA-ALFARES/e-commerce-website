@@ -29,7 +29,7 @@
 
         <div class="d-flex justify-content-end">
             <a class="uber_bar text-white" ><button  class="btn-lg btn btn-primary">
-                    <i class="fa-solid fa-user icons"></i>
+                    <i class="fa-solid fa-user "></i>
                     <?php echo lang("MY_ACCOUNT")?></button>
             </a>
         </div>
@@ -38,7 +38,7 @@
     else{ ?>
         <div class="d-flex justify-content-end">
             <a class="uber_bar text-white" ><button  class="btn-lg btn btn-primary">
-                    <i class="fa-solid fa-user icons">  </i>
+                    <i class="fa-solid fa-user ">  </i>
                     <?php echo lang("LOGIN_SIGNUP"); ?></button></a>
         </div>
     <?php } ?>

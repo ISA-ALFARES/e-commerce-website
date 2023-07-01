@@ -275,13 +275,14 @@ h1{
 	margin-bottom: 0px;
 	position: relative;
 }
-.contact-form .axstrisx {
+.axstrisx {
 	position: absolute;
 	font-size: 22px;
 	top: 5px;
 	color: #ff7272;
 	right: 5px;
 }
+
 input{
 	transition: 1.5s ease-in-out;
 }
