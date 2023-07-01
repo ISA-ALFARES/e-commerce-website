@@ -135,7 +135,7 @@ if(isset($_SESSION['Username'])){
                           required="required">
                           <span class="axstrisx">*</span>
                       </div>
-                      <!-- End Fullname  field -->
+                      <!-- End avatar  field -->
                     <i class="fa-solid fa-photo icons"></i>
                     <div class="form-group">
                         <input
@@ -144,10 +144,10 @@ if(isset($_SESSION['Username'])){
                                 name="avatar"
                                 placeholder=""
                                 value=""
-                                required="required">
+
                         <span class="axstrisx">*</span>
                     </div>
-                    <!-- End Fullname  field -->
+                    <!-- End avatar  field -->
                       <!-- Start Save  field -->
                       <input
                       class="btn btn-success btn-block"
@@ -162,15 +162,16 @@ if(isset($_SESSION['Username'])){
             <?php
               if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-                  echo '<pre>';
-                  print_r($_FILES['avatar']);
-                  echo '<pre>';
+
                   $avatarName = $_FILES['avatar']['name'] ;
                   $avatarSize = $_FILES['avatar']['size'] ;
                   $avatarType = $_FILES['avatar']['type'] ;
                   $avatarTmp = $_FILES['avatar']['tmp_name'] ;
 
-                  $avatarExtension =   array('jpeg' , 'jpg' , 'png' , 'gif');
+                  $avatarAllowdExtension =   array('jpeg' , 'jpg' , 'png' , 'gif');
+
+                  $array = explode('.', $avatarName);
+                  $avatarExtension = strtolower(end($array));
 
                   //Get  Variables from the from....
 
@@ -203,6 +204,14 @@ if(isset($_SESSION['Username'])){
                 if(strlen($full) <= 1 ){
                   $formNameError[] = "Message Nust be Lareger Then  <strong> 1</strong> Characters..!";
                 }
+                if (!empty($avatarName) && ! in_array($avatarExtension , $avatarAllowdExtension)){
+                    $formNameError[] = "The image format is invalid";
+                }if (empty($avatarName)){
+                   $formNameError[] = "Avatar Cant Be <strong>Empty</strong>..!";
+                  }
+
+
+
                 if( ! empty($formNameError)) {
 
                   echo  '<div class="alert alert-danger" role="alert">';
