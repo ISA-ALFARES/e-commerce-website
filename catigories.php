@@ -28,20 +28,19 @@ echo '<div class="categories-title"><h2 >'. str_replace('-' , '' ,$_GET["pageNam
                             $items = getItem($_GET["cat_id"]) ;
                             foreach ($items as $item) {
                                 echo '<div class="col-sm-12 col-md-6   col-lg-3"">' ;
-                                    echo '<div class="card item-box">' ;
-                                        echo '<div class="card-bodys">';
-                                            echo '<div class="img-box">';
-                                                echo '<img class="img-responsive box-image" src="./layout/images/b2.jpg" alt="" >';
+                                        echo '<a target="_blank"  href="items.php?item_ID='.$item['Item_ID'].'"><div class="card item-box">';
+                                            echo '<div class="card-bodys">';
+                                                echo '<div class="img-box">';
+                                                    echo '<img class="img-responsive box-image" src="./layout/images/b2.jpg" alt="" >';
                                                 echo '</div>';
                                                 echo '<div class="box-information">';
                                                     echo '<h5 class="font-weight-bold d-inline-block title-font-size ">'.$item['Name'].'</h5>';
                                                     echo '<span class=" Description-font-size ">'.$item['Description'] .'</span>';
                                                     echo '<h4 class="text-dark font-weight-bold  ">'.$item['Price'].'<span class="text-dark money">'.lang("MONY").'</span>'.'</h4>';
-
                                                 echo '</div>';
-                                            echo '<input   class="btn btn-primary   add-card  ml-5 " type="submit"  value="'.lang("ADD_TO_CARD").'">';
+                                                echo '<input   class="btn btn-primary   add-card  ml-5 " type="submit"  value="'.lang("ADD_TO_CARD").'">';
                                             echo '</div>';
-                                    echo '</div>';
+                                    echo '</div></a>';
                                 echo '</div>';
                             }
                     echo '</div>';

@@ -58,14 +58,17 @@ if (isset($_SESSION['user'])){
                             <?php
                             foreach ((getitems('Member_ID' ,$info['UserID'])) as $item){
                                 echo '<div class="col-sm-6 col-md-4 col-lg-3">' ;
-                                echo '<div class="thumbnail item-box">' ;
-                                echo '<img class="img-responsive box-image "  src="./layout/images/b2.jpg" alt="" >';
-                                echo '<h3 class="text-danger">'.$item['Price'].'</h3>';
-                                echo '<h3 class="">'.$item['Name'].'</h3>';
-                                echo '<p class=" ">'.$item['Description'] .'</p>';
-                                echo '</div>';
+                                    echo '<a target="_blank"  href="items.php?item_ID='.$item['Item_ID'].'"><div class="thumbnail item-box">';
+                                    echo '<img class="img-responsive box-image "  src="./layout/images/b2.jpg" alt="" >';
+                                    echo '<div class="box-information">';
+                                        echo '<h5 class="font-weight-bold d-inline-block title-font-size ">'.$item['Name'].'</h5>';
+                                        echo '<span class=" Description-font-size ">'.$item['Description'] .'</span>';
+                                        echo '<h4 class="text-dark font-weight-bold  ">'.$item['Price'].'<span class="text-dark money">'.lang("MONY").'</span>'.'</h4>';
+                                    echo '</div>';
+                                echo '</div></a>';
                                 echo  '</div>';
                             }
+
                             ?>
                         </div>
                     </div>
