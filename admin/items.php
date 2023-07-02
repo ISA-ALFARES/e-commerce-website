@@ -28,14 +28,15 @@ session_start();
                 echo '<h1 class="text-center">'.  lang("MANAGE_ITEMS").'</h1>';
                 if (! empty($rows)){
                     ?>
-                    <div class="container">
+                    <div class="container  table-container">
                         <div class="table-responsive">
 
-                            <table class="main-table text-center table text-white table-bordered border-danger ">
+                            <table class="main-table text-center table text-white table-bordered border-danger  avatar-table">
                                 <tr>
                                     <td>ID</td>
+                                    <td>Photo</td>
                                     <td>Name</td>
-                                    <td>Description</td>
+                                    <td >Description</td>
                                     <td>Price</td>
                                     <td>Adding Date</td>
                                     <td>Catigore name</td>
@@ -47,8 +48,16 @@ session_start();
                                     foreach($rows as $row){
                                         echo "<tr>";
                                         echo "<td>" . $row['Item_ID'] . "</td>";
+                                        echo "<td>";
+                                        if (empty($row['itemAvatar'])){
+
+                                            echo  '<img  src="uploads/avatars/b3.jpg" alt=""/>';
+                                        }else{
+                                            echo  '<img  src="uploads/avatars/'.$row['itemAvatar'].'" alt=""/>';
+                                        }
+                                        echo "</td>";
                                         echo "<td>" . $row['Name'] . "</td>";
-                                        echo "<td>" . $row['Description'] . "</td>";
+                                        echo "<td class='Description'>" . $row['Description'] . "</td>";
                                         echo "<td>" . $row['Price'] . "</td>";
                                         echo "<td>" . $row['Add_Data']."</td>";
                                         echo "<td>" . $row['Name']."</td>";
@@ -80,7 +89,7 @@ session_start();
             <!--start Add Form-->
             <div class="continyer">
                 <h1 class="text-center"><?php echo lang("ADD_ITEMS")?></h1>
-                <form class="contact-form" action="<?php echo "?do=Insert" ?>" method="POST">
+                <form class="contact-form" action="<?php echo "?do=Insert" ?>" method="POST"  enctype="multipart/form-data">
                     <!-- Start item name field -->
                     <i class="fa-solid fa-caret-right icons"></i>
                     <div class="form-group">
@@ -178,6 +187,19 @@ session_start();
                         </select>
                     </div>
                     <!-- End member Field -->
+                    <!-- Start avatar  field -->
+                    <i class="fa-solid fa-photo icons"></i>
+                    <div class="form-group">
+                        <input
+                                class="form-control"
+                                type="file"
+                                name="avatar"
+                                placeholder=""
+                                value=""
+                                required="required"
+                        <span class="axstrisx">*</span>
+                    </div>
+                    <!-- End avatar  field -->
                     <!-- Start Save  field -->
                     <input
                         class="btn btn-success btn-block btn-add-item"
@@ -451,6 +473,20 @@ session_start();
 
             if ($_SERVER['REQUEST_METHOD']  ==  "POST"){
 
+
+
+
+                $itemAvatarName = $_FILES['avatar']['name'] ;
+                $itemAvatarSize = $_FILES['avatar']['size'] ;
+                $itemAvatarType = $_FILES['avatar']['type'] ;
+                $itemAvatarTmp = $_FILES['avatar']['tmp_name'] ;
+
+
+                $itemAvatarAllowdExtension =   array('jpeg' , 'jpg' , 'png' , 'gif');
+
+                $avatarArray = explode('.', $itemAvatarName);
+                $itemAvatarExtension = strtolower(end($avatarArray));
+
                 $name            = $_POST['name'];
                 $description     = $_POST['description'];
                 $price           = $_POST['price'];
@@ -482,6 +518,16 @@ session_start();
                 if($user == 0 ){
                     $fromError [] = 'memper Can\'t be <sronge>Empty</sronge>';
                 }
+                if (!empty($itemAvatarName) && ! in_array($itemAvatarExtension , $itemAvatarAllowdExtension)){
+                    $formNameError[] = "The image format is invalid";
+                }
+                if (empty($$itemAvatarName)){
+                    $formNameError[] = "Avatar Cant Be <strong>Empty</strong>..!";//1  (MB) = 1024  (KB)  1  (MB) = 1024  (KB)
+                }
+                if($itemAvatarSize >= ((4*1024)*1024)){
+
+                    $formNameError[] = "Image size cannot be greater than <strong>4MB </strong>..!";
+                }
 
                 if (!empty($fromError)){
 
@@ -493,9 +539,14 @@ session_start();
 
                 else{
 
-                    $stetment=$connection->prepare("INSERT INTO 
-                        items(Name , Description , Price , Status , Country  , Add_Data  , Cat_ID , Member_ID )
-                        VALUES (:zname ,:zdescription ,:zprice ,:zstatus, :zcountry ,now()  ,:zcatigores ,:zmember)");
+                    $itemavatar = rand(0 , 1000000) . '_' . $itemAvatarName ;
+                    // mkdir("uploads/avatars" ,0777);
+
+                    move_uploaded_file($itemAvatarTmp , "uploads\avatars\\".$itemavatar);
+
+                    $stetment=$connection->prepare("INSERT INTO
+                        items(Name , Description , Price , Status , Country  , Add_Data  , Cat_ID , Member_ID ,itemAvatar )
+                        VALUES (:zname ,:zdescription ,:zprice ,:zstatus, :zcountry ,now()  ,:zcatigores ,:zmember,:zitemAvatar)");
                     $stetment->execute(array(
 
                         'zname'          =>  $name ,
@@ -504,7 +555,8 @@ session_start();
                         'zstatus'        =>  $status ,
                         'zcountry'       =>  $country ,
                         'zcatigores'      => $cat ,
-                        'zmember'      => $user
+                        'zmember'      => $user ,
+                        'zitemAvatar'      => $itemavatar
                     ));
                     echo '<div class="container">' ;
                     $themesg     ='<div class=" alert alert-info">'.$stetment->rowCount().'Record updated...</div>' ;

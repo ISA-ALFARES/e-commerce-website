@@ -33,7 +33,7 @@
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <li><a class="dropdown-item text-dark" href="myProfile.php">My Profile</a></li>
                             <li><a class="dropdown-item  text-dark" href="additem.php">New Item</a></li>
-                            <li><a class="dropdown-item  text-dark" href="profile.php#my-ads">My Items</a></li>
+                            <li><a class="dropdown-item  text-dark" href="myProfile.php#my-ads">My Items</a></li>
                             <li><a class="dropdown-item  text-dark" href="logout.php">Logout</a></li>
                         </ul>
                     </div>

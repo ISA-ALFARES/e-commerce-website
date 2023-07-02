@@ -29,6 +29,12 @@ body {
   box-shadow: 0px 1px 12px var(--hover);
 	
 }
+.table-container{
+	max-width: 1260px !important;
+}
+.Description {
+	width: 200px;
+}
 .container td:first-child { color: #FB667A; }
 .container td:hover {
 background-color:#2d2a60a2;
@@ -277,6 +283,10 @@ textarea,input:hover{
 	color: #eee;
 	background-color: #007bff;
 
+}
+.avatar-table img{
+	width: 50px;
+	height: 50px;
 }
 /* END  Table  edit */
 .Activate{

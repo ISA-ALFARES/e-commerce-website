@@ -35,9 +35,10 @@ if(isset($_SESSION['Username'])){
                 ?>
                 <div class="container">
                     <div class="table-responsive">
-                        <table class="main-table text-center table text-white table-bordered border-danger ">
+                        <table class="main-table text-center table text-white table-bordered border-danger avatar-table ">
                             <tr>
                                 <td>ID</td>
+                                <td>Photo</td>
                                 <td>Username</td>
                                 <td>Email</td>
                                 <td>Fullname</td>
@@ -49,6 +50,14 @@ if(isset($_SESSION['Username'])){
                                 foreach($rows as $row){
                                     echo "<tr>";
                                     echo "<td>" . $row['UserID'] . "</td>";
+                                    echo "<td>";
+                                    if (empty($row['avatar'])){
+
+                                        echo  '<img  src="uploads/avatars/b5.jpg" alt=""/>';
+                                    }else{
+                                        echo  '<img  src="uploads/avatars/'.$row['avatar'].'" alt=""/>';
+                                    }
+                                    echo "</td>";
                                     echo "<td>" . $row['Username'] . "</td>";
                                     echo "<td>" . $row['Email'] . "</td>";
                                     echo "<td>" . $row['Fullname'] . "</td>";
@@ -144,7 +153,7 @@ if(isset($_SESSION['Username'])){
                                 name="avatar"
                                 placeholder=""
                                 value=""
-
+                                required="required"
                         <span class="axstrisx">*</span>
                     </div>
                     <!-- End avatar  field -->
@@ -206,10 +215,14 @@ if(isset($_SESSION['Username'])){
                 }
                 if (!empty($avatarName) && ! in_array($avatarExtension , $avatarAllowdExtension)){
                     $formNameError[] = "The image format is invalid";
-                }if (empty($avatarName)){
-                   $formNameError[] = "Avatar Cant Be <strong>Empty</strong>..!";
-                  }
+                }
+                if (empty($avatarName)){
+                   $formNameError[] = "Avatar Cant Be <strong>Empty</strong>..!";//1  (MB) = 1024  (KB)  1  (MB) = 1024  (KB)
+                }
+                if($avatarSize >= ((4*1024)*1024)){
 
+                    $formNameError[] = "Image size cannot be greater than <strong>4MB </strong>..!";
+                }
 
 
                 if( ! empty($formNameError)) {
@@ -223,6 +236,11 @@ if(isset($_SESSION['Username'])){
                     //End Error checking the data sent...!
                     //If there are no errors, perform the Insert process
                 else{
+                    $avatar = rand(0 , 1000000) . '_' . $avatarName ;
+                    // mkdir("uploads/avatars" ,0777);
+
+                    move_uploaded_file($avatarTmp , "uploads\avatars\\".$avatar);
+
 
                 //Checking whether the entered name exists in the database or not for funcation
                   $check = chekitem("Username" ,"users", $user );
@@ -234,23 +252,24 @@ if(isset($_SESSION['Username'])){
                         echo '</div>' ;
                     }
                   else{
-//                    //Update the  database with This Information
-//                    $stetment = $connection->prepare("INSERT INTO  users ( Username , Email  , Fullname , Password , Date ) VALUES( :insert_user , :insert_email  , :insert_full , :insert_pass , NOW() ) ");
-//                    $stetment->execute(array(
-//                      'insert_user'    =>  $user, // add to array key and value...
-//                      'insert_email'   => $email,
-//                      'insert_full'    => $full,
-//                      'insert_pass'    => $pass
-//
-//                    ));
-//                    //End Update the  database with This Information
-//                    //When the Update operation succeeds, this sentence will be printed
-//
-//                        echo '<div class="container">' ;
-//                          $themesg     ='<div class=" alert alert-info">'.$stetment->rowCount().'Record updated...</div>' ;
-//                          $page_adress = 'members.php';
-//                          redirect_home($themesg,2,$page_adress);
-//                        echo '</div>';
+                    //Update the  database with This Information
+                    $stetment = $connection->prepare("INSERT INTO  users ( Username , Email  , Fullname , Password , Date ,avatar ) VALUES( :insert_user , :insert_email  , :insert_full , :insert_pass , NOW() ,:insert_avatar ) ");
+                    $stetment->execute(array(
+                      'insert_user'    =>  $user, // add to array key and value...
+                      'insert_email'   => $email,
+                      'insert_full'    => $full,
+                      'insert_pass'    => $pass,
+                      'insert_avatar'    => $avatar
+
+                    ));
+                    //End Update the  database with This Information
+                    //When the Update operation succeeds, this sentence will be printed
+
+                        echo '<div class="container">' ;
+                          $themesg     ='<div class=" alert alert-info">'.$stetment->rowCount().'Record updated...</div>' ;
+                          $page_adress = 'members.php';
+                          redirect_home($themesg,2,$page_adress);
+                        echo '</div>';
                   }
                 }
             }else{ // error page
@@ -445,7 +464,7 @@ if(isset($_SESSION['Username'])){
         //End Update page
     }elseif ($do == 'Delete'){
             // Chek if  Get Request is numeric & Get the integer value of it
-            $userid = isset($_GET['catid'])&& is_numeric($_GET['ID']) ? intval($_GET['ID']) : 0 ;
+            $userid = isset($_GET['ID'])&& is_numeric($_GET['ID']) ? intval($_GET['ID']) : 0 ;
 
             $chek = chekitem('UserID' , 'users' , $userid);
 

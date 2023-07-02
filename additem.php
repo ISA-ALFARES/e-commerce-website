@@ -7,6 +7,15 @@ if (isset($_SESSION['user'])){
     print_r($_SESSION)  ;
     if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
 
+        $itemAvatarName = $_FILES['avatar']['name'] ;
+        $itemAvatarSize = $_FILES['avatar']['size'] ;
+        $itemAvatarType = $_FILES['avatar']['type'] ;
+        $itemAvatarTmp = $_FILES['avatar']['tmp_name'] ;
+        $itemAvatarAllowdExtension =   array('jpeg' , 'jpg' , 'png' , 'gif');
+        $avatarArray = explode('.', $itemAvatarName);
+        $itemAvatarExtension = strtolower(end($avatarArray));
+
+
         $fromErrors  = array();
         $name        = filter_var($_POST['name'] ,FILTER_SANITIZE_STRING);
         $description = filter_var($_POST['description'] ,FILTER_SANITIZE_STRING);
@@ -35,11 +44,26 @@ if (isset($_SESSION['user'])){
         if($catigore == 0 ){
             $fromError [] = 'CAtigore Can\'t be <sronge>Empty</sronge>';
         }
+        if (!empty($itemAvatarName) && ! in_array($itemAvatarExtension , $itemAvatarAllowdExtension)){
+            $formNameError[] = "The image format is invalid";
+        }
+        if (empty($itemAvatarName)){
+            $formNameError[] = "Avatar Cant Be <strong>Empty</strong>..!";//1  (MB) = 1024  (KB)  1  (MB) = 1024  (KB)
+        }
+        if($itemAvatarSize >= ((4*1024)*1024)){
+
+            $formNameError[] = "Image size cannot be greater than <strong>4MB </strong>..!";
+        }
         if (empty($fromErrors)){
 
+            $avatar = rand(0 , 1000000) . '_' . $itemAvatarName ;
+            // mkdir("uploads/avatars" ,0777);
+
+            move_uploaded_file($itemAvatarTmp , "admin/uploads\avatars\\".$avatar);
+
             $stetment=$connection->prepare("INSERT INTO 
-                        items(Name , Description , Price , Status , Country  , Add_Data ,Cat_ID ,Member_ID )
-                        VALUES (:zname ,:zdescription ,:zprice ,:zstatus, :zcountry ,now() ,:zcat,:zmember)");
+                        items(Name , Description , Price , Status , Country  , Add_Data ,Cat_ID ,Member_ID ,itemAvatar )
+                        VALUES (:zname ,:zdescription ,:zprice ,:zstatus, :zcountry ,now() ,:zcat,:zmember ,:zitemAvatar)");
             $stetment->execute(array(
 
                 'zname'          =>  $name ,
@@ -48,7 +72,8 @@ if (isset($_SESSION['user'])){
                 'zstatus'        =>  $status ,
                 'zcountry'       =>  $country ,
                 'zcat'           =>  $catigore ,
-                'zmember'       => $_SESSION['usrID']
+                'zmember'           => $_SESSION['usrID'] ,
+                'zitemAvatar'   =>  $avatar
             ));
             if ($stetment) {
                 echo '<div class="container">';
@@ -72,7 +97,7 @@ if (isset($_SESSION['user'])){
                             <div class="col-md-8">
                                 <!--start Add Form-->
                                 <div class="continyer">
-                                    <form class="contact-form" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
+                                    <form class="contact-form" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" enctype="multipart/form-data">
                                         <!-- Start item name field -->
                                         <i class="fa-solid fa-caret-right icons"></i>
                                         <div class="form-group">
@@ -125,7 +150,7 @@ if (isset($_SESSION['user'])){
                                         <div class="form-group">
                                             <input
 
-                                                    class="form-control"
+                                                    class="form-control live-image"
                                                     type="text"
                                                     name="country"
                                                     placeholder="    Enter the Country name...! "
@@ -149,6 +174,19 @@ if (isset($_SESSION['user'])){
                                             </select>
                                         </div>
                                         <!-- End Catigore Field -->
+                                        <!-- Start avatar  field -->
+                                        <i class="fa-solid fa-photo icons"></i>
+                                        <div class="form-group">
+                                            <input
+                                                    class="form-control"
+                                                    type="file"
+                                                    name="avatar"
+                                                    placeholder=""
+                                                    value=""
+                                                    required="required"
+                                            <span class="axstrisx">*</span>
+                                        </div>
+                                        <!-- End avatar  field -->
                                         <!-- Start Save  field -->
                                         <input
                                                 class="btn btn-success btn-block btn-add-item"

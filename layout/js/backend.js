@@ -26,4 +26,8 @@ $(function()
 
     $('.live-preview .box-information h4').text($(this).val());
   });
+  $('.live-image').keyup(function () {
+
+    $('.live-preview .img-box img').files($(this).dir());
+  });
 });
