@@ -63,13 +63,13 @@ session_start();
 
         <div class="signup">
             <form action="<?php echo $_SERVER['PHP_SELF'] ;?>" method="POST">
-                <label for="chk" aria-hidden="true">Login</label>
-                <input type="text"      name="user"      placeholder="User name" required="">
-                <input type="password" name="pass"  placeholder="Password" required="">
-                <button>Login</button>
+                <label for="chk" aria-hidden="true"><?php echo lang('Login') ?></label>
+                <input type="text"      name="user"      placeholder="<?php echo lang('User name') ?>" required="">
+                <input type="password" name="pass"  placeholder="<?php echo lang('Password') ?>" required="">
+                <button><?php echo lang('Login') ?></button>
             </form>
             <div class="social-login">
-                <h3>log in via</h3>
+                <h3><?php echo lang('log in via') ?></h3>
                 <div class="social-icons">
                     <a href="#" class="social-login__icon fab fa-instagram"></a>
                     <a href="#" class="social-login__icon fab fa-facebook"></a>

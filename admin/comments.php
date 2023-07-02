@@ -39,12 +39,12 @@ if(isset($_SESSION['Username'])){
 
                     <table class="main-table text-center table text-white table-bordered border-danger ">
                         <tr>
-                            <td>ID</td>
-                            <td>Comment</td>
-                            <td>Item Name</td>
-                            <td>User Name</td>
-                            <td>Comment_data</td>
-                            <td>Control</td>
+                            <td><?php echo lang('ID') ?></td>
+                            <td><?php echo lang('Comment') ?></td>
+                            <td><?php echo lang('Item Name') ?></td>
+                            <td><?php echo lang('User Name') ?></td>
+                            <td><?php echo lang('Comment_data') ?></td>
+                            <td><?php echo lang('Control') ?></td>
                         </tr>
                         <tr>
                             <?php
@@ -55,15 +55,16 @@ if(isset($_SESSION['Username'])){
                                 echo "<td>" . $comment['Item_Name']   .  "</td>";
                                 echo "<td>" . $comment['username']   . "</td>";
                                 echo "<td>" . $comment['Comment_data']."</td>";
-                                echo "<td>
-                              <a class='btn btn-success' href='comments.php?do=Edit&comment_id=".$comment['comment_ID']."' role='button'><i class='fa-solid fa-pen-to-square'> </i> Edit </a>
-                              <a  href='comments.php?do=Delete&comment_id=".$comment['comment_ID']."' role='button' class='btn btn-danger confirm' ><i class='fa-regular fa-trash-can'> </i> Delete </a>";
+                                echo "<td>";
+
+                                echo  '<a  role="button" class="btn btn-success" href="comments.php?do=Edit&comment_id='.$comment['comment_ID'].'"><i class="fa-solid fa-pen-to-square"></i>  '.lang('Edit').'</a>';
+                                echo '       ';
+                                echo  '<a  role="button" class="btn btn-danger confirm"  href="comments.php?do=Delete&comment_id='.$comment['comment_ID'].'"><i class="fa-regular fa-trash-can"> </i>     '.lang('Delete').'</a>';
                                 if($comment['Status'] == 0 ){
 
-                                    echo "<a  href='comments.php?do=activate&comment_id=".$comment['comment_ID']."' role='button' class='btn btn-info confirm Activate' ><i class='fa-solid fa-circle-check''></i> Activate </a>";
+                                    echo "<a  href='comments.php?do=activate&comment_id=".$comment['comment_ID']."' role='button' class='btn btn-info confirm Activate' ><i class='fa-solid fa-circle-check'></i>"  .lang('Activate')."</a>";
                                 }
                                 echo  "</td>";
-                                echo "<tr>";
                             }
                             ?>
                         </tr>
@@ -72,7 +73,7 @@ if(isset($_SESSION['Username'])){
             </div>
             <?php
         }else{
-            echo  '<div class="alert alert-danger">Sorry This page is empty, there is nothing to display...!</div>';
+            echo  '<div class="alert alert-danger">'.lang('Sorry This page is empty, there is nothing to display...!').'</div>';
         }
     }//End Insert page.
     elseif($do == "Edit"){  //Edit page
@@ -227,7 +228,7 @@ if(isset($_SESSION['Username'])){
                 $stetment = $connection->prepare("UPDATE comments SET Comment = ? , item_id = ? , user_id = ? , Comment_data = ? WHERE comment_ID = ?");
                 $stetment->execute(array($comment,$item_name,$username,$Comment_data,$commentid));
                 echo '<div class="container">' ;
-                $themesg     ='<div class=" alert alert-info">'.$stetment->rowCount().'Record updated...</div>' ;
+                $themesg     ='<div class=" alert alert-info">'.$stetment->rowCount().lang('Record updated...').'</div>' ;
                 $page_adress = 'comments.php';
                 redirect_home($themesg,2,$page_adress);
                 echo '</div>';
@@ -250,14 +251,14 @@ if(isset($_SESSION['Username'])){
             // Redirect to another page
             echo '<div class="container">' ;
             $page_adress = 'comments.php';
-            $themesg ='<div class="alert alert-info">The deletion was completed successfully...!</div>';
+            $themesg ='<div class="alert alert-info">'.lang(''.lang('').'').'</div>';
             redirect_home($themesg,1,$page_adress);
             echo '</div>' ;
         }
         else{
             echo '<div class="container">' ;
             $page_adress = 'comments.php';
-            $themesg ='<div class="alert alert-danger">This user does not exist...!</div>';
+            $themesg ='<div class="alert alert-danger">'.lang(''.lang('').'').'</div>';
             redirect_home($themesg,1,$page_adress);
             echo '</div>' ;
         }
@@ -275,7 +276,7 @@ if(isset($_SESSION['Username'])){
 
             $page_adress = 'comments.php';
 
-            $themesg ='<div class="alert alert-success">Activation completed successfully...!</div>';
+            $themesg ='<div class="alert alert-success">'.lang('Activation completed successfully...!').'</div>';
 
             redirect_home($themesg,1,$page_adress);
 
@@ -284,7 +285,7 @@ if(isset($_SESSION['Username'])){
 
             echo '<div class="container">' ;
             $page_adress = 'comments.php';
-            $themesg ='<div class="alert alert-danger">We do not have this user in our records...!</div>';
+            $themesg ='<div class="alert alert-danger">'.lang('We do not have this user in our records...!').'</div>';
             redirect_home($themesg,3,$page_adress);
             echo '</div>' ;
         }

@@ -34,7 +34,7 @@ echo '<div class="categories-title"><h2 >Fiyatları ve Modelleri</h2></div>';
                                                 echo '<div class="img-box">';
                                                 if (empty($item['itemAvatar'])){
 
-                                                    echo  '<img class="img-responsive box-image" src="uploads/avatars/b3.jpg" alt=""/>';
+                                                    echo  '<img class="img-responsive box-image" src="admin/uploads/avatars/b3.jpg" alt=""/>';
                                                 }else{
                                                     echo  '<img class="img-responsive box-image" src="admin/uploads/avatars/'.$item['itemAvatar'].'" alt=""/>';
                                                 }

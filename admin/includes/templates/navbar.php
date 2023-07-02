@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg" style="background-color: #123354;">
 
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <i class="fa-solid fa-bars"></i>
     </button>
@@ -37,9 +37,9 @@
                   <i class="fa-solid fa-globe"></i>
               </a>
               <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="?language=arabic.php"">AR</a></li>
-                  <li><a class="dropdown-item" href="?language=turkish.php">TR</a></li>
-                  <li><a class="dropdown-item" href="?language=english.php">EN</a></li>
+                  <li><a class="dropdown-item" href="?language=arabic.php""><?php echo lang('AR') ?></a></li>
+                  <li><a class="dropdown-item" href="?language=turkish.php"><?php echo lang('TR') ?></a></li>
+                  <li><a class="dropdown-item" href="?language=english.php"><?php echo lang('EN') ?></a></li>
               </ul>
           </li>
       </ul>

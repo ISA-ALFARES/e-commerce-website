@@ -7,7 +7,7 @@
     */
 global $connection, $do, $temp;
 session_start();
-     if(isset($_SESSION['Username'])){
+     if(isset($_SESSION['Username'])  ){
 
         $page_title = "CATIGORIES"; // The Page Title...;
 
@@ -43,11 +43,11 @@ session_start();
                 <div class="container categories ">
                     <div class="card">
                         <div class="card-header">
-                            <i class="fa fa-edit"></i> Manage Categories
+                            <i class="fa fa-edit"></i> <?php echo lang('Manage Categories')?>
                             <div class="option float-right text-right">
-                                <i class="fa fa-sort"></i> Ordering: [
-                                <a class="<?php if ($sort == 'ASC') { echo 'active'; } ?>" href="?sort=ASC">asc</a> |
-                                <a class="<?php if ($sort == 'DESC') { echo 'active'; } ?>" href="?sort=DESC">desc</a> ]
+                                <i class="fa fa-sort"></i> <?php echo lang('Ordering: [')?>
+                                <a class="<?php if ($sort == 'ASC') { echo 'active'; } ?>" href="?sort=ASC"><?php echo lang('asc')?></a> |
+                                <a class="<?php if ($sort == 'DESC') { echo 'active'; } ?>" href="?sort=DESC"><?php echo lang('desc')?></a> ]
                                 <!--                             <i class="fa fa-eye"></i> View: [-->
                                 <!--                             <span class="active" data-view="full">Full</span> |-->
                                 <!--                             <span data-view="classic">Classic</span> ]-->
@@ -59,15 +59,21 @@ session_start();
 
                                 echo "<div class='cat'>";
                                 echo "<div class='hidden-buttons'>";
-                                echo "<a href='catigories.php?do=Edit&catid=".$cat['ID']."' class='btn btn-xs btn-primary'><i class='fa fa-edit'></i> Edit</a>";
-                                echo "<a href='catigories.php?do=Delete&catid=" . $cat['ID'] . "' class=' btn btn-xs btn-danger confirm'><i class='fa fa-close'></i> Delete</a>";
+                                echo "<a href='catigories.php?do=Edit&catid=".$cat['ID']."' class='btn btn-xs btn-primary'><i class='fa fa-edit'></i>";
+                                echo lang('Edit') ."</a>";
+                                echo "<a href='catigories.php?do=Delete&catid=" . $cat['ID'] . "' class=' btn btn-xs btn-danger confirm'><i class='fa fa-close'></i>";
+                                echo lang('Delete')."</a>";
+
                                 echo "</div>";
+
                                 echo "<h3>" . $cat['Name'] . '</h3>';
+
                                 echo "<div class='full-view'>";
+
                                 echo "<p>"; if($cat['Description'] == '') { echo 'This category has no description'; } else { echo $cat['Description']; } echo "</p>";
-                                if($cat['Visibility'] == 1) { echo '<span class="visibility cat-span"><i class="fa fa-eye"></i> Hidden</span>'; }
-                                if($cat['Allow_Comment'] == 1) { echo '<span class="commenting cat-span"><i class="fa fa-close"></i> Comment Disabled</span>'; }
-                                if($cat['Allow_Ads'] == 1) { echo '<span class="advertises cat-span"><i class="fa fa-close"></i> Ads Disabled</span>'; }
+                                if($cat['Visibility'] == 1) { echo '<span class="visibility cat-span"><i class="fa fa-eye"></i>';echo lang("Hidden"). '</span>'; }
+                                if($cat['Allow_Comment'] == 1) { echo '<span class="commenting cat-span"><i class="fa fa-close"></i>';echo lang("Comment Disabled"). '</span>'; }
+                                if($cat['Allow_Ads'] == 1) { echo '<span class="advertises cat-span"><i class="fa fa-close"></i>';echo lang("Ads Disabled"). '</span>'; }
                                 echo "</div>";
                                 echo "</div>";
                                 echo '<hr>';
@@ -81,13 +87,13 @@ session_start();
             }else{
 
                 echo '<div class="container">';
-                echo  '<div class="alert alert-danger">Sorry This page is empty, there is nothing to display...!</div>';
+                echo  '<div class="alert alert-danger">'.lang('Sorry This page is empty, there is nothing to display...!').'</div>';
                 echo '<a class=" margin-categories btn btn-primary btn-lg add_null" href="?do=Add" role="button"><i class="fa-solid fa-plus"></i>     Add Catigory    </a>';
                 echo '<div>';
             }
          }elseif ($do == 'Add'){
              ?>
-             <h1 class="text-center">Add New Category</h1>
+             <h1 class="text-center"><?php echo lang('Add New Category') ?></h1>
 
              <div class="container">
                  <div class="row">
@@ -96,21 +102,21 @@ session_start();
                      <div class="col-md-6 offset-md-3">
                          <form class="form-horizontal" action="?do=Insert" method="POST">
                              <div class="form-group">
-                                 <label for="name" class="col-sm-2 control-label">Name</label>
+                                 <label for="name" class="col-sm-2 control-label"><?php echo lang('Name') ?></label>
                                  <div class="col-sm-10">
-                                     <input type="text" id="name" name="name" class="form-control" placeholder="Category name">
+                                     <input type="text" id="name" name="name" class="form-control" placeholder="<?php echo lang('Category name') ?>">
                                  </div>
                              </div>
                              <div class="form-group">
-                                 <label for="description" class="col-sm-2 control-label">Description</label>
+                                 <label for="description" class="col-sm-2 control-label"><?php echo lang('Description') ?></label>
                                  <div class="col-sm-10">
                                      <textarea id="description" name="description" class="form-control" rows="3"></textarea>
                                  </div>
                              </div>
                              <div class="form-group">
-                                 <label for="ordering" class="col-sm-2 control-label">Ordering</label>
+                                 <label for="ordering" class="col-sm-2 control-label"><?php echo lang('Ordering') ?></label>
                                  <div class="col-sm-10">
-                                     <input type="number" id="ordering" name="ordering" class="form-control" placeholder="Ordering number">
+                                     <input type="number" id="ordering" name="ordering" class="form-control" placeholder="<?php echo lang('Ordering number') ?>">
                                  </div>
                              </div>
                              <!--
@@ -126,7 +132,7 @@ session_start();
                                              </div>
                              -->
                              <div class="form-group">
-                                 <label for="visibility" class="col-sm-2 control-label">Visibility</label>
+                                 <label for="visibility" class="col-sm-2 control-label"><?php echo lang('Visibility') ?></label>
                                  <div class="col-sm-10">
                                      <input type="radio" id="visibility-yes" name="visibility" value="1" checked />
                                      <label for="visibility-yes">Yes</label>
@@ -135,21 +141,21 @@ session_start();
                                  </div>
                              </div>
                              <div class="form-group">
-                                 <label for="commenting" class="col-sm-2 control-label">Allow Commenting</label>
+                                 <label for="commenting" class="col-sm-2 control-label"><?php echo lang('Allow Commenting') ?></label>
                                  <div class="col-sm-10">
                                      <input type="radio" id="commenting-yes" name="commenting" value="1" checked />
-                                     <label for="commenting-yes">Yes</label>
+                                     <label for="commenting-yes"><?php echo lang('Yes') ?></label>
                                      <input type="radio" id="commenting-no" name="commenting" value="0" />
-                                     <label for="commenting-no">No</label>
+                                     <label for="commenting-no"><?php echo lang('No') ?></label>
                                  </div>
                              </div>
                              <div class="form-group">
-                                 <label for="ads" class="col-sm-2 control-label">Allow Ads</label>
+                                 <label for="ads" class="col-sm-2 control-label"><?php echo lang('Allow Ads') ?></label>
                                  <div class="col-sm-10">
                                      <input type="radio" id="ads-yes" name="ads" value="1" checked />
-                                     <label for="ads-yes">Yes</label>
+                                     <label for="ads-yes"><?php echo lang('Yes') ?></label>
                                      <input type="radio" id="ads-no" name="ads" value="0" />
-                                     <label for="ads-no">No</label>
+                                     <label for="ads-no"><?php echo lang('No') ?></label>
                                  </div>
                              </div>
                              <div class="form-group">
@@ -198,7 +204,7 @@ session_start();
 
                      //End Update the  database with This Information
                      echo '<div class="container">' ;
-                     $themesg     ='<div class=" alert alert-info">'.$statement->rowCount().'Record updated...</div>' ;
+                     $themesg     ='<div class=" alert alert-info">'.$statement->rowCount(). lang('Record updated...').'</div>' ;
                      $page_adress = 'catigories.php';
 
                  }else{

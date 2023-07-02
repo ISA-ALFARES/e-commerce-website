@@ -37,13 +37,14 @@ if(isset($_SESSION['Username'])){
                     <div class="table-responsive">
                         <table class="main-table text-center table text-white table-bordered border-danger avatar-table ">
                             <tr>
-                                <td>ID</td>
-                                <td>Photo</td>
-                                <td>Username</td>
-                                <td>Email</td>
-                                <td>Fullname</td>
-                                <td>Date</td>
-                                <td>Control</td>
+                                <td><?php echo lang('ID')?></td>
+                                <td><?php echo lang('Photo')?></td>
+                                <td><?php echo lang('Username')?></td>
+                                <td><?php echo lang('Email')?></td>
+                                <td><?php echo lang('Fullname')?></td>
+                                <td><?php echo lang('Control')?></td>
+                                <td><?php echo lang('Date')?></td>
+
                             </tr>
                             <tr>
                                 <?php
@@ -62,12 +63,14 @@ if(isset($_SESSION['Username'])){
                                     echo "<td>" . $row['Email'] . "</td>";
                                     echo "<td>" . $row['Fullname'] . "</td>";
                                     echo "<td>" . $row['Date']."</td>";
-                                    echo "<td>
-                              <a class='btn btn-success' href='members.php?do=Edit&ID=".$row['UserID']."' role='button'><i class='fa-solid fa-pen-to-square'> </i> Edit </a>
-                              <a  href='members.php?do=Delete&ID=".$row['UserID']."' role='button' class='btn btn-danger confirm' ><i class='fa-regular fa-trash-can'> </i> Delete </a>";
+                                    echo "<td>";
+
+                               echo  '<a  role="button" class="btn btn-success" href="members.php?do=Edit&ID='.$row['UserID'].'"><i class="fa-regular fa-edit"></i>  '.lang('Edit').'</a>';
+                               echo '       ';
+                               echo  '<a  role="button" class="btn btn-danger confirm"  href="members.php?do=Delete&ID='.$row['UserID'].'"><i class="fa-regular fa-trash-can"> </i>     '.lang('Delete').'</a>';
                                     if($row['RegStatus'] == 0 ){
 
-                                        echo "<a  href='members.php?do=activate&ID=".$row['UserID']."' role='button' class='btn btn-info confirm Activate' ><i class='fa-solid fa-circle-check''></i> Activate </a>";
+                                        echo "<a  href='members.php?do=activate&ID=".$row['UserID']."' role='button' class='btn btn-info confirm Activate' ><i class='fa-solid fa-circle-check'></i>"  .lang('Activate')."</a>";
                                     }
                                     echo  "</td>";
                                     echo "<tr>";
@@ -75,14 +78,14 @@ if(isset($_SESSION['Username'])){
                                 ?>
                             </tr>
                         </table>
-                        <a class="btn btn-primary btn-lg" href="?do=Add" role="button"><i class="fa-solid fa-plus"></i>     Add Member    </a>
+                        <a class="btn btn-primary btn-lg" href="?do=Add" role="button"><i class="fa-solid fa-plus"></i>     <?php echo lang('Add Member')?>    </a>
                     </div>
                 </div>
                 <?php
             }else{
                 echo '<div class="container">';
-                    echo  '<div class="alert alert-danger">Sorry This page is empty, there is nothing to display...!</div>';
-                    echo  '<a class="btn btn-primary btn-lg add_null " href="?do=Add" role="button"><i class="fa-solid fa-plus"></i>     Add Member    </a>';
+                    echo  '<div class="alert alert-danger">'.lang('Sorry This page is empty, there is nothing to display...!').'</div>';
+                    echo  '<a class="btn btn-primary btn-lg add_null " href="?do=Add" role="button"><i class="fa-solid fa-plus"></i>      '. lang('Add Member') .'    </a>';
                 echo '<div>';
 
             }
@@ -100,7 +103,7 @@ if(isset($_SESSION['Username'])){
                                   class="form-control"
                                   type="text"
                                   name="username"
-                                  placeholder="    Enter the username...! "
+                                  placeholder="<?php echo lang('    Enter the username...! ') ?>"
                                   value=""
                                   required="required">
                           <span class="axstrisx">*</span>
@@ -113,7 +116,7 @@ if(isset($_SESSION['Username'])){
                           class="form-control"
                           type="password"
                           name="newpassword"
-                          placeholder="    Type Your a Password... "
+                          placeholder="<?php echo lang('    Type Your a Password... ') ?>"
                           value=""
                           required="required">
                           <span class="axstrisx">*</span>
@@ -126,7 +129,7 @@ if(isset($_SESSION['Username'])){
                               class="form-control"
                               type="email"
                               name="email"
-                              placeholder="      Please Type a valid email"
+                              placeholder="<?php echo lang('      Please Type a valid email') ?>"
                               value=""
                               required="required">
                               <span class="axstrisx">*</span>
@@ -139,7 +142,7 @@ if(isset($_SESSION['Username'])){
                           class="form-control"
                           type="text"
                           name="fullname"
-                          placeholder="      Type your fullname... "
+                          placeholder="<?php echo lang('      Type your fullname... ') ?>"
                           value=""
                           required="required">
                           <span class="axstrisx">*</span>
@@ -161,7 +164,7 @@ if(isset($_SESSION['Username'])){
                       <input
                       class="btn btn-success btn-block"
                       type="submit"
-                      value="Save">
+                      value="<?php echo lang('Save') ?>">
                       <!-- End Save  field -->
                     </form>
               </div><!--End Add Form-->
@@ -196,32 +199,32 @@ if(isset($_SESSION['Username'])){
                 //Creatinh Array of errors
                 $formNameError = array() ;
                 if(empty($user)){
-                $formNameError[] = "Username Cant Be <strong>Empty</strong>..!";
+                $formNameError[] =  lang('Username Cant Be <strong>Empty</strong>..!');
                 }
                     if(strlen($user) < 3 ){
-                $formNameError[] = "Username Nust  be Lareger Than <strong>3</strong> Characters..!";
+                $formNameError[] = lang('Username Nust  be Lareger Than <strong>3</strong> Characters..!');
                 }
                  if(strlen($pass) < 2  ){
-                $formNameError[] = "cellnumper Nust be Larger Then <strong>2</strong> Numper..!";
+                $formNameError[] = lang('cellnumper Nust be Larger Then <strong>2</strong> Numper..!');
                 }
                 if(empty($pass)){
-                   $formNameError[] = "Password Cant Be <strong>Empty</strong>..!";
+                   $formNameError[] = lang('Password Cant Be <strong>Empty</strong>..!');
                  }
                 if(empty($full) ){
-                  $formNameError[] = "Fullname Cant Be <strong>Empty</strong>..!";
+                  $formNameError[] = lang('Fullname Cant Be <strong>Empty</strong>..!');
                 }
                 if(strlen($full) <= 1 ){
-                  $formNameError[] = "Message Nust be Lareger Then  <strong> 1</strong> Characters..!";
+                  $formNameError[] = lang('Message Nust be Lareger Then  <strong> 1</strong> Characters..!');
                 }
                 if (!empty($avatarName) && ! in_array($avatarExtension , $avatarAllowdExtension)){
-                    $formNameError[] = "The image format is invalid";
+                    $formNameError[] = lang('The image format is invalid');
                 }
                 if (empty($avatarName)){
-                   $formNameError[] = "Avatar Cant Be <strong>Empty</strong>..!";//1  (MB) = 1024  (KB)  1  (MB) = 1024  (KB)
+                   $formNameError[] = lang('Avatar Cant Be <strong>Empty</strong>..!');//1  (MB) = 1024  (KB)  1  (MB) = 1024  (KB)
                 }
                 if($avatarSize >= ((4*1024)*1024)){
 
-                    $formNameError[] = "Image size cannot be greater than <strong>4MB </strong>..!";
+                    $formNameError[] = lang('Image size cannot be greater than <strong>4MB </strong>..!');
                 }
 
 
@@ -266,7 +269,7 @@ if(isset($_SESSION['Username'])){
                     //When the Update operation succeeds, this sentence will be printed
 
                         echo '<div class="container">' ;
-                          $themesg     ='<div class=" alert alert-info">'.$stetment->rowCount().'Record updated...</div>' ;
+                          $themesg     ='<div class=" alert alert-info">'.$stetment->rowCount() . lang('Record updated...').'</div>' ;
                           $page_adress = 'members.php';
                           redirect_home($themesg,2,$page_adress);
                         echo '</div>';
@@ -329,7 +332,7 @@ if(isset($_SESSION['Username'])){
                             class="form-control"
                             type="password"
                             name="newpassword"
-                            placeholder="   Type Your New Password... "
+                            placeholder="<?php echo lang('   Type Your New Password... ') ?>"
                             value="">
                         </div>
                         <!-- End Password  field -->
@@ -451,7 +454,7 @@ if(isset($_SESSION['Username'])){
                     $stetment = $connection->prepare("UPDATE users SET Username = ? , Email = ? , Fullname = ? , Password = ? WHERE UserID = ?");
                     $stetment->execute(array($user,$email,$full,$pass,$userid));
                     echo '<div class="container">' ;
-                    $themesg     ='<div class=" alert alert-info">'.$stetment->rowCount().'Record updated...</div>' ;
+                    $themesg     ='<div class=" alert alert-info">'.$stetment->rowCount() . lang('Record updated...').'</div>' ;
                     $page_adress = 'members.php';
                     redirect_home($themesg,2,$page_adress);
                     echo '</div>';
@@ -475,7 +478,7 @@ if(isset($_SESSION['Username'])){
                 // Redirect to another page
                   echo '<div class="container">' ;
                     $page_adress = 'members.php';
-                    $themesg ='<div class="alert alert-info">The deletion was completed successfully...!</div>';
+                    $themesg ='<div class="alert alert-info">'.lang('The deletion was completed successfully...!').'</div>';
                     redirect_home($themesg,1,$page_adress);
                   echo '</div>' ;
               }
@@ -500,7 +503,7 @@ if(isset($_SESSION['Username'])){
 
           $page_adress = 'members.php';
 
-          $themesg ='<div class="alert alert-success">Activation completed successfully...!</div>';
+          $themesg ='<div class="alert alert-success">'.lang('Activation completed successfully...!').'</div>';
 
           redirect_home($themesg,1,$page_adress);
 
@@ -509,7 +512,7 @@ if(isset($_SESSION['Username'])){
 
           echo '<div class="container">' ;
           $page_adress = 'members.php';
-          $themesg ='<div class="alert alert-danger">We do not have this user in our records...!</div>';
+          $themesg ='<div class="alert alert-danger">'.lang('We do not have this user in our records...!').'</div>';
           redirect_home($themesg,1,$page_adress);
           echo '</div>' ;
       }

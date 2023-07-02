@@ -24,7 +24,7 @@
 
         echo  $themesg;
 
-        echo '<div class="alert alert-info"> You will be redirected to the previous page after seconds '.$secends.'</div>';
+        echo '<div class="alert alert-info"> '. lang('You will be redirected to the previous page after seconds ') . $secends.'</div>';
 
         header("refresh:$secends;url=$page_adress");
 

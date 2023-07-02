@@ -8,17 +8,22 @@
     //include The Improtant  files...
     include   $func ."funcation.php";     // 2-header Directory
 
-        $language = 'english.php';
 
         $lang_array = array('english.php','turkish.php','arabic.php');
-
-
         if(isset($_GET['language']) && in_array($_GET['language'] ,$lang_array)){
 
             $language = $_GET['language'];
 
+            $_SESSION['language'] = $language;
+
+
+
+        }else{
+
+            $language = 'english.php';
+
         }
-    include   $lang . $language; // 1-Languages Directory --olwes firset file
+    include   $lang . $_SESSION['language']; // 1-Languages Directory --olwes firset file
     include   $temp ."header.php";     // 2-header Directory
 
     //include navbar all pages Expect The one with $navbar variable

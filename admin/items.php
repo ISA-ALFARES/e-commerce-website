@@ -33,15 +33,15 @@ session_start();
 
                             <table class="main-table text-center table text-white table-bordered border-danger  avatar-table">
                                 <tr>
-                                    <td>ID</td>
-                                    <td>Photo</td>
-                                    <td>Name</td>
-                                    <td >Description</td>
-                                    <td>Price</td>
-                                    <td>Adding Date</td>
-                                    <td>Catigore name</td>
-                                    <td>User name</td>
-                                    <td>Control</td>
+                                    <td><?php echo lang('ID') ?></td>
+                                    <td><?php echo lang('Photo') ?></td>
+                                    <td><?php echo lang('Name') ?></td>
+                                    <td><?php echo lang('Description') ?></td>
+                                    <td><?php echo lang('Price') ?></td>
+                                    <td><?php echo lang('Adding Date') ?></td>
+                                    <td><?php echo lang('Catigore name') ?></td>
+                                    <td><?php echo lang('User name') ?></td>
+                                    <td><?php echo lang('Control') ?></td>
                                 </tr>
                                 <tr>
                                     <?php
@@ -62,13 +62,16 @@ session_start();
                                         echo "<td>" . $row['Add_Data']."</td>";
                                         echo "<td>" . $row['Name']."</td>";
                                         echo "<td>" . $row['Username']."</td>";
-                                        echo "<td>
-                              <a class='btn btn-success' href='items.php?do=Edit&ID=".$row['Item_ID']."' role='button'><i class='fa-solid fa-pen-to-square'> </i> Edit </a>
-                              <a  href='items.php?do=Delete&ID=".$row['Item_ID']."' role='button' class='btn btn-danger confirm' ><i class='fa-regular fa-trash-can'> </i> Delete </a>";
+                                        echo "<td>";
+
+                                        echo  '<a  role="button" class="btn btn-success" href="items.php?do=Edit&ID='.$row['Item_ID'].'"><i class="fa-solid fa-pen-to-square"></i>  '.lang('Edit').'</a>';
+                                        echo '       ';
+                                        echo  '<a  role="button" class="btn btn-danger confirm"  href="items.php?do=Delete&ID='.$row['Item_ID'].'"><i class="fa-regular fa-trash-can"> </i>     '.lang('Delete').'</a>';
                                         if($row['Approve'] == 0 ){
 
-                                            echo "<a  href='items.php?do=Approve&item_id=".$row['Item_ID']."' role='button' class='btn btn-info confirm Activate' ><i class='fa-solid fa-circle-check''></i> Approve </a>";
+                                            echo "<a  href='items.php?do=Approve&item_id=".$row['Item_ID']."' role='button' class='btn btn-info confirm Activate' ><i class='fa-solid fa-circle-check'></i>"  .lang('Approve')."</a>";
                                         }
+                                        echo  "</td>";
                                     }
                                     ?>
                                 </tr>
@@ -79,7 +82,7 @@ session_start();
                     <?php
                 }else{
                     echo '<div class="container">';
-                    echo  '<div class="alert alert-danger">Sorry This page is empty, there is nothing to display...!</div>';
+                    echo  '<div class="alert alert-danger">'.lang('Sorry This page is empty, there is nothing to display...!').'</div>';
                     echo  '<a class="btn btn-primary btn-lg add_null" href="?do=Add" role="button"><i class="fa-solid fa-plus"></i>     Add Item    </a>';
                     echo '<div>';
                 }
@@ -98,7 +101,7 @@ session_start();
                             class="form-control"
                             type="text"
                             name="name"
-                            placeholder="    Enter the Item Name...! "
+                            placeholder="<?php echo lang('    Enter the Item Name...! ') ?>"
                             value=""
                             required="required">
                         <span class="axstrisx">*</span>
@@ -112,7 +115,7 @@ session_start();
                             name="description"
                             class="form-control"
                             required="required"
-                            placeholder="   Description of The Item" />
+                            placeholder="<?php echo lang('   Description of The Item" ') ?>"/>
                         <span class="axstrisx">*</span>
                     </div>
                     <!-- End Description Field -->
@@ -124,7 +127,7 @@ session_start();
                             class="form-control"
                             type="text"
                             name="price"
-                            placeholder="    Enter the Price...! "
+                            placeholder="<?php echo lang('    Enter the Price...! ') ?>"
                             value=""
                             required="required">
                         <span class="axstrisx">*</span>
@@ -133,11 +136,10 @@ session_start();
                     <!-- Start Status Field -->
                     <div class="form-group ">
                         <select  class="form-control selection " name="status">
-                            <option value="0">Status</option>
-                            <option value="1">New</option>
-                            <option value="2">Like New</option>
-                            <option value="3">Used</option>
-                            <option value="4">Very Old</option>
+                            <option value="0"><?php echo lang('Status') ?></option>
+                            <option value="1"><?php echo lang('New') ?></option>
+                            <option value="2"><?php echo lang('Like New') ?></option>
+                            <option value="3"><?php echo lang('Used') ?></option>
                         </select>
                     </div>
                     <!-- End Status Field -->
@@ -149,7 +151,7 @@ session_start();
                                 class="form-control"
                                 type="text"
                                 name="country"
-                                placeholder="    Enter the Country name...! "
+                                placeholder="<?php echo lang('    Enter the Country name...! ') ?>"
                                 value=""
                                 required="required">
                         <span class="axstrisx">*</span>
@@ -158,7 +160,7 @@ session_start();
                     <!-- Start Catigore Field -->
                     <div class="form-group">
                         <select  class="form-control selection " name="catigore">
-                            <option value="0">Catigore</option>
+                            <option value="0"><?php echo lang('Catigore') ?></option>
                             <?php
                             $stetment=$connection->prepare("SELECT * FROM categories");
                             $stetment ->execute();
@@ -174,7 +176,7 @@ session_start();
                     <!-- Start Member Field -->
                     <div class="form-group">
                         <select  class="form-control selection" name="member">
-                            <option value="0">Member</option>
+                            <option value="0"><?php echo lang('Member') ?></option>
                             <?php
                             $stetment=$connection->prepare("SELECT * FROM users");
                             $stetment ->execute();
@@ -204,7 +206,7 @@ session_start();
                     <input
                         class="btn btn-success btn-block btn-add-item"
                         type="submit"
-                        value="Save Item">
+                        value="<?php echo lang('Save Item') ?>">
                     <!-- End Save  field -->
                 </form>
             </div><!--End Add Form-->
@@ -282,10 +284,9 @@ session_start();
                         <!-- Start Status Field -->
                         <div class="form-group ">
                             <select  class="form-control selection " name="status">
-                                <option value="1" <?php  if($items['Status'] == 1){ echo  'selected' ; } ?>>New</option>
-                                <option value="2" <?php  if($items['Status'] == 2){ echo  'selected' ; } ?>>Like New</option>
-                                <option value="3" <?php  if($items['Status'] == 3){ echo  'selected' ; } ?>>Used</option>
-                                <option value="4" <?php  if($items['Status'] == 4){ echo  'selected' ; } ?>>Very Old</option>
+                                <option value="1" <?php  if($items['Status'] == 1){ echo  'selected' ; } ?>><?php echo lang('New') ?></option>
+                                <option value="2" <?php  if($items['Status'] == 2){ echo  'selected' ; } ?>><?php echo lang('Like New') ?></option>
+                                <option value="3" <?php  if($items['Status'] == 3){ echo  'selected' ; } ?>><?php echo lang('Used') ?></option>
                             </select>
                         </div>
                         <!-- End Status Field -->
@@ -306,7 +307,7 @@ session_start();
                         <!-- Start Catigore Field -->
                         <div class="form-group">
                             <select  class="form-control selection " name="catigore">
-                                <option value="0">Catigore</option>
+                                <option value="0"><?php echo lang('Catigore') ?></option>
                                 <?php
                                 $stetment=$connection->prepare("SELECT * FROM categories");
                                 $stetment ->execute();
@@ -324,7 +325,7 @@ session_start();
                         <!-- Start Member Field -->
                         <div class="form-group">
                             <select  class="form-control selection" name="member">
-                                <option value="0">Member</option>
+                                <option value="0"><?php echo lang('Member') ?></option>
                                 <?php
                                 $stetment=$connection->prepare("SELECT * FROM users");
                                 $stetment ->execute();
@@ -340,10 +341,11 @@ session_start();
                         </div>
                         <!-- End member Field -->
                         <!-- Start Save  field -->
+                        <br>
                         <input
                                 class="btn btn-success btn-block"
                                 type="submit"
-                                value="Save Item">
+                                value="<?php echo lang('Update Item') ?>">
                         <!-- End Save  field -->
                     </form>
                 </div>
@@ -374,11 +376,11 @@ session_start();
                             <h1 class="text-center"><?php echo lang("MANAGECOMMENTS");  echo "   ( ".$items['Name']." )" ?></h1>
                             <table class="main-table text-center table text-white table-bordered border-danger ">
                                 <tr>
-                                    <td>ID</td>
-                                    <td>Comment</td>
-                                    <td>User Name</td>
-                                    <td>Comment_data</td>
-                                    <td>Control</td>
+                                    <td><?php echo lang('ID') ?></td>
+                                    <td><?php echo lang('Comment') ?></td>
+                                    <td><?php echo lang('User Name') ?></td>
+                                    <td><?php echo lang('Comment_data') ?></td>
+                                    <td><?php echo lang('Control') ?></td>
                                 </tr>
                                 <tr>
                                     <?php
@@ -396,7 +398,6 @@ session_start();
                                             echo "<a  href='comments.php?do=activate&comment_id=".$comment['comment_ID']."' role='button' class='btn btn-info confirm Activate' ><i class='fa-solid fa-circle-check''></i> Activate </a>";
                                         }
                                         echo  "</td>";
-                                        echo "<tr>";
                                     }
                                     ?>
                                 </tr>
@@ -421,25 +422,25 @@ session_start();
                 $fromError = array();
 
                 if(empty($name)){
-                    $fromError [] =  "Name Can\'t be <sronge>Empty</sronge>" ;
+                    $fromError [] =  lang('Name Can\'t be <sronge>Empty</sronge>');
                 }
                 if(empty($description)){
-                    $fromError [] = 'Description Can\'t be <sronge>Empty</sronge>';
+                    $fromError [] = lang('Description Can\'t be <sronge>Empty</sronge>');
                 }
                 if(empty($price)){
-                    $fromError [] = 'price Can\'t be <sronge>Empty</sronge>';
+                    $fromError [] = lang('price Can\'t be <sronge>Empty</sronge>');
                 }
                 if($status == 0 ){
-                    $fromError [] = 'Status Can\'t be <sronge>Empty</sronge>';
+                    $fromError [] = lang('Status Can\'t be <sronge>Empty</sronge>');
                 }
                 if(empty($country)){
-                    $fromError [] = 'country Can\'t be <sronge>Empty</sronge>';
+                    $fromError [] = lang('country Can\'t be <sronge>Empty</sronge>');
                 }
                 if($cat == 0 ){
-                    $fromError [] = 'CAtigore Can\'t be <sronge>Empty</sronge>';
+                    $fromError [] = lang('CAtigore Can\'t be <sronge>Empty</sronge>');
                 }
                 if($user == 0 ){
-                    $fromError [] = 'memper Can\'t be <sronge>Empty</sronge>';
+                    $fromError [] =lang('memper Can\'t be <sronge>Empty</sronge>') ;
                 }
 
                 if (!empty($fromError)){
@@ -462,7 +463,7 @@ session_start();
                                                                WHERE Item_ID = ?");
                     $stetment->execute(array($name,$description,$price,$status,$country,$cat,$user,$item_ID));
                     echo '<div class="container">' ;
-                    $themesg     ='<div class=" alert alert-info">'.$stetment->rowCount().'Record updated...</div>' ;
+                    $themesg     ='<div class=" alert alert-info">'.$stetment->rowCount().lang('').'</div>' ;
                     $page_adress = 'items.php';
                     redirect_home($themesg,2,$page_adress);
                     echo '</div>';
@@ -559,7 +560,7 @@ session_start();
                         'zitemAvatar'      => $itemavatar
                     ));
                     echo '<div class="container">' ;
-                    $themesg     ='<div class=" alert alert-info">'.$stetment->rowCount().'Record updated...</div>' ;
+                    $themesg     ='<div class=" alert alert-info">'.$stetment->rowCount().lang('Record updated...').'</div>' ;
                     $page_adress = 'items.php';
                     redirect_home($themesg,2,$page_adress);
                     echo '</div>';
@@ -585,14 +586,14 @@ session_start();
                 // Redirect to another page
                 echo '<div class="container">' ;
                 $page_adress = 'items.php';
-                $themesg ='<div class="alert alert-info">The deletion was completed successfully...!</div>';
+                $themesg ='<div class="alert alert-info">'.lang('The deletion was completed successfully...!').'</div>';
                 redirect_home($themesg,1,$page_adress);
                 echo '</div>' ;
             }
             else{
                 echo '<div class="container">' ;
                 $page_adress = 'items.php';
-                $themesg ='<div class="alert alert-danger">This user does not exist...!</div>';
+                $themesg ='<div class="alert alert-danger">'.lang('This user does not exist...!').'</div>';
                 redirect_home($themesg,1,$page_adress);
                 echo '</div>' ;
             }
@@ -611,7 +612,7 @@ session_start();
 
                 $page_adress = 'items.php';
 
-                $themesg = '<div class="alert alert-success">Approve completed successfully...!</div>';
+                $themesg = '<div class="alert alert-success">'.lang('Approve completed successfully...!').'</div>';
 
                 redirect_home($themesg, 1, $page_adress);
 
@@ -622,7 +623,7 @@ session_start();
 
             echo '<div class="container">' ;
             $page_adress = 'items.php';
-            $themesg ='<div class="alert alert-danger">We do not have this items in our records...!</div>';
+            $themesg ='<div class="alert alert-danger">'.lang('We do not have this items in our records...!').'</div>';
             redirect_home($themesg,1,$page_adress);
             echo '</div>' ;
         }

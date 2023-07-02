@@ -24,13 +24,13 @@
       ?>
 		<div class="home-stats">
 			<div class="container text-center">
-				<h1>Dashboard</h1>
+				<h1><?php echo lang('Dashboard')?></h1>
 				<div class="row">
 					<div class="col-md-3">
 						<div class="stat st-members">
                             <a href="members.php"><i class="fa fa-users"></i></a>
 							<div class="info">
-								Total Members
+                                <?php echo lang('Total Members')?>
 								<span>
 									<a href="members.php"> <?= count_items('UserID' ,'users') ?> </a>
 								</span>
@@ -41,7 +41,7 @@
 						<div class="stat st-pending">
                             <a href="members.php?do=Mangae&page=pending"><i class="fa fa-user-plus"></i></a>
 							<div class="info">
-								Pending Members
+                                <?php echo lang('Pending Members')?>
 								<span>
 									<a href="members.php?do=Mangae&page=pending"><?= count_items('UserID' ,'users' , 'WHERE RegStatus = 0 ') ?></a>
 								</span>
@@ -52,7 +52,7 @@
 						<div class="stat st-items">
                             <a href="items.php"><i class="fa fa-tag"></i></a>
 							<div class="info">
-								Total Items
+                                <?php echo lang('Total Items')?>
 								<span>
 									<a href="items.php"> <?= count_items('Item_ID' ,'items') ?> </a>
 								</span>
@@ -63,7 +63,7 @@
 						<div class="stat st-comments">
                             <a href="comments.php"><i class="fa fa-comments"></i></a>
 							<div class="info">
-								Total Comments
+                                <?php echo lang('Total Comments')?>
 								<span>
                                     <a href="comments.php"> <?= count_items('comment_id' ,'comments') ?> </a>
 								</span>
@@ -80,7 +80,7 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <i class="fa fa-users"></i>
-                                Latest <?php echo $numUsers ?>  Registerd Users
+                                <?php echo lang('Latest')?> <?php echo $numUsers ?>  <?php echo lang('Registerd Users')?>
                                 <span class="toggle-info pull-right">
 									<i class="fa fa-plus fa-lg"></i>
 								</span>
@@ -94,12 +94,14 @@
                                             echo $user['Username'];
                                             echo '<a href="members.php?do=Edit&ID=' . $user['UserID'] . '">';
                                             echo '<span class="btn btn-success pull-right">';
-                                            echo '<i class="fa fa-edit"></i> Edit';
+                                            echo '<i class="fa fa-edit"></i>';
+                                            echo '  '.lang('Edit');
                                             if ($user['RegStatus'] == 0) {
                                                 echo "<a 
 																	href='members.php?do=activate&ID=" . $user['UserID'] . "' 
 																	class='btn btn-info pull-right activate'>
-																	<i class='fa fa-check'></i> Activate</a>";
+																	<i class='fa fa-check'></i> ";
+												echo  '  '.lang('Activate')."</a>";
                                             }
                                             echo '</span>';
                                             echo '</a>';
@@ -116,7 +118,7 @@
                     <div class="col-sm-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <i class="fa fa-tag"></i> Latest <?php echo $num_items ?> Items
+                                <i class="fa fa-tag"></i><?php echo lang('Latest')?> <?php echo $num_items ?> <?php echo lang('Items')?>
                                 <span class="toggle-info pull-right">
 									<i class="fa fa-plus fa-lg"></i>
 								</span>
@@ -130,10 +132,13 @@
                                             echo $item['Name'];
                                             echo '<a href="items.php?do=Edit&item_id=' . $item['Item_ID'] . '">';
                                             echo '<span class="btn btn-success pull-right">';
-                                            echo '<i class="fa fa-edit"></i> Edit';
+                                            echo '<i class="fa fa-edit"></i>';
+                                            echo '  '.lang('Edit');
                                             if ($item['Approve'] == 0) {
                                                 echo "<a href='items.php?do=Approve&item_id=" . $item['Item_ID'] . "'class='btn btn-info pull-right activate'>
-												<i class='fa fa-check'></i> Approve</a>";
+												    <i class='fa fa-check'></i>";
+                                                echo  '  '.lang('Activate')."</a>";
+
                                             }
                                             echo '</span>';
                                             echo '</a>';
@@ -154,7 +159,7 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <i class="fa fa-comments-o"></i>
-                                Latest  <?php echo $num_comment ?> Comments
+                                <?php echo lang('Latest')?>  <?php echo $num_comment ?> <?php echo lang('Comments')?>
                                 <span class="toggle-info pull-right">
 									<i class="fa fa-plus fa-lg"></i>
 								</span>
@@ -184,17 +189,20 @@
                                             echo '<a href="comments.php?do=Edit&comment_id=' . $comment['comment_ID'] . '">';
                                             echo "</div>";
                                             echo '<span class="btn btn-success pull-right comment_edit ">';
-                                            echo '<i class="fa fa-edit  "></i> Edit';
+                                            echo '<i class="fa fa-edit  "></i>';
+                                            echo '  '.lang('Edit');
                                             if ($comment['Status'] == 0) {
                                                 echo "<a href='comments.php?do=activate&comment_id=" . $comment['comment_ID'] . "'class='btn btn-info pull-right activate comment_edit'>
-												<i class='fa fa-check '></i> Approve</a>";
+												    <i class='fa fa-check '></i>";
+                                                echo  '  '.lang('Activate')."</a>";
+
                                             }
                                             echo '</span>';
                                             echo '</a>';
                                             echo '</li>';
                                         }
                                     } else {
-                                        echo 'There\'s No Comment To Show';
+                                        echo lang('There\'s No Comment To Show');
                                     }
                                     ?>
                                 </ul>
