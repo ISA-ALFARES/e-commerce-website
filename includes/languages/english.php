@@ -29,7 +29,14 @@
                     'LOGIN_SIGNUP'   =>  "Login|Signup" ,
                     'ADD_NEW_ITEM'   =>  "Add Item" ,
                     'MONY'   =>  "  $" ,
-                   'ADD_TO_CARD'   =>  "Add To Cart" ,
+            'My Profile'   =>  "My Profile" ,
+            'Add addres'   =>  "Add addres" ,
+            'New Item'   =>  "New Item" ,
+            'My Items'   =>  "My Items" ,
+            'ADD_TO_CARD'   =>  "Add To Cart" ,
+            'ADDADDRESS'   =>  "Adres Ekle" ,
+            'INSERTADDRES'   =>  "Adres Ekle" ,
+            'Save'   =>  "Save" ,
 
                 //End  NavbarPages
 

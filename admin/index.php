@@ -1,9 +1,9 @@
 <?php
 global $temp, $connection;
 session_start();
-    $no_navbar =''; //On the login (index.php) page, the navbar should not appear
+    $no_navbar ='';//Giriş (index.php) sayfasında gezinme çubuğu görünmemeli
     $page_title = 'LOGIN';
-    //If the user is already logged in, direct them to the appropriate page
+    //Kullanıcı zaten oturum açmışsa, onları uygun sayfaya yönlendirin
     if (isset($_SESSION['username'])) {
       header('Location: dashboard.php');
       exit;
@@ -11,13 +11,13 @@ session_start();
     include    "init.php"; 
   ?>
   <?php
-      //Check if user coming from http post request... 
+        //Kullanıcının http gönderi isteğinden gelip gelmediğini kontrol edin...
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $username = $_POST['user'];
         $password = $_POST['pass'];
         $hashedpass = sha1($password); //Şifre şifreleme
 
-        //chek if the user exist in databases
+         //kullanıcının veritabanlarında var olup olmadığını kontrol edin
         $stetment =  $connection->prepare("SELECT
                           UserID , 
                           Username,
@@ -29,24 +29,24 @@ session_start();
                           or Email = ?
                           AND GroubID = 1 
                           ");
-        //execute the data entered by the user
-        $stetment ->execute(array($username,$hashedpass,$username)); 
-        //If the entered data exists, it will be stored here
+        //kullanıcı tarafından girilen verileri çalıştır
+        $stetment ->execute(array($username,$hashedpass,$username));
+        //Girilen veriler varsa $row saklanacaktır.
         $row = $stetment->fetch();
         $count = $stetment->rowcount();                              
         
-        //if count > 0 This mean the database record about this
-        if($count > 0 ){
 
-          $_SESSION['Username'] =$username ;  //Register Session name...
+        if($count > 0 ){ //eğer say > 0 ise veritabanı bununla ilgili kayıt yapıyor demektir
 
-          $_SESSION['ID'] =$row['UserID'] ;   //Register Session ID...
+          $_SESSION['Username'] =$username ;//oturum adını kaydet...
 
-          header('Location: dashbord.php');   //redirect to dashbord page...
+          $_SESSION['ID'] =$row['UserID'] ;//oturum adını kaydet...
+
+          header('Location: dashbord.php');//dashbord sayfasına yönlendir...
 
           exit(); //finish the programme...
         }
-        //else The username or password is incorrect
+        //else Kullanıcı adı veya şifre yanlış
         else{
             echo  $php_errormsg = "The username or password is incorrect";
         }

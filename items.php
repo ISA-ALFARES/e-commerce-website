@@ -38,7 +38,7 @@ global $tpl, $connection, $items, $temp;
             // Fetch The Data
             $item = $stmt->fetch();
             ?>
-            <h1 class="text-center"><?php echo $item['Name'] ?></h1>
+            <h1 class="text-center text-dark"><?php echo $item['Name'] ?></h1>
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">

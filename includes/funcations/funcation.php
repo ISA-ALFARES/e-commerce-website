@@ -14,7 +14,7 @@
 
         global $connection ;
 
-        $statement = $connection->prepare("SELECT * FROM items where Cat_ID = ? ");
+        $statement = $connection->prepare("SELECT * FROM items  where Cat_ID = ? ");
 
         $statement->execute(array($catID));
 

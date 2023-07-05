@@ -11,7 +11,7 @@
 
       /* Start Dashboard Page */
 
-        // This function shows me a list of the data I want from the database
+        // Bu işlev bana veritabanından istediğim verilerin bir listesini gösterir
 
         $numUsers = 6 ;  // Number Of Latest Users
         $user_Latest = getLatest('*' ,'users' , 'Username' , $numUsers );

@@ -2,8 +2,7 @@
 session_start();
 global $temp, $userSession;
 include "init.php";
- echo  $userSession;
-echo '<div class="categories-title"><h2 >Fiyatları ve Modelleri</h2></div>';
+echo '<div class="categories-title"><h2 ></h2></div>';
     echo '<div class="container categores-container">';
         echo '<div class="row">';
             echo '<div class="col-md-2">';
@@ -43,10 +42,10 @@ echo '<div class="categories-title"><h2 >Fiyatları ve Modelleri</h2></div>';
                                                     echo '<h5 class="font-weight-bold d-inline-block title-font-size ">'.$item['Name'].'</h5>';
                                                     echo '<span class=" Description-font-size  ">'.$item['Description'] .'</span>';
                                                     echo '<h4 class="text-dark font-weight-bold  ">'.$item['Price'].'<span class="text-dark money ">'.lang("MONY").'</span>'.'</h4>';
+                                                echo '</div></a>';
                                                 echo '</div>';
-                                                echo '<input   class="btn btn-primary   add-card  ml-5 " type="submit"  value="'.lang("ADD_TO_CARD").'">';
+                                                echo '<a href="cards.php?item_ID='.$item['Item_ID'].'" class="btn btn-primary" >'.lang("ADD_TO_CARD").'</a>';
                                             echo '</div>';
-                                    echo '</div></a>';
                                 echo '</div>';
                             }
                     echo '</div>';

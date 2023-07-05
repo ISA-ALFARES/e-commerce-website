@@ -1,6 +1,6 @@
 <?php
 
-    function get_title(){
+    function get_title(){//Bu işlev sayfaları adlandırmak için kullanılır
 
               global $page_title ;
 
@@ -14,11 +14,11 @@
               }
     }
     /*
-    ** Home Redirect Function v2.0
-    ** This Function Accept Parameters
-    ** $theMsg = Echo The Message [ Error | Success | Warning ]
-    ** $page_adress = The address You Want To Redirect To
-    ** $seconds = Seconds Before Redirecting
+    ** anasayfa Yönlendirme fonksiyonu
+    ** Bu fonksiyon Parametreleri Kabul Etmektedir
+    ** $theMsg = Mesajı  [ Hata | Başarı |  ]
+    ** $page_address = Yönlendirmek istediğiniz adres
+    ** $saniye = Yeniden Yönlendirmeden Önceki Saniye
     */
     function redirect_home($themesg , $secends =3,$page_adress = 'index.php' ){
 
@@ -31,12 +31,12 @@
         exit();
     }
 
-    /*
-    ** Check Items Function v1.0
-    ** Function to Check Item In Database [ Function Accept Parameters ]
-    ** $select = The Item To Select [ Example: user, item, category ]
-    ** $from = The Table To Select From [ Example: users, items, categories ]
-    ** $where_value = The Value Of Select [ Example: Osama, Box, Electronics ]
+/*
+    ** urunler Kontrol Et fonksiyonu
+    ** Veritabanındaki urun Kontrol Etme fonksiyonu [ İşlev Parametreleri Kabul Et ]
+    ** $select = Seçilecek Öğe [ Örnek: kullanıcı, öğe, kategori ]
+    ** $from = Seçilecek Tablo [ Örnek: kullanıcılar, öğeler, kategoriler ]
+    ** $where_value = Seçimin Değeri [ Örnek: isa, Box, ]
     */
     function chekitem($select,$from,$where_value) {
 
@@ -49,13 +49,13 @@
       return $statement->rowCount();
     }
 
-    /*
-    ** Count Number Of Items Function v1.0
-    ** Function To Count Number Of Items Rows
-    ** $item = The Item To Count
-    ** $table = The Table To Choose From
-     * $condition = The
-    */
+/*
+   ** urunler Kontrol Et İşlevi
+   ** Veritabanındaki Öğeyi Kontrol Etme fonksiyonu [ fonksiyon Parametreleri Kabul Et ]
+   ** $select = Seçilecek urun [ Örnek: bilgisayar, telefon ]
+   ** $from = Seçilecek Tablo [ Örnek: users, items, kategoriler ]
+   ** $where_value = Seçimin Değeri [ Örnek: isa, Box ]
+   */
     function count_items( $item , $table ,$condition = '' ){
 
       global $connection ;
@@ -67,13 +67,13 @@
       return $statement->fetchColumn();
     }
     /*
-    ** Get Latest Records Function v1.0
-    ** Function To Get Latest Items From Database [ Users, Items, Comments ]
-    ** $select = Field To Select
-    ** $table = The Table To Choose From
-    ** $order = The Desc Ordering
-    ** $limit = Number Of Records To Get
-    */
+        ** En Son Kayıtları Alma İşlevi v1.0
+        ** Veritabanından En Son Öğeleri Alma fonksiyonu [ Kullanıcılar, Öğeler, Yorumlar ]
+        ** $select = Seçilecek Alan
+        ** $tablo = Seçim Yapılacak Tablo
+        ** $order = order by
+        ** $limit = Alınacak Kayıt Sayısı
+        */
     function getLatest($select , $table , $order , $limit = 5 ){
 
         global $connection ;
@@ -84,6 +84,8 @@
 
         return $statement->fetchAll();
     }
+
+
     function getCount($column , $table){
 
         global $connection ;

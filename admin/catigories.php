@@ -13,13 +13,13 @@ session_start();
 
          include  'init.php';       // include files
 
-         if (isset($_GET['do'])) {
+         if (isset($_GET['do'])) { //varsayılan değişken
 
-             $do = $_GET['do'];
+             $do = $_GET['do']; //do Sayfayı bölmek için kullanıyoruz
          } else {
              $do = 'Manage';
          }
-         if ($do == 'Manage'){
+         if ($do == 'Manage'){ // Manage  sayfası
 
              $sort = 'ASC';
 

@@ -32,3 +32,14 @@ if(isset($_GET['do'])){
 
 //End manage page...
 include $temp."footer.php";
+
+
+
+//
+//
+//ALTER TABLE cart
+//  ADD CONSTRAINT cartItems
+//  FOREIGN KEY cart(ItemID)
+//  REFERENCES items (Item_ID)
+//  ON DELETE CASCADE
+//  ON UPDATE CASCADE;

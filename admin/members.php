@@ -12,9 +12,9 @@ if(isset($_SESSION['Username'])  && isset($_SESSION['language'])){
   
   $page_title = 'MEMBERS'; // The page name
   
-  include 'init.php';     //In this file, we include all the necessary files in the project and call them once, such as the header file
+  include 'init.php';     //Bu dosyada, projedeki gerekli tüm dosyaları dahil ediyoruz ve bunları bir kez çağırıyoruz, örneğin başlık dosyası
   
-  $do = isset($_GET['do']) ? $_GET['do']  : 'Mangae';   //Start manage page...
+  $do = isset($_GET['do']) ? $_GET['do']  : 'Mangae';   //başla manage sayfasi...
   if($do== "Mangae"){
 
                  $query = '';
@@ -22,13 +22,13 @@ if(isset($_SESSION['Username'])  && isset($_SESSION['language'])){
 
                     $query  = ' AND RegStatus =  0';
                 }
-             //chek if the user exist in databases and select all users except admin
+            //kullanıcının veritabanlarında var olup olmadığını kontrol edin ve yönetici dışındaki tüm kullanıcıları seçin
             $stetment=$connection->prepare("SELECT * FROM users WHERE GroubID != 1  $query");
 
-            //execute the data entered by the user
+            //kullanıcı tarafından girilen verileri çalıştır
             $stetment->execute();
 
-            //Assign to variable...
+            // $rows değişkene ata...
             $rows = $stetment->fetchAll();
             echo   '<h1 class="text-center">'. lang("MANAGEMEMBER").'</h1>';
             if (! empty($rows)){
@@ -91,9 +91,9 @@ if(isset($_SESSION['Username'])  && isset($_SESSION['language'])){
             }
 
     }elseif($do== "Add"){?>
-          <!--start Add Form-->
+            <!--Form Ekleme sayfası Başlat-->
           <div class="continyer">
-                <h1 class="text-center"><?php echo lang("ADDMEMBER")?></h1>
+                <h1 class="text-center"><?php echo lang("ADDMEMBER")?></h1> <!--//sayfa adi-->
                 <form class="contact-form" action="<?php echo "?do=Insert" ?>" method="POST"  enctype="multipart/form-data">
                       <!-- Start user name field -->
                     <i class="fa-solid fa-user icons"></i>
@@ -282,25 +282,24 @@ if(isset($_SESSION['Username'])  && isset($_SESSION['language'])){
         }//End Insert page.
     elseif($do == "Edit"){  //Edit page
 
-          // Chek if  Get Request is numaric & Get the integer value of it
+         // $_GET gelen  sayısal olup olmadığını kontrol edin ve tamsayı değerini alın
 
           $userid = isset($_GET['ID'])&& is_numeric($_GET['ID']) ? intval($_GET['ID']) : 0 ;
 
-          //Select all data Depend On this ID
+            //Tüm verileri seç Bu id ile Bağlıdır
 
           $stetment = $connection->prepare("SELECT *  FROM users  WHERE UserID = ?");
 
-          //Execute query
-
+          //Sorguyu çalıştır
           $stetment ->execute(array($userid));
 
-          //If the entered data exists, it will be stored here/ Fetch the data
-
+        //Girilen veriler varsa $row saklanacaktır/ Verileri getir
           $row = $stetment->fetch();
 
-          //The Row Count
-          $count = $stetment->rowcount();
+          //The Row Count Süreci kontrol etmek için  1/0
+          $count = $stetment->rowcount();//0/1
 
+        //eğer çalışırsa
           if($count > 0) { ?>
 
               <!--start Edit Form-->
@@ -370,7 +369,7 @@ if(isset($_SESSION['Username'])  && isset($_SESSION['language'])){
               </div>
           <!--End Form-->
           <?php }
-          else{//Enter a user ID that does not exist
+          else{//Var olmayan bir kullanıcı kimliği girin
                 $errormsg = "Sorry You Enter a user ID that does not exist";
                 redirect_home($errormsg);
               }
@@ -434,8 +433,8 @@ if(isset($_SESSION['Username'])  && isset($_SESSION['language'])){
                       ?>
                   </div>
             <?php }
-          //End Error checking the data sent...!
-          //If there are no errors, perform the update process
+            //Son Gönderilen veri kontrol edilirken hata oluştu...!
+            //Hata yoksa güncelleme işlemini gerçekleştirin
             else{
                 $stetment = $connection->prepare("SELECT  *
                                                         FROM users
@@ -466,7 +465,7 @@ if(isset($_SESSION['Username'])  && isset($_SESSION['language'])){
         }
         //End Update page
     }elseif ($do == 'Delete'){
-            // Chek if  Get Request is numeric & Get the integer value of it
+           //  İsteğinin sayısal  $_GET'ten gelen ID olup olmadığını kontrol edin ve tamsayı değerini alın
             $userid = isset($_GET['ID'])&& is_numeric($_GET['ID']) ? intval($_GET['ID']) : 0 ;
 
             $chek = chekitem('UserID' , 'users' , $userid);
@@ -489,9 +488,9 @@ if(isset($_SESSION['Username'])  && isset($_SESSION['language'])){
                   redirect_home($themesg,1,$page_adress);
                 echo '</div>' ;
               }
-    }elseif ($do == "activate"){ //start User activation page
+    }elseif ($do == "activate"){ //Kullanıcı aktivasyon sayfasını başlat
 
-      // Chek if  Get Request is numeric & Get the integer value of it
+      // Alma İsteğinin sayısal olup olmadığını kontrol edin ve tamsayı değerini alın
       $userid = isset($_GET['ID'])&& is_numeric($_GET['ID']) ? intval($_GET['ID']) : 0 ;
       //Verify that the user number exists IN database
       $chek =chekitem('UserID' , 'users' ,  $userid);
@@ -517,14 +516,13 @@ if(isset($_SESSION['Username'])  && isset($_SESSION['language'])){
           echo '</div>' ;
       }
 
-    }//End User activation page
-
-      //End Delete  page...
-      //End manage page...
+    }//Son Kullanıcı aktivasyon sayfası
+    //Silme sayfasını sonlandır...
+    //Yönetim sayfasını sonlandırın...
      include $temp."footer.php";
 
   } else{
-    header('Location:index.php'); // user is not admin  Around the index.php page 
+    header('Location:index.php'); // kullanıcı admin değil index.php sayfası etrafında
     exit();
     }
   ?>

@@ -3,7 +3,7 @@
 	--primary: rgb(60, 65, 133);
 	--brown: rgb(66, 66, 66);
 	--red: rgb(80, 86, 168);
-	--hover: #009aef;
+	--hover: #02202f;
 	--White: #eee ;
 }
 body {
@@ -36,7 +36,7 @@ a.nav-link:hover{
 }
 
 a.nav-link {
-	color: white;
+	color: #210505;
 }
 a.dropdown-item {
 	color: #eee;

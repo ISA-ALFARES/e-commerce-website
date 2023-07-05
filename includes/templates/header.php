@@ -31,9 +31,10 @@
                             <?php echo $sessionUser ?>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <li><a class="dropdown-item text-dark" href="myProfile.php">My Profile</a></li>
-                            <li><a class="dropdown-item  text-dark" href="additem.php">New Item</a></li>
-                            <li><a class="dropdown-item  text-dark" href="myProfile.php#my-ads">My Items</a></li>
+                            <li><a class="dropdown-item text-dark" href="myProfile.php"><?php echo lang('My Profile')?></a></li>
+                            <li><a class="dropdown-item text-dark" href="adres.php?do=Add"><?php echo lang('Add addres')?></a></li>
+                            <li><a class="dropdown-item  text-dark" href="additem.php"><?php echo lang('New Item')?></a></li>
+                            <li><a class="dropdown-item  text-dark" href="myProfile.php#my-ads"><?php echo lang('My Items')?></a></li>
                             <li><a class="dropdown-item  text-dark" href="logout.php">Logout</a></li>
                         </ul>
                     </div>
@@ -51,9 +52,9 @@
             </a>
         </div>
     <?php } ?>
-    <nav class="navbar navbar-expand-lg nav-bar" style="background-color: #000000;">
+    <nav class="navbar navbar-expand-lg nav-bar" style="background-color: #007bffd9;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.php"><?php echo lang('HOMEPAGE')?></a>
+            <a class="navbar-brand text-dark" href="index.php"><?php echo lang('HOMEPAGE')?></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fa-solid fa-bars"></i>
             </button>

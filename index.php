@@ -15,7 +15,12 @@ include 'init.php';
                                 echo '<a target="_blank" href="items.php?item_ID='.$item['Item_ID'].'" class="text-dark" style="text-decoration: none;"><div class="card item-box">';
                                         echo '<div class="card-bodys">';
                                             echo '<div class="img-box">';
-                                                echo '<img class="img-responsive box-image" src="./layout/images/b3.jpg" alt="" >';
+                                                    if (empty($item['itemAvatar'])){
+
+                                                        echo  '<img class="img-responsive box-image" src="admin/uploads/avatars/b3.jpg" alt=""/>';
+                                                    }else{
+                                                        echo  '<img class="img-responsive box-image" src="admin/uploads/avatars/'.$item['itemAvatar'].'" alt=""/>';
+                                                    }
                                             echo '</div>';
                                             echo '<div class="box-information ">';
                                                 echo '<h5 class="font-weight-bold d-inline-block title-font-size ">'.$item['Name'].'</h5>';
