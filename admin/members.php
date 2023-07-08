@@ -8,7 +8,7 @@
 global $connection, $temp, $do;
 session_start();
 
-if(isset($_SESSION['Username'])  && isset($_SESSION['language'])){
+if(isset($_SESSION['Username'])){
   
   $page_title = 'MEMBERS'; // The page name
   

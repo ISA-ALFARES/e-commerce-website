@@ -100,4 +100,20 @@
         }
 
     }
+    /*
+    ** Get All Function v2.0
+    ** Function To Get All Records From Any Database Table
+    */
+    function getAllFrom($field, $table, $where = NULL, $and = "NULL", $orderFiled = '' , $ordering = "DESC") {
+
+        global $connection;
+
+        $getAll = $connection->prepare("SELECT $field FROM $table WHERE $where $and ORDER BY $orderFiled  $ordering");
+
+        $getAll->execute();
+
+        $all = $getAll->fetchAll();
+
+        return $all;
+    }
 

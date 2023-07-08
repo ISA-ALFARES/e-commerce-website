@@ -32,7 +32,7 @@ session_start();
 
                  }
 
-             $statement=$connection->prepare("SELECT * FROM categories ORDER BY Ordering $sort");
+             $statement=$connection->prepare("SELECT * FROM categories WHERE parent = 0 ORDER BY Ordering $sort");
 
              $statement->execute();
 
@@ -48,9 +48,6 @@ session_start();
                                 <i class="fa fa-sort"></i> <?php echo lang('Ordering: [')?>
                                 <a class="<?php if ($sort == 'ASC') { echo 'active'; } ?>" href="?sort=ASC"><?php echo lang('asc')?></a> |
                                 <a class="<?php if ($sort == 'DESC') { echo 'active'; } ?>" href="?sort=DESC"><?php echo lang('desc')?></a> ]
-                                <!--                             <i class="fa fa-eye"></i> View: [-->
-                                <!--                             <span class="active" data-view="full">Full</span> |-->
-                                <!--                             <span data-view="classic">Classic</span> ]-->
                             </div>
                         </div>
                         <div class="card-body">
@@ -65,16 +62,21 @@ session_start();
                                 echo lang('Delete')."</a>";
 
                                 echo "</div>";
+                                    echo "<h3>" . $cat['Name'] . '</h3>';
+                                    echo "<div class='full-view'>";
+                                        echo "<p>"; if($cat['Description'] == '') { echo 'This category has no description'; } else { echo $cat['Description']; } echo "</p>";
+                                        if($cat['Visibility'] == 1) { echo '<span class="visibility cat-span"><i class="fa fa-eye"></i>';echo lang("Hidden"). '</span>'; }
+                                        if($cat['Allow_Comment'] == 1) { echo '<span class="commenting cat-span"><i class="fa fa-close"></i>';echo lang("Comment Disabled"). '</span>'; }
+                                        if($cat['Allow_Ads'] == 1) { echo '<span class="advertises cat-span"><i class="fa fa-close"></i>';echo lang("Ads Disabled"). '</span>'; }
+                                $catsChild = getAllFrom("*" , "categories" , "parent = {$cat['ID']}" ,"","ID");
+                                foreach ( $catsChild  as $child) {
 
-                                echo "<h3>" . $cat['Name'] . '</h3>';
+                                    if (!empty($catsChild)){
+                                        echo '<span class="child text-white cat-span">';echo $child['Name']. '</span>';
+                                    }
+                                }
+                                    echo "</div>";
 
-                                echo "<div class='full-view'>";
-
-                                echo "<p>"; if($cat['Description'] == '') { echo 'This category has no description'; } else { echo $cat['Description']; } echo "</p>";
-                                if($cat['Visibility'] == 1) { echo '<span class="visibility cat-span"><i class="fa fa-eye"></i>';echo lang("Hidden"). '</span>'; }
-                                if($cat['Allow_Comment'] == 1) { echo '<span class="commenting cat-span"><i class="fa fa-close"></i>';echo lang("Comment Disabled"). '</span>'; }
-                                if($cat['Allow_Ads'] == 1) { echo '<span class="advertises cat-span"><i class="fa fa-close"></i>';echo lang("Ads Disabled"). '</span>'; }
-                                echo "</div>";
                                 echo "</div>";
                                 echo '<hr>';
                             }
@@ -119,18 +121,20 @@ session_start();
                                      <input type="number" id="ordering" name="ordering" class="form-control" placeholder="<?php echo lang('Ordering number') ?>">
                                  </div>
                              </div>
-                             <!--
-                                             <div class="form-group">
-                                                 <label for="parent" class="col-sm-2 control-label">Parent</label>
-                                                 <div class="col-sm-10">
-                                                     <select id="parent" name="parent">
-                                                         <option value="0">None</option>
-                                                         <option value="1">Category 1</option>
-                                                         <option value="2">Category 2</option>
-                                                     </select>
-                                                 </div>
-                                             </div>
-                             -->
+                             <div class="form-group">
+                                 <label for="parent" class="col-sm-2 control-label">Parent</label>
+                                 <div class="col-sm-10">
+                                     <select class="form-control selection " id="parent" name="parent">
+                                         <option value="0">...</option>
+                                         <?php
+                                         $allCatigore = getAllFrom("*", "categories", "parent = 0" ,"", "ID");
+                                         foreach ($allCatigore as $cat) {
+                                            echo '<option value="'.$cat['ID'].'">'.$cat['Name'].'</option>';
+                                         }
+                                         ?>
+                                     </select>
+                                 </div>
+                             </div>
                              <div class="form-group">
                                  <label for="visibility" class="col-sm-2 control-label"><?php echo lang('Visibility') ?></label>
                                  <div class="col-sm-10">
@@ -183,20 +187,21 @@ session_start();
                  $visibility      = $_POST['visibility'];
                  $commenting      = $_POST['commenting'];
                  $ads             = $_POST['ads'];
+                 $parent             = $_POST['parent'];
                  //Check the category name
                  $check = chekitem( "Name" , "categories" , $name );
                  if($check  == 0 ){
 
                      //Update the  database with This Information
                      $statement=$connection->prepare(
-                             "INSERT INTO categories (Name , Description  ,Ordering, Visibility , Allow_Comment , Allow_Ads ) 
-                                    VALUES(:the_name , :the_describe  ,:the_order , :the_visible , :the_comment , :the_ads)");
+                             "INSERT INTO categories (Name , Description , parent ,Ordering, Visibility , Allow_Comment , Allow_Ads) 
+                                    VALUES(:the_name , :the_describe ,:the_parent ,:the_order , :the_visible , :the_comment , :the_ads)");
                      $statement->execute(array(
 
                          // add to array key and value...
                         'the_name'      =>    $name ,
                         'the_describe'  =>    $description ,
-//                        'the_parent'    =>    $parent ,
+                        'the_parent'    =>    $parent ,
                         'the_order'     =>    $ordering ,
                         'the_visible'   =>    $visibility ,
                         'the_comment'   =>    $commenting ,

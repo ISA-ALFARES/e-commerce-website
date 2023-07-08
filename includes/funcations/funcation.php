@@ -33,7 +33,7 @@
 
         global $connection ;
 
-        $statement = $connection->prepare("SELECT * FROM categories ");
+        $statement = $connection->prepare("SELECT * FROM categories WHERE parent = 0");
 
         $statement->execute();
         $cats = $statement->fetchAll();

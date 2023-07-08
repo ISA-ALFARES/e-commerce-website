@@ -115,7 +115,7 @@
             'Allow Ads' => 'Allow Ads' ,
             'Allow Commenting' => 'Allow Commenting' ,
             'Visibility' => 'Visibility' ,
-            '' => '' ,
+            'CATIGORIES_CHILD' => 'Categories Child' ,
             '' => '' ,
             '' => '' ,
             //           END  Categories Pages Page   //
