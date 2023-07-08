@@ -10,11 +10,15 @@
 
         return $cats;
     }
-    function getItem($catID) {
+    function getItem($catID , $approve = NULL){
 
         global $connection ;
-
-        $statement = $connection->prepare("SELECT * FROM items  where Cat_ID = ? ");
+        if ($approve == NULL){
+            $sql =  "AND Approve = 1";
+        }else{
+            $sql = "NULL";
+        }
+        $statement = $connection->prepare("SELECT * FROM items  where Cat_ID = ? $sql");
 
         $statement->execute(array($catID));
 
@@ -89,11 +93,16 @@ function redirect_secces($themesg, $seconds = 3) {
 ** Function To Get All Records From Any Database Table
 */
 
-    function getAllFrom($field, $table, $where = NULL, $and = NULL, $ordering = "DESC") {
+    function getAllFrom($field, $table, $where = NULL, $and = NULL, $ordering = "DESC" , $approve = NULL) {
 
     global $connection;
 
-    $getAll = $connection->prepare("SELECT $field FROM $table $where $and ORDER BY  $ordering");
+    if ($approve == NULL){
+        $sql =  "Approve = 1";
+    }else{
+        $sql = "NULL";
+    }
+    $getAll = $connection->prepare("SELECT $field FROM $table WHERE $sql $and ORDER BY  $ordering");
 
     $getAll->execute();
 

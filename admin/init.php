@@ -23,7 +23,7 @@
             $language = 'english.php';
 
         }
-    include   $lang . $_SESSION['language']; // 1-Languages Directory --olwes firset file
+    include   $lang .$language; // 1-Languages Directory --olwes firset file
     include   $temp ."header.php";     // 2-header Directory
 
     //include navbar all pages Expect The one with $navbar variable

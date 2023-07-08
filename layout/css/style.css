@@ -69,6 +69,13 @@ a.dropdown-item {
 	margin-bottom: 20px;
 
 }
+.cart-descrip{
+	width: 20px;
+	max-height: 20px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 /* End categories page */
 /* Start navbar */
 .uber_bar{
@@ -240,6 +247,15 @@ label{
 	padding: 12px 15px;
 	border-left: 5px solid rgba(0, 128, 0, 0.74);
 }
+.not-approve{
+	position: absolute;
+	top: 25px;
+	background-color: #bd0808;
+	width: 150px;
+	left: 16px;
+
+}
+
 /* End myProfile page */
 /* Start edit form */
 

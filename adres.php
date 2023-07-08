@@ -13,7 +13,7 @@ if(isset($_SESSION['user'])  ){
     $page_title = 'Address'; // The page name
 
     include 'init.php';     //Bu dosyada, projedeki gerekli tüm dosyaları dahil ediyoruz ve bunları bir kez çağırıyoruz, örneğin başlık dosyası
-
+    print_r($_SESSION)  ;
     $do = isset($_GET['do']) ? $_GET['do']  : 'Mangae';   //başla manage sayfasi...
     if($do== "Mangae"){
 

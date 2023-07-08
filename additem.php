@@ -1,7 +1,7 @@
 <?php
 global $connection, $items;
 session_start();
-if (isset($_SESSION['user']) && isset($_SESSION['language'])){
+if (isset($_SESSION['user'])){
     global $temp;
     include  "init.php";
     print_r($_SESSION)  ;

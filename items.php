@@ -26,7 +26,7 @@ global $tpl, $connection, $items, $temp;
 							WHERE 
 								Item_ID = ?
 							AND 
-								Approve = 0");
+								Approve = 1");
 
 	// Execute Query
 	$stmt->execute(array($itemid));

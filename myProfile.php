@@ -64,7 +64,12 @@ if (isset($_SESSION['user'])){
                                         echo '<div class="box-information">';
                                             echo '<h5 class="font-weight-bold d-inline-block title-font-size ">'.$item['Name'].'</h5>';
                                             echo '<span class=" Description-font-size ">'.$item['Description'] .'</span>';
-                                            echo '<h4 class="text-dark font-weight-bold  ">'.$item['Price'].'<span class="text-dark money">'.lang("MONY").'</span>'.'</h4>';
+                                             echo '<h4 class="text-dark font-weight-bold  ">'.$item['Price'].'<span class="text-dark money">'.lang("MONY").'</span>'.'</h4>';
+                                                 if ($item['Approve'] == 0)
+                                                    {
+                                                        echo '<span class="text-white text-center not-approve">'.lang("NOT APPROVE").'</span>';
+
+                                                    }
                                         echo '</div>';
                                     echo '</div></a>';
                                 echo  '</div>';

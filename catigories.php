@@ -40,7 +40,7 @@ echo '<div class="categories-title"><h2 ></h2></div>';
                                                 echo '</div>';
                                                 echo '<div class="box-information ">';
                                                     echo '<h5 class="font-weight-bold d-inline-block title-font-size ">'.$item['Name'].'</h5>';
-                                                    echo '<span class=" Description-font-size  ">'.$item['Description'] .'</span>';
+                                                    echo '<span class=" Description-font-size cart-descrip ">'.$item['Description'] .'</span>';
                                                     echo '<h4 class="text-dark font-weight-bold  ">'.$item['Price'].'<span class="text-dark money ">'.lang("MONY").'</span>'.'</h4>';
                                                 echo '</div></a>';
                                                 echo '</div>';

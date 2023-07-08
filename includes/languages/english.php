@@ -37,6 +37,7 @@
             'ADDADDRESS'   =>  "Adres Ekle" ,
             'INSERTADDRES'   =>  "Adres Ekle" ,
             'Save'   =>  "Save" ,
+            'NOT APPROVE'   =>  "NOT APPROVE" ,
 
                 //End  NavbarPages
 

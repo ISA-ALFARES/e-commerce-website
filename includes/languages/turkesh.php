@@ -1,6 +1,7 @@
 <?php
     function lang($phrase){
         static $trlang = array(
+//           Start  NavbarPages
             'HOMEPAGE'          => "HomePage",
             'LOGIN'         => "Login" ,
             'MEMBERS'       => "Members" ,
@@ -28,11 +29,16 @@
             'LOGIN_SIGNUP'   =>  "Login|Signup" ,
             'ADD_NEW_ITEM'   =>  "Add Item" ,
             'MONY'   =>  "  $" ,
-            'My Profile'   =>  "Hisabım" ,
-            'Add addres'   =>  "adres ekle" ,
-            'New Item'   =>  "yeni ürün" ,
-            'My Items'   =>  "ürünlerim" ,
-            'ADD_TO_CARD'   =>  "Sepete ekle" ,
+            'My Profile'   =>  "My Profile" ,
+            'Add addres'   =>  "Add addres" ,
+            'New Item'   =>  "New Item" ,
+            'My Items'   =>  "My Items" ,
+            'ADD_TO_CARD'   =>  "Add To Cart" ,
+            'ADDADDRESS'   =>  "Adres Ekle" ,
+            'INSERTADDRES'   =>  "Adres Ekle" ,
+            'Save'   =>  "Save" ,
+            'NOT APPROVE'   =>  "NOT APPROVE" ,
+
 
         );
         return $trlang[$phrase];
