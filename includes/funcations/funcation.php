@@ -1,4 +1,34 @@
 <?php
+    function get_title(){
+
+        global $page_title ;
+
+        if(isset($page_title)){
+
+            echo lang($page_title);
+
+        }else{
+
+            echo 'Default';
+        }
+    }
+
+    /*
+    ** Get All Function v2.0
+    ** Function To Get All Records From Any Database Table
+    */
+     function getAllFrom($field, $table, $where = NULL, $and = NULL, $orderFiled = '' , $ordering = "DESC") {
+
+        global $connection;
+
+        $getAll = $connection->prepare("SELECT $field FROM $table WHERE $where $and ORDER BY $orderFiled  $ordering");
+
+        $getAll->execute();
+
+        $all = $getAll->fetchAll();
+
+        return $all;
+    }
     function getCat() {
 
         global $connection ;
@@ -88,29 +118,6 @@ function redirect_secces($themesg, $seconds = 3) {
 
 
 
-/*
-** Get All Function v2.0
-** Function To Get All Records From Any Database Table
-*/
-
-    function getAllFrom($field, $table, $where = NULL, $and = NULL, $ordering = "DESC" , $approve = NULL) {
-
-    global $connection;
-
-    if ($approve == NULL){
-        $sql =  "Approve = 1";
-    }else{
-        $sql = "NULL";
-    }
-    $getAll = $connection->prepare("SELECT $field FROM $table WHERE $sql $and ORDER BY  $ordering");
-
-    $getAll->execute();
-
-    $all = $getAll->fetchAll();
-
-    return $all;
-
-}
 
 
 
@@ -134,74 +141,5 @@ function redirect_secces($themesg, $seconds = 3) {
 
 
 
-
-
-
-function get_title(){
-
-              global $page_title ;
-
-              if(isset($page_title)){
-
-                echo lang($page_title);
-
-              }else{
-
-                echo 'Default';
-              }
-    }
-
-
-
-
-/*
-** Count Number Of Items Function v1.0
-** Function To Count Number Of Items Rows
-** $item = The Item To Count
-** $table = The Table To Choose From
- * $condition = The
-*/
-    function count_items( $item , $table ,$condition = '' ){
-
-      global $connection ;
-
-      $statement = $connection->prepare("SELECT COUNT($item) FROM $table $condition ");
-
-      $statement->execute();
-
-      return $statement->fetchColumn();
-    }
-    /*
-    ** Get Latest Records Function v1.0
-    ** Function To Get Latest Items From Database [ Users, Items, Comments ]
-    ** $select = Field To Select
-    ** $table = The Table To Choose From
-    ** $order = The Desc Ordering
-    ** $limit = Number Of Records To Get
-    */
-    function getLatest($select , $table , $order , $limit = 5 ){
-
-        global $connection ;
-
-        $statement=$connection->prepare("SELECT  $select  FROM $table ORDER BY  $order desc LIMIT $limit    ");
-
-        $statement->execute();
-
-        return $statement->fetchAll();
-    }
-    function getCount($column , $table){
-
-        global $connection ;
-
-        $statement = $connection->prepare("SELECT $column AS number FROM $table");
-        $statement->execute();
-        $result = $statement->fetch();
-        if ($result) {
-            echo $result['number'];
-        } else {
-            echo "No data found.";
-        }
-
-    }
 
 

@@ -9,7 +9,7 @@ include 'init.php';
         <?php
             echo '<div class="col-md-12">';
                 echo '<div class="row">';
-                    $allItems = getAllFrom('*', 'items', 'where Approve = 0', '', 'Item_ID');
+                    $allItems = getAllFrom('*', 'items', 'Approve = 1', '', 'Item_ID');
                     foreach ($allItems as $item) {
                         echo '<div class="col-sm-12 col-md-6   col-lg-3"">' ;
                                 echo '<a target="_blank" href="items.php?item_ID='.$item['Item_ID'].'" class="text-dark" style="text-decoration: none;"><div class="card item-box">';
