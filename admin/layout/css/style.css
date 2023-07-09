@@ -428,7 +428,8 @@ textarea,input:hover{
 }
 .child{
 	background-color: #578d21;
-	margin-left: 5px;
+	margin-left: 1px;
+	font-size: 13px;
 }
 /* End Category Page */
 /* Start items Page */

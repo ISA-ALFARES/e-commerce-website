@@ -62,21 +62,28 @@ session_start();
                                 echo lang('Delete')."</a>";
 
                                 echo "</div>";
-                                    echo "<h3>" . $cat['Name'] . '</h3>';
+                                    echo "<h3 class='d-inline-block mr-2 '>" . $cat['Name'] . '</h3>';
                                     echo "<div class='full-view'>";
                                         echo "<p>"; if($cat['Description'] == '') { echo 'This category has no description'; } else { echo $cat['Description']; } echo "</p>";
                                         if($cat['Visibility'] == 1) { echo '<span class="visibility cat-span"><i class="fa fa-eye"></i>';echo lang("Hidden"). '</span>'; }
                                         if($cat['Allow_Comment'] == 1) { echo '<span class="commenting cat-span"><i class="fa fa-close"></i>';echo lang("Comment Disabled"). '</span>'; }
                                         if($cat['Allow_Ads'] == 1) { echo '<span class="advertises cat-span"><i class="fa fa-close"></i>';echo lang("Ads Disabled"). '</span>'; }
-                                $catsChild = getAllFrom("*" , "categories" , "parent = {$cat['ID']}" ,"","ID");
-                                foreach ( $catsChild  as $child) {
-
-                                    if (!empty($catsChild)){
-                                        echo '<span class="child text-white cat-span">';echo $child['Name']. '</span>';
-                                    }
-                                }
                                     echo "</div>";
+                                $catsChild = getAllFrom("*" , "categories" , "parent = {$cat['ID']}" ,"","ID");
+                                    if (!empty($catsChild)){
+                                        echo "<h5 class=' mr-2 mt-2  '>" .lang('CATIGORIES_CHILD'). '</h5>';
+                                    }
+                                foreach ( $catsChild  as $child) {
+                                    echo '<div class="child-link">';
+                                        echo '<span class="child text-white cat-span">';echo $child['Name']. '</span>';
+                                        echo "<a href='catigories.php?do=Delete&catid=" . $child['ID'] . "' class='text-danger show-delete confirm'>";
+                                        echo lang('Delete')."</a>";
+                                        echo "<a href='catigories.php?do=Edit&catid=".$child['ID']."' class='ml-2 text-primary show-delete '>";
+                                        echo lang('Edit') ."</a><br>";
+                                    echo '</div>';
 
+
+                                }
                                 echo "</div>";
                                 echo '<hr>';
                             }
