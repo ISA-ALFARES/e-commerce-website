@@ -116,7 +116,8 @@
             'Allow Commenting' => 'Allow Commenting' ,
             'Visibility' => 'Visibility' ,
             'CATIGORIES_CHILD' => 'Categories Child' ,
-            '' => '' ,
+
+            'None' => 'None' ,
             '' => '' ,
             //           END  Categories Pages Page   //
             //           Start  Categories Pages Page   //

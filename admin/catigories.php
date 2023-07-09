@@ -189,7 +189,6 @@ session_start();
                  //Check the category name
                  $name            = $_POST['name'];
                  $description     = $_POST['description'];
-//                 $parent          = $_POST['parent'];
                  $ordering        = $_POST['ordering'];
                  $visibility      = $_POST['visibility'];
                  $commenting      = $_POST['commenting'];
@@ -289,19 +288,26 @@ session_start();
                                      </div>
                                  </div>
                                  <!-- End  Ordering field -->
-
-                              <!--
-                                    <div class="form-group">
+                                 <!-- Start  parent field -->
+                                 <div class="form-group">
                                      <label for="parent" class="col-sm-2 control-label">Parent</label>
                                      <div class="col-sm-10">
-                                         <select id="parent" name="parent">
-                                             <option value="0">None</option>
-                                             <option value="1">Category 1</option>
-                                             <option value="2">Category 2</option>
+                                         <select class="form-control  " id="parent" name="parent">
+                                             <option value="0"><?php echo lang('None') ?></option>
+                                             <?php
+                                             $allCatigore = getAllFrom("*", "categories", "parent = 0" ,"", "ID");
+                                             foreach ($allCatigore as $c) {
+                                                 echo '<option value="'.$c['ID'].'"';
+
+                                                 if($cat['parent'] == $c['ID']){ echo 'selected' ;}
+
+                                                 echo '>'.$c['Name'].'</option>';
+                                             }
+                                             ?>
                                          </select>
                                      </div>
                                  </div>
-                              -->
+                                 <!-- End  parent field -->
                                  <!-- Start  Visibility field -->
                                  <div class="form-group">
                                      <label for="visibility" class="col-sm-2 control-label">Visibility</label>
@@ -365,7 +371,7 @@ session_start();
                  $cat_id          = $_POST['cat_id'];
                  $name            = $_POST['name'];
                  $description     = $_POST['description'];
-//                 $parent          = $_POST['parent'];
+                 $parent          = $_POST['parent'];
                  $ordering        = $_POST['ordering'];
                  $visibility      = $_POST['visibility'];
                  $commenting      = $_POST['commenting'];
@@ -377,13 +383,14 @@ session_start();
                          "UPDATE categories SET 
                                                       Name          = ? ,
                                                       Description   = ?  ,
+                                                      parent   = ?  ,
                                                       Ordering      = ?, 
                                                       Visibility    = ? ,
                                                       Allow_Comment = ? , 
                                                       Allow_Ads     = ? 
                                                     WHERE ID = ?");
 
-                     $statement->execute(array($name , $description , $ordering , $visibility , $commenting , $ads ,$cat_id));
+                     $statement->execute(array($name , $description ,$parent, $ordering , $visibility , $commenting , $ads ,$cat_id));
                      $count = $statement->rowCount();
                      if($count > 0){
 
