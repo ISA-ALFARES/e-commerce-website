@@ -114,7 +114,16 @@ function redirect_secces($themesg, $seconds = 3) {
     exit();
 }
 
+function redirect_home($themesg , $secends =3,$page_adress = 'index.php' ){
 
+    echo  $themesg;
+
+    echo '<div class="alert alert-info"> You will be redirected to the previous page after seconds ' . $secends.'</div>';
+
+    header("refresh:$secends;url=$page_adress");
+
+    exit();
+}
 
 
 

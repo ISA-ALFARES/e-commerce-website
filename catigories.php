@@ -47,7 +47,7 @@ echo '<div class="categories-title"><h2>catigores</h2></div>';
                                                             echo '<h4 class="text-dark font-weight-bold  ">'.$item['Price'].'<span class="text-dark money ">'.lang("MONY").'</span>'.'</h4>';
                                                         echo '</div></a>';
                                                         echo '</div>';
-                                                        echo '<a href="cards.php?item_ID='.$item['Item_ID'].'" class="btn btn-primary" >'.lang("ADD_TO_CARD").'</a>';
+                                                        echo '<a href="cards.php?do=Add" class="cart-button ml-5 " ><span>'.lang("ADD_TO_CARD").'</span></a>';
                                                     echo '</div>';
                                         echo '</div>';
                                     }

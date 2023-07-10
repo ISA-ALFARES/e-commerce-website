@@ -22,9 +22,13 @@
         $sessionUser = $_SESSION['user'];
 
 //            $userStatus = CheckUserStatus($_SESSION['user']);
+
             ?>
             <div class="uber_bar">
+                <?php
+                echo '<a href="cards.php?do=Manage" class="cart-button ml-5 " ><span>'.lang("ADD_TO_CARD").'</span></a>';
 
+                ?>
                 <div class="d-flex justify-content-end">
                     <div class="dropdown">
                         <button class="btn  mr-2 bg-transparent dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">

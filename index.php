@@ -27,7 +27,7 @@ include 'init.php';
                                                 echo '<span class=" Description-font-size  ">'.$item['Description'] .'</span>';
                                                 echo '<h4 class="text-dark font-weight-bold  ">'.$item['Price'].'<span class="text-dark money ">'.lang("MONY").'</span>'.'</h4>';
                                             echo '</div>';
-                                            echo '<input   class="btn btn-primary   add-card  ml-5 " type="submit"  value="'.lang("ADD_TO_CARD").'">';
+                                            echo '<a href="cards.php?do=Add&item_ID='.$item['Item_ID'].'" class="cart-button ml-5 " ><span>'.lang("ADD_TO_CARD").'</span></a>';
                                         echo '</div>';
                                 echo '</div></a>';
                             echo '</div>';

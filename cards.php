@@ -1,85 +1,127 @@
 <?php
-global $tpl, $connection, $items, $temp;
+global $tpl, $connection, $items, $temp, $do;
 ob_start();
 session_start();
-$pageTitle = 'Show Items';
-include 'init.php';
+    if (isset($_SESSION['user'])){
+    $pageTitle = 'Show Items';
+    include 'init.php';
+        $do = isset($_GET['do']) ? $_GET['do'] : 'Manage';
+        if (isset($_GET['item_ID']) && is_numeric($_GET['item_ID']) && isset($_SESSION['usrID']) && is_numeric($_SESSION['usrID']) ){
+            $itemID = $_GET['item_ID'];
+            $userID = $_SESSION['usrID'];
+        }
+        if ( $do == "Manage"){
+            ?>
+            <nav class="navbar  cartnav navbar-expand-lg navbar-light bg-white">
+                <div class="container">
+                    <a class="navbar-brand" href="#"><i class="fa fa-shopping-cart text-colors"></i>cart</a>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Delte</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="container mt-md-4">
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="card">
+                            <div class="card">
+                                <div class="card-header">
+                                    <i class="fa fa-shop text-colors"></i> Satici
+                                    <div class="option float-right text-right">
+                                        <i class="fa fa-shipping-fast text-colors"></i> <span class="text-colors">argobedava</span>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-md-1 mb-1 d-flex align-items-center">
+                                            <!-- العنصر الأول - مربع صغير يمكن الضغط عليه -->
+                                            <div class="form-check ml-3">
+                                                <input class="form-check-input checkbox1 "    type="checkbox">
+                                            </div>
+                                        </div>
 
-// Check If Get Request item Is Numeric & Get Its Integer Value
-$itemid = isset($_GET['item_ID']) && is_numeric($_GET['item_ID']) ? intval($_GET['item_ID']) : 0;
+                                        <div class="col-md-2 mb-2">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <!-- العنصر الثاني - صورة داخل الـ card -->
+                                                    <img class="img-fluid rounded" src="admin/uploads/avatars/b3.jpg" alt="صورة">
+                                                </div>
+                                            </div>
+                                        </div>
 
-// Select All Data Depend On This ID
-$stmt = $connection->prepare("SELECT 
-								items.*, 
-								categories.Name AS category_name, 
-								users.Username 
-							FROM 
-								items
-							INNER JOIN 
-								categories 
-							ON 
-								categories.ID = items.Cat_ID 
-							INNER JOIN 
-								users 
-							ON 
-								users.UserID = items.Member_ID 
-							WHERE 
-								Item_ID = ?
-							AND 
-								Approve = 0");
+                                        <div class="col-md-4 mb-4">
+                                            <!-- العنصر الثالث - نص -->
+                                            <u>blablablablablablblablablablablablablablablablablablablablablablablabla</u>
+                                        </div>
+                                        <div class="col-md-2 mb-2">
+                                            <!-- العنصر الرابع - رقم قابل للزيادة والنقصان -->
+                                            <input type="number" min="0" max="100" value="1" class="custom-input">
+                                        </div>
+                                        <div class="col-md-2 mb-2">
+                                            <!-- العنصر الخامس - السعر -->
+                                            <span class="text-colors font-weight-bold">300 TL</span>
+                                        </div>
+                                        <div class="col-md-1 mb-1">
+                                            <!-- العنصر السادس - رابط مع كلمة -->
+                                            <a href="#"><i class="fa fa-trash-alt text-colors"></i> </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <!-- المحتوى العمودي -->
+                                <p class="text-colors"> urunler</p>
+                                <h3 class="text-center font-weight-bold text-colors"> 300 TL</h3>
+                                <p>أجرة التوصيل</p>
+                                <button class="cart-button"><span>أضف إلى السلة</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php
+        }elseif ($do == "Add" && isset($itemID)  ){
+            $cartitems = getAllFrom("*", "items" , "  Item_ID = {$itemID} " ,' AND Approve = 1', "Item_ID");
+            foreach ($cartitems as $cartitem) {
 
-// Execute Query
-$stmt->execute(array($itemid));
+             $Item_ID       =  $cartitem['Item_ID'];
+             $Description   = $cartitem['Description'];
+             $Name          =  $cartitem['Name'];
+             $Price         =  $cartitem['Price'];
+             $Member_ID     =  $cartitem['Member_ID'];
+             $itemAvatar    =  $cartitem['itemAvatar'];
 
-$count = $stmt->rowCount();
+            }
+            $statement = $connection->prepare("INSERT INTO cart (CartDate, Item_id, User_id, Price) VALUES (NOW(), :insert_item_id, :insert_user_id, :insert_price)");
 
-if ($count > 0) {
+            $statement->execute(array(
+                'insert_item_id' => $Item_ID ,
+                'insert_user_id' => $userID ,
+                'insert_price' => $Price));
 
-    // Fetch The Data
-    $item = $stmt->fetch();
-    ?>
-    <h1 class="text-center text-dark"><?php echo $item['Name'] ?></h1>
-    <div class="container">
-    <div class="row">
-        <div class="col-md-3">
-            <img class="img-responsive img-thumbnail center-block " src="./layout/images/b3.jpg" alt="" />
-        </div>
-        <div class="col-md-9 item-info">
-            <h2><?php echo $item['Name'] ?></h2>
-            <p><?php echo $item['Description'] ?></p>
-            <ul class="list-unstyled">
-                <li>
-                    <i class="fa fa-calendar fa-fw"></i>
-                    <span>Added Date</span> : <?php echo $item['Add_Data'] ?>
-                </li>
-                <li>
-                    <i class="fa fa-magic  fa-fw"></i>
-                    <span>Price</span> : <?php echo $item['Price'] ?>
-                </li>
-                <li>
-                    <i class="fa fa-building fa-fw"></i>
-                    <span>Made In</span> : <?php echo $item['Country'] ?>
-                </li>
-                <li>
-                    <i class="fa fa-tags fa-fw"></i>
-                    <span>Category</span> : <a href="catigories.php?cat_id=<?php echo $item['Cat_ID'] ?>"><?php echo $item['category_name'] ?></a>
-                </li>
-                <li>
-                    <i class="fa fa-user fa-fw"></i>
-                    <span>Added By</span> : <a href="#"><?php echo $item['Username'] ?></a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <hr class="custom-hr">
-    <?php
+            echo '<div class="container">' ;
+            $themesg     ='<div class=" alert alert-info">'.$statement->rowCount() . 'Record updated...</div>' ;
+            $page_adress = 'cards.php?do=Manage';
+            redirect_home($themesg,3,$page_adress);
+            echo '</div>';
 
+        }elseif ($do == "Delete"){
+
+            echo "add page";
+
+        }else{
+            echo "yalnis bir sayfa....!";
+        }
     }else{
-
-        header('Location:login.php'); // This page does not exist. Invalid login
-        exit();
-
+        echo "giris yapmalisiniz...!!";
     }
-    include $temp."footer.php";
-    ob_end_flush();
+//print_r($_SESSION);
+include $temp."footer.php";
+ob_end_flush();
 
