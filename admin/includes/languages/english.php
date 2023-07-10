@@ -179,6 +179,12 @@
             'User name' => 'User name' ,
             '' => '' ,
             //           End  login Pages Page   //
+            'Separate Tags With Comma' => 'Tags' ,
+            '' => '' ,
+            '' => '' ,
+            '' => '' ,
+            '' => '' ,
+            '' => '' ,
 
         );
         return $lang[$phrase];

@@ -71,16 +71,16 @@ global $tpl, $connection, $items, $temp;
                             <li class="tags-items">
                                 <i class="fa fa-user fa-fw"></i>
                                 <span>Tags</span> :
-    <!--                            --><?php
-    //                                $allTags = explode(",", $item['tags']);
-    //                                foreach ($allTags as $tag) {
-    //                                    $tag = str_replace(' ', '', $tag);
-    //                                    $lowertag = strtolower($tag);
-    //                                    if (! empty($tag)) {
-    //                                        echo "<a href='tags.php?name={$lowertag}'>" . $tag . '</a>';
-    //                                    }
-    //                                }
-    //                            ?>
+                                    <?php
+                                    $allTags = explode(",", $item['brand']);
+                                    foreach ($allTags as $tag) {
+                                        $tag = str_replace(' ', '', $tag);
+                                        $lowertag = strtolower($tag);
+                                        if (! empty($tag)) {
+                                            echo "<a href='tags.php?name={$lowertag}'>" . $tag . '</a>';
+                                        }
+                                    }
+                                  ?>
                             </li>
                         </ul>
                     </div>

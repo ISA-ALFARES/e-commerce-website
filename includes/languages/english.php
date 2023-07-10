@@ -40,6 +40,7 @@
             'NOT APPROVE'   =>  "NOT APPROVE" ,
 
                 //End  NavbarPages
+            'Separate Tags With Comma' => 'Tags' ,
 
             //Start Member titles....
         );

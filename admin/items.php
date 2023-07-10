@@ -162,11 +162,13 @@ session_start();
                         <select  class="form-control selection " name="catigore">
                             <option value="0"><?php echo lang('Catigore') ?></option>
                             <?php
-                            $stetment=$connection->prepare("SELECT * FROM categories");
-                            $stetment ->execute();
-                            $cats =$stetment ->fetchAll();
+                            $cats =  getAllFrom("*" , "categories" , "parent = 0" , "" , "ID");
                             foreach ($cats as $cat ){
                                 echo  "<option value='".$cat['ID']."'>" . $cat['Name'] . "</option>";
+                                $childCats = getAllFrom("*", "categories", "parent = {$cat['ID']}", "", "ID");
+                                foreach ($childCats as $child) {
+                                    echo "<option value='" . $child['ID'] . "'>--- " . $child['Name'].'('.$cat['Name'].')'."</option>";
+                                }
                             }
                             ?>
 
@@ -199,9 +201,18 @@ session_start();
                                 placeholder=""
                                 value=""
                                 required="required"
-                        <span class="axstrisx">*</span>
                     </div>
                     <!-- End avatar  field -->
+                    <!-- Start Tags Field -->
+                    <i class="fa-solid fa-caret-right icons"></i>
+                    <div class="form-group">
+                            <input
+                                    class="form-control"
+                                    type="text"
+                                    name="tags"
+                                    placeholder=<?php echo lang('Separate Tags With Comma') ?> />
+                    </div>
+                    <!-- End Tags Field -->
                     <!-- Start Save  field -->
                     <input
                         class="btn btn-success btn-block btn-add-item"
@@ -340,6 +351,18 @@ session_start();
                             </select>
                         </div>
                         <!-- End member Field -->
+                        <!-- Start tags name field -->
+                        <i class="fa-solid fa-caret-right icons"></i>
+                        <div class="form-group">
+                            <input
+
+                                    class="form-control"
+                                    type="text"
+                                    name="tags"
+                                    placeholder="    Enter the Tags...! "
+                                    value="<?php echo $items['brand'] ?>"
+                        </div>
+                        <!-- End tags field -->
                         <!-- Start Save  field -->
                         <br>
                         <input
@@ -418,6 +441,7 @@ session_start();
                 $country         = $_POST['country'];
                 $cat             = $_POST['catigore'];
                 $user            = $_POST['member'];
+                $tags            = $_POST['tags'];
 
                 $fromError = array();
 
@@ -453,17 +477,18 @@ session_start();
                     $stetment=$connection->prepare("UPDATE
                                                                     items
                                                                SET
-                                                                   Name = ? ,
-                                                                   Description = ? ,
-                                                                   Price = ? ,
-                                                                   Status = ? ,
-                                                                   Country = ? ,
-                                                                   Cat_ID = ? ,
-                                                                   Member_ID = ? 
+                                                                   Name = ?          ,
+                                                                   Description = ?   ,
+                                                                   Price = ?         ,
+                                                                   Status = ?        ,
+                                                                   Country = ?       ,
+                                                                   Cat_ID = ?        ,
+                                                                   Member_ID = ?     ,
+                                                                   brand = ? 
                                                                WHERE Item_ID = ?");
-                    $stetment->execute(array($name,$description,$price,$status,$country,$cat,$user,$item_ID));
+                    $stetment->execute(array($name,$description,$price,$status,$country,$cat,$user,$item_ID,$tags));
                     echo '<div class="container">' ;
-                    $themesg     ='<div class=" alert alert-info">'.$stetment->rowCount().lang('').'</div>' ;
+                    $themesg     ='<div class=" alert alert-info">'.$stetment->rowCount().lang('Record updated...').'</div>' ;
                     $page_adress = 'items.php';
                     redirect_home($themesg,2,$page_adress);
                     echo '</div>';
@@ -495,6 +520,7 @@ session_start();
                 $country         = $_POST['country'];
                 $cat             = $_POST['catigore'];
                 $user            = $_POST['member'];
+                $tags            = $_POST['tags'];
 
                 $fromError = array();
 
@@ -546,18 +572,19 @@ session_start();
                     move_uploaded_file($itemAvatarTmp , "uploads\avatars\\".$itemavatar);
 
                     $stetment=$connection->prepare("INSERT INTO
-                        items(Name , Description , Price , Status , Country  , Add_Data  , Cat_ID , Member_ID ,itemAvatar )
-                        VALUES (:zname ,:zdescription ,:zprice ,:zstatus, :zcountry ,now()  ,:zcatigores ,:zmember,:zitemAvatar)");
+                        items(Name , Description , Price , Status , Country  , Add_Data  , Cat_ID , Member_ID ,brand,itemAvatar )
+                        VALUES (:zname ,:zdescription ,:zprice ,:zstatus, :zcountry ,now()  ,:zcatigores ,:zmember,:zbrand,:zitemAvatar)");
                     $stetment->execute(array(
 
-                        'zname'          =>  $name ,
-                        'zdescription'   =>  $description ,
-                        'zprice'         =>  $price ,
-                        'zstatus'        =>  $status ,
-                        'zcountry'       =>  $country ,
-                        'zcatigores'      => $cat ,
-                        'zmember'      => $user ,
-                        'zitemAvatar'      => $itemavatar
+                        'zname'              =>     $name           ,
+                        'zdescription'       =>     $description    ,
+                        'zprice'             =>     $price          ,
+                        'zstatus'            =>     $status         ,
+                        'zcountry'           =>     $country        ,
+                        'zcatigores'         =>     $cat            ,
+                        'zmember'            =>     $user           ,
+                        'zbrand'              =>     $tags           ,
+                        'zitemAvatar'        =>     $itemavatar
                     ));
                     echo '<div class="container">' ;
                     $themesg     ='<div class=" alert alert-info">'.$stetment->rowCount().lang('Record updated...').'</div>' ;

@@ -23,6 +23,7 @@ if (isset($_SESSION['user'])){
         $status      = filter_var($_POST['status'] ,FILTER_SANITIZE_STRING);;
         $country     = filter_var($_POST['country'] ,FILTER_SANITIZE_STRING);
         $catigore    = filter_var($_POST['catigore'] ,FILTER_SANITIZE_STRING);
+        $tags        = filter_var($_POST['tags'] ,FILTER_SANITIZE_STRING);
 
         $fromError = array();
 
@@ -62,8 +63,8 @@ if (isset($_SESSION['user'])){
             move_uploaded_file($itemAvatarTmp , "admin/uploads\avatars\\".$avatar);
 
             $stetment=$connection->prepare("INSERT INTO 
-                        items(Name , Description , Price , Status , Country  , Add_Data ,Cat_ID ,Member_ID ,itemAvatar )
-                        VALUES (:zname ,:zdescription ,:zprice ,:zstatus, :zcountry ,now() ,:zcat,:zmember ,:zitemAvatar)");
+                        items(Name , Description , Price , Status , Country  , Add_Data ,Cat_ID ,Member_ID ,brand,itemAvatar )
+                        VALUES (:zname ,:zdescription ,:zprice ,:zstatus, :zcountry ,now() ,:zcat,:zmember ,:zbrand,:zitemAvatar)");
             $stetment->execute(array(
 
                 'zname'          =>  $name ,
@@ -73,6 +74,7 @@ if (isset($_SESSION['user'])){
                 'zcountry'       =>  $country ,
                 'zcat'           =>  $catigore ,
                 'zmember'           => $_SESSION['usrID'] ,
+                'zbrand'           => $tags ,
                 'zitemAvatar'   =>  $avatar
             ));
             if ($stetment) {
@@ -85,7 +87,7 @@ if (isset($_SESSION['user'])){
 
     }
     ?>
-    <h1 class="text-center"><?php echo lang("ADD_NEW_ITEM")?></h1>';
+    <h1 class="text-center text-dark"><?php echo lang("ADD_NEW_ITEM")?></h1>';
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -184,9 +186,19 @@ if (isset($_SESSION['user'])){
                                                     placeholder=""
                                                     value=""
                                                     required="required"
-                                            <span class="axstrisx">*</span>
+                                            <span class=""></span>
                                         </div>
                                         <!-- End avatar  field -->
+                                        <!-- Start Tags Field -->
+                                        <i class="fa-solid fa-caret-right icons"></i>
+                                        <div class="form-group">
+                                            <input
+                                                    class="form-control"
+                                                    type="text"
+                                                    name="tags"
+                                                    placeholder=<?php echo lang('Separate Tags With Comma') ?> />
+                                        </div>
+                                        <!-- End Tags Field -->
                                         <!-- Start Save  field -->
                                         <input
                                                 class="btn btn-success btn-block btn-add-item"
