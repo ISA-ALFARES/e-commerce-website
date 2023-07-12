@@ -95,6 +95,7 @@
         $statement->execute(array($where_value));
 
         $count = $statement->rowCount();
+
         return $count;
     }
 
@@ -124,6 +125,18 @@ function redirect_home($themesg , $secends =3,$page_adress = 'index.php' ){
 
     exit();
 }
+function chekNewcart($select,$from,$where,$where_value) {
+
+    global $connection ;
+
+    $statement = $connection->prepare("SELECT $select FROM $from  WHERE $where = ? ");
+
+    $statement->execute(array($where_value));
+    $count = $statement->rowCount();
+
+    return $count;
+}
+
 
 
 
