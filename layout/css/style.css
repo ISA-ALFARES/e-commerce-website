@@ -81,10 +81,64 @@ a.dropdown-item {
 /* Start navbar */
 .uber_bar{
 	padding-right: 10%;
-	margin: 20px 0px;
+	margin: 5px 0px;
 }
 .box-information {
 	padding: 10px 24px;
+}
+.uber_bar {
+	background-color: #f8f9fa;
+	padding: 10px;
+}
+
+.d-flex {
+	display: flex;
+}
+
+.justify-content-between {
+	justify-content: space-between;
+}
+
+.align-items-center {
+	align-items: center;
+}
+
+.website-name span {
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.search-field {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.search-field input[type="text"] {
+	padding: 6px 12px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+.search-field button {
+	padding: 6px 12px;
+	background-color: #007bff;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.user-info {
+	display: flex;
+	align-items: center;
+}
+
+.store-name {
+	font-size: 35px;
+	font-weight: bold;
+	color: #0080ff;
+	font-family: Arial, sans-serif;
 }
 
 
@@ -504,4 +558,9 @@ textarea,input:hover{
 	opacity: 1;
 	right: 0;
 }
+.zoomed-button-sepete:hover span {
+	padding-right: 10px;
+}
+
+
 /*end cart page*/

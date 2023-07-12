@@ -24,28 +24,42 @@
 //            $userStatus = CheckUserStatus($_SESSION['user']);
 
             ?>
-            <div class="uber_bar">
-                <?php
-                echo '<a href="cards.php?do=Manage" class="cart-button ml-5 " ><span>'.lang("ADD_TO_CARD").'</span></a>';
+        <div class="uber_bar">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="">
+                    <span class="store-name m-5">kısayol</span>
+                </div>
 
-                ?>
-                <div class="d-flex justify-content-end">
+                <div class="search-bar">
+                    <div class="search-field">
+                        <input type="text" placeholder="Burda Ara">
+                        <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+
+                <div class="user-info">
+                    <a href="cards.php?do=Manage" class="cart-button mr-2"><span><i class="fa fa-shopping-cart"></i> Sepetim</span></a>
+
                     <div class="dropdown">
-                        <button class="btn  mr-2 bg-transparent dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn btn-outline-primary btn-lg dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                             <?php echo $sessionUser ?>
                         </button>
+
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <li><a class="dropdown-item text-dark" href="myProfile.php"><?php echo lang('My Profile')?></a></li>
                             <li><a class="dropdown-item text-dark" href="adres.php?do=Add"><?php echo lang('Add addres')?></a></li>
-                            <li><a class="dropdown-item  text-dark" href="additem.php"><?php echo lang('New Item')?></a></li>
-                            <li><a class="dropdown-item  text-dark" href="myProfile.php#my-ads"><?php echo lang('My Items')?></a></li>
-                            <li><a class="dropdown-item  text-dark" href="logout.php">Logout</a></li>
+                            <li><a class="dropdown-item text-dark" href="additem.php"><?php echo lang('New Item')?></a></li>
+                            <li><a class="dropdown-item text-dark" href="myProfile.php#my-ads"><?php echo lang('My Items')?></a></li>
+                            <li><a class="dropdown-item text-dark" href="logout.php">Logout</a></li>
                         </ul>
                     </div>
+
                     <img class="my-image img-thumbnail rounded-circle" src="../../layout/images/b5.jpg" alt="">
                 </div>
-
             </div>
+        </div>
+
+
 
         <?php
     }else{ ?>

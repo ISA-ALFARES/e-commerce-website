@@ -49,7 +49,7 @@ session_start();
                                     <div class="card-header">
                                         <i class="fa fa-shop text-colors"></i> <?php  echo  $cart['Username']; ?>
                                         <div class="option float-right text-right">
-                                            <i class="fa fa-shipping-fast text-colors"></i> <span class="text-colors">kargobedava</span>
+                                            <i class="fa fa-shipping-fast text-success"></i> <span class="text-success">Kargo Bedava</span>
                                         </div>
                                     </div>
                                     <div class="card-body">
@@ -116,7 +116,7 @@ session_start();
                             <div class="card custom-card">
                                 <div class="card-body">
                                     <!-- المحتوى العمودي -->
-                                    <p class="text-colors"> urunler</p>
+                                    <p class="text-colors mb-3 ">ÖDENECEK TUTAR</p>
                                     <h3 class="text-center font-weight-bold text-colors">
                                         <?php
                                         $totalPrice = 0;
@@ -126,12 +126,22 @@ session_start();
                                             $totalPrice += $price;
                                         }
 
-                                        echo $totalPrice;
-                                        ?>
+                                        if ($totalPrice >= 150){
 
-                                        </h3>
-                                    <p class="text-success">Kargo bedava </p>
-                                    <a href="order.php?cartid=<?php echo  $cartid ?>" class="cart-button"><span>Sepeti Onayla</span></a>
+                                            echo $totalPrice ." TL";
+                                            echo '</h3>';
+                                            echo'<p class="text-success ml-2">Kargo Bedava</p>';
+
+                                        }else{
+
+                                            $kargo = 20 ;
+                                            echo $totalPrice += $kargo ,' TL';
+                                            echo '</h3>';
+                                            echo'<p class="text-success">Kargo Ucreti  20 TL</p>';
+
+                                        }
+                                        ?>
+                                        <a href="order.php?cartid=<?php echo $cartid ?>" class="cart-button  zoomed-button-sepete"><span>Sepeti Onayla</span></a>
                                 </div>
                             </div>
                         </div>
