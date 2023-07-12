@@ -9,6 +9,8 @@ global $connection, $temp, $do;
 session_start();
 
 if(isset($_SESSION['user'])  ){
+    global $userID;
+    $userID=$_SESSION['usrID'];
 
     $page_title = 'Address'; // The page name
 
@@ -26,10 +28,70 @@ if(isset($_SESSION['user'])  ){
                 <!-- Start    -->
                 <div class="form-group">
                     <input
+                            class="form-control"
+                            type="text"
+                            name="ad"
+                            placeholder="ad ve soyadınız giriniz.."
+                            value=""
+                            required="required">
+                    <span class="axstrisx">*</span>
+                </div>
+                <!-- End    -->
+                <!-- Start    -->
+                <div class="form-group">
+                    <input
+                            class="form-control"
+                            type="text"
+                            name="telefon"
+                            placeholder="Telefon "
+                            value=""
+                            required="required">
+                    <span class="axstrisx">*</span>
+                </div>
+                <!-- End    -->
+                <!-- Start    -->
+                <div class="form-group">
+                    <input
+                            class="form-control"
+                            type="text"
+                            name="il"
+                            placeholder="il"
+                            value=""
+                            required="required">
+                    <span class="axstrisx">*</span>
+                </div>
+                <!-- End    -->
+                <!-- Start    -->
+                <div class="form-group">
+                    <input
+                            class="form-control"
+                            type="text"
+                            name="ilce"
+                            placeholder="ilçe!"
+                            value=""
+                            required="required">
+                    <span class="axstrisx">*</span>
+                </div>
+                <!-- End    -->
+                <!-- Start    -->
+                <div class="form-group">
+                    <input
+                            class="form-control"
+                            type="text"
+                            name="mahalle"
+                            placeholder="Mahalle!"
+                            value=""
+                            required="required">
+                    <span class="axstrisx">*</span>
+                </div>
+                <!-- End    -->
+                <!-- Start    -->
+                <div class="form-group">
+                    <input
                         class="form-control"
                         type="text"
-                        name="Sokak"
-                        placeholder="Sokak no "
+                        name="sokak"
+                        placeholder="Sokak "
                         value=""
                         required="required">
                     <span class="axstrisx">*</span>
@@ -40,44 +102,8 @@ if(isset($_SESSION['user'])  ){
                     <input
                         class="form-control"
                         type="text"
-                        name="ilçe"
-                        placeholder="'ilçe!"
-                        value=""
-                        required="required">
-                    <span class="axstrisx">*</span>
-                </div>
-                <!-- End    -->
-                <!-- Start    -->
-                <div class="form-group">
-                    <input
-                        class="form-control"
-                        type="text"
-                        name="il"
-                        placeholder="il"
-                        value=""
-                        required="required">
-                    <span class="axstrisx">*</span>
-                </div>
-                <!-- End    -->
-                <!-- Start    -->
-                <div class="form-group">
-                    <input
-                        class="form-control"
-                        type="text"
-                        name="Posta"
+                        name="posta"
                         placeholder="Posta Code"
-                        value=""
-                        required="required">
-                    <span class="axstrisx">*</span>
-                </div>
-                <!-- End    -->
-                <!-- Start    -->
-                <div class="form-group">
-                    <input
-                        class="form-control"
-                        type="text"
-                        name="Telefon"
-                        placeholder="Telefon"
                         value=""
                         required="required">
                     <span class="axstrisx">*</span>
@@ -102,12 +128,16 @@ if(isset($_SESSION['user'])  ){
 
             //Get  Variables from the from....
 
-            $sokak = filter_var($_POST ['Sokak'],FILTER_SANITIZE_STRING);
-            $ilce  = filter_var($_POST['ilçe'],FILTER_SANITIZE_STRING);
-            $il  = filter_var($_POST['il'],FILTER_SANITIZE_STRING);
-            $posta  = filter_var($_POST['Posta'],FILTER_SANITIZE_STRING);
-            $telefon  = filter_var($_POST['Telefon'],FILTER_SANITIZE_STRING);
-            $formNameError = array() ;
+            $ad             = filter_var($_POST ['ad'],     FILTER_SANITIZE_STRING);
+            $telefon        = filter_var($_POST ['telefon'],FILTER_SANITIZE_NUMBER_INT);
+            $il             = filter_var($_POST ['il'],     FILTER_SANITIZE_STRING);
+            $ilce           = filter_var($_POST ['ilce'],   FILTER_SANITIZE_STRING);
+            $mahalle        = filter_var($_POST ['mahalle'],FILTER_SANITIZE_STRING);
+            $sokak          = filter_var($_POST ['sokak']  );
+            $posta          = filter_var($_POST ['posta'],  FILTER_SANITIZE_NUMBER_INT);
+
+
+            $formNameError  = array() ;
 
 
             if( ! empty($formNameError)) {
@@ -125,20 +155,23 @@ if(isset($_SESSION['user'])  ){
                 //Checking whether the entered name exists in the database or not for funcation
 
                     //Update the  database with This Information
-                    $stetment = $connection->prepare("INSERT INTO  addresses ( Street , City , Country, Posta_code ,Phone ) VALUES( :insert_sokak , :insert_ilce  , :insert_il , :insert_posta , :insert_telefon ) ");
+                    $stetment = $connection->prepare("INSERT INTO  addresses ( Street,District,City,State,Posta_code	,RecipientPhone,RecipientName,User_id ) 
+                                                            VALUES( :insert_sokak , :insert_mahalle  , :insert_il , :insert_ilce , :insert_posta, :insert_telefon, :insert_ad,:insert_user) ");
                     $stetment->execute(array(
-                        'insert_sokak'      => $sokak,
-                        'insert_ilce'       => $ilce,
-                        'insert_il'         => $il,
-                        'insert_posta'      => $posta,
-                        'insert_telefon'    => $telefon
-
+                        'insert_sokak'           => $sokak,
+                        'insert_mahalle'         => $mahalle,
+                        'insert_il'              => $il,
+                        'insert_ilce'            => $ilce,
+                        'insert_posta'           => $posta,
+                        'insert_telefon'         => $telefon,
+                        'insert_ad'              => $ad,
+                        'insert_user'            => $userID
                     ));
                     //End Update the  database with This Information
                     //When the Update operation succeeds, this sentence will be printed
 
                     echo '<div class="container">' ;
-                    echo '<div class=" alert alert-info">'.$stetment->rowCount() .'Record updated...</div>' ;
+                    echo '<div class=" alert alert-info">'.$stetment->rowCount() .'Başarli bir şekılde adres eklenmişrit...</div>' ;
                     echo '</div>';
 
             }
