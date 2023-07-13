@@ -36,7 +36,7 @@ a.nav-link:hover{
 }
 
 a.nav-link {
-	color: #210505;
+	color: #ffffff;
 }
 a.dropdown-item {
 	color: #eee;
@@ -564,3 +564,67 @@ textarea,input:hover{
 
 
 /*end cart page*/
+.item-box {
+	background-color: #f9f9f9;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	padding: 10px;
+	margin-bottom: 20px;
+}
+
+.box-image {
+	width: 100%;
+	height: auto;
+}
+
+.title-font-size {
+	font-size: 16px;
+	margin-top: 10px;
+}
+
+.Description-font-size {
+	font-size: 14px;
+	color: #888;
+}
+
+.money {
+	font-size: 12px;
+}
+
+.cart-button {
+	display: inline-block;
+	color: #fff;
+	text-decoration: none;
+}
+.item-box {
+	width: 250px; /* أدخل العرض المطلوب للكارت */
+}
+
+.box-information {
+	height: 130px; /* أدخل الارتفاع المطلوب للكارت */
+	overflow: hidden;
+}
+.list-groups {
+	margin-bottom: 20px;
+}
+
+.list-groups-item {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	padding: 10px 20px;
+	border: none;
+	background-color: rgba(185, 177, 177, 0.17);
+}
+
+.list-groups-item a {
+	color: #333;
+	text-decoration: none;
+	transition: color 0.3s ease;
+}
+
+.list-groups-item a:hover {
+	color: #007bffd9;
+}
+
+

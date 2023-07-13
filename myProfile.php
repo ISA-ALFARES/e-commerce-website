@@ -11,12 +11,12 @@ if (isset($_SESSION['user'])){
     $information = $userStatment ->fetchAll();
 
     ?>
-    <h1 class="text-center">My Profile</h1>';
+    <h1 class="text-center">Hisabim</h1>';
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="card  mt-3 mb-3">
-                    <div class="card-header bg-primary text-white">My Profile</div>
+                    <div class="card-header bg-primary text-white">Hisabim</div>
                     <div class="card-body information">
                         <?php
 
@@ -25,23 +25,23 @@ if (isset($_SESSION['user'])){
                             <ul class="list-unstyled">
                                 <li>
                                     <i class="fa-solid fa-unlock "></i>
-                                    <span>Name</span> :   <?php echo $info['Username']; ?>
+                                    <span>ad</span> :   <?php echo $info['Username']; ?>
                                 </li>
                                 <li>
                                     <i class="fa-solid fa-envelope "></i>
-                                    <span>Email</span> :   <?php echo $info['Email']; ?>
+                                    <span>E-post</span> :   <?php echo $info['Email']; ?>
                                 </li>
                                 <li>
                                     <i class="fa-solid fa-user-group "></i>
-                                    <span>Full Name</span> :   <?php echo $info['Fullname']; ?>
+                                    <span>Ad ve soyad</span> :   <?php echo $info['Fullname']; ?>
                                 </li>
                                 <li>
                                     <i class="fa-solid fa-calendar "></i>
-                                    <span>Ragistered Data</span> :   <?php echo $info['Date']; ?>
+                                    <span>ekleme tarih</span> :   <?php echo $info['Date']; ?>
                                 </li>
                                 <li>
                                     <i class="fa-solid fa-tags "></i>
-                                    <span>Fov Category</span> :   <?php echo $info['UserID']; ?>
+                                    <span>Kategori</span> :   <?php echo $info['UserID']; ?>
                                 </li>
 
                             </ul>
@@ -53,7 +53,7 @@ if (isset($_SESSION['user'])){
             <div id="my-ads" class="my-ads block">
             <div class="col-md-12">
                 <div class="card mt-3 mb-3">
-                    <div class="card-header bg-primary text-white ">My ads</div>
+                    <div class="card-header bg-primary text-white ">Reklamlarım</div>
                     <div class="card-body ">
                         <div class="d-flex justify-content-start flex-wrap">
                             <?php
@@ -64,7 +64,7 @@ if (isset($_SESSION['user'])){
                                         echo '<div class="box-information">';
                                             echo '<h5 class="font-weight-bold d-inline-block title-font-size ">'.$item['Name'].'</h5>';
                                             echo '<span class=" Description-font-size ">'.$item['Description'] .'</span>';
-                                             echo '<h4 class="text-dark font-weight-bold  ">'.$item['Price'].'<span class="text-dark money">'.lang("MONY").'</span>'.'</h4>';
+                                             echo '<h4 class="text-dark font-weight-bold  ">'.$item['Price'].'<span class="text-dark money"> TL</span>'.'</h4>';
                                                  if ($item['Approve'] == 0)
                                                     {
                                                         echo '<span class="text-white text-center not-approve">'.lang("NOT APPROVE").'</span>';

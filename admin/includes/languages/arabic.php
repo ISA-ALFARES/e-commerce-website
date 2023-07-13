@@ -153,7 +153,17 @@ function lang($phrase){
         'Password' => 'كلمة المرور' ,
         'User name' => 'اسم المستخدم' ,
         '' => '' ,
-
+        'CATIGORIES_CHILD' => 'Categories Child' ,
+        'None' => 'None' ,
+        //           END  Categories Pages Page   //
+        //           Start  Categories Pages Page   //
+        //           End  login Pages Page   //
+        'Separate Tags With Comma' => 'Tags' ,
+        '' => '' ,
+        '' => '' ,
+        '' => '' ,
+        '' => '' ,
+        '' => '' ,
         //End  NavbarPages
 
         //Start Member titles....

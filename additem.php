@@ -93,7 +93,7 @@ if (isset($_SESSION['user'])){
             <div class="col-md-12">
                 <div class="card  mt-3 mb-3">
 
-                    <div class="card-header bg-primary text-white">My Profile</div>
+                    <div class="card-header bg-primary text-white">Hisabım</div>
                     <div class="card-body crate-add">
                         <div class="row">
                             <div class="col-md-8">
@@ -107,7 +107,7 @@ if (isset($_SESSION['user'])){
                                                     class="form-control live-name"
                                                     type="text"
                                                     name="name"
-                                                    placeholder="    Enter the Item Name...! "
+                                                    placeholder="    Ürün Adı"
                                                     value=""
                                             <span class="axstrisx"></span>
                                         </div>
@@ -120,7 +120,7 @@ if (isset($_SESSION['user'])){
                                                     type="text"
                                                     name="description"
                                                     class="form-control live-description"
-                                                    placeholder="   Description of The Item" />
+                                                    placeholder="  Ürün Tanımı" />
                                             <span class="axstrisx">*</span>
                                         </div>
                                         <!-- End Description Field -->
@@ -132,7 +132,7 @@ if (isset($_SESSION['user'])){
                                                     class="form-control live-price"
                                                     type="text"
                                                     name="price"
-                                                    placeholder="    Enter the Price...! "
+                                                    placeholder="    Ürün Fiatı...! "
                                             <span class="axstrisx"></span>
                                         </div>
                                         <!-- End Price field -->
@@ -140,10 +140,9 @@ if (isset($_SESSION['user'])){
                                         <div class="form-group ">
                                             <select  class="form-control selection " name="status">
                                                 <option value="0">Status</option>
-                                                <option value="1">New</option>
-                                                <option value="2">Like New</option>
-                                                <option value="3">Used</option>
-                                                <option value="4">Very Old</option>
+                                                <option value="1">Yeni</option>
+                                                <option value="2">Yeni gibi</option>
+                                                <option value="3">Eski</option>
                                             </select>
                                         </div>
                                         <!-- End Status Field -->
@@ -155,7 +154,7 @@ if (isset($_SESSION['user'])){
                                                     class="form-control live-image"
                                                     type="text"
                                                     name="country"
-                                                    placeholder="    Enter the Country name...! "
+                                                    placeholder="    Ülke...! "
                                                     value=""
                                             <span class="axstrisx"></span>
                                         </div>
@@ -163,7 +162,7 @@ if (isset($_SESSION['user'])){
                                         <!-- Start Catigore Field -->
                                         <div class="form-group">
                                             <select  class="form-control selection " name="catigore">
-                                                <option value="0">Catigore</option>
+                                                <option value="0">Kategori</option>
                                                 <?php
                                                 $stetment=$connection->prepare("SELECT * FROM categories");
                                                 $stetment ->execute();

@@ -97,6 +97,9 @@ if(isset($_SESSION['user'])  ){
                     <span class="axstrisx">*</span>
                 </div>
                 <!-- End    -->
+                <div class="mb-3">
+                    <textarea class="form-control" name="adres" required></textarea>
+                </div>
                 <!-- Start    -->
                 <div class="form-group">
                     <input
@@ -134,6 +137,7 @@ if(isset($_SESSION['user'])  ){
             $ilce           = filter_var($_POST ['ilce'],   FILTER_SANITIZE_STRING);
             $mahalle        = filter_var($_POST ['mahalle'],FILTER_SANITIZE_STRING);
             $sokak          = filter_var($_POST ['sokak']  );
+            $adres          = filter_var($_POST ['adres']  );
             $posta          = filter_var($_POST ['posta'],  FILTER_SANITIZE_NUMBER_INT);
 
 
@@ -155,14 +159,15 @@ if(isset($_SESSION['user'])  ){
                 //Checking whether the entered name exists in the database or not for funcation
 
                     //Update the  database with This Information
-                    $stetment = $connection->prepare("INSERT INTO  addresses ( Street,District,City,State,Posta_code	,RecipientPhone,RecipientName,User_id ) 
-                                                            VALUES( :insert_sokak , :insert_mahalle  , :insert_il , :insert_ilce , :insert_posta, :insert_telefon, :insert_ad,:insert_user) ");
+                    $stetment = $connection->prepare("INSERT INTO  addresses ( Street,District,City,State,address,Posta_code	,RecipientPhone,RecipientName,User_id ) 
+                                                            VALUES( :insert_sokak , :insert_mahalle  , :insert_il , :insert_ilce , :insert_address, :insert_posta, :insert_telefon, :insert_ad,:insert_user) ");
                     $stetment->execute(array(
                         'insert_sokak'           => $sokak,
                         'insert_mahalle'         => $mahalle,
                         'insert_il'              => $il,
                         'insert_ilce'            => $ilce,
                         'insert_posta'           => $posta,
+                        'insert_address'           => $adres,
                         'insert_telefon'         => $telefon,
                         'insert_ad'              => $ad,
                         'insert_user'            => $userID

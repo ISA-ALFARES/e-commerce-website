@@ -156,6 +156,39 @@
             //End  NavbarPages
 
             //Start Member titles....
+            '' => '' ,
+            //           End  login Pages Page   //
+            'Separate Tags With Comma' => 'Tags' ,
+            '' => '' ,
+            '' => '' ,
+            '' => '' ,
+            '' => '' ,
+            '' => '' ,
+            'HOME'          => "HOME",
+            'LOGIN'         => "Login" ,
+            'MEMBERS'       => "Members" ,
+            'LANGUAGE'       => "Language" ,
+            'CATIGORIES'    => "Catigories",
+            'DASHBOARD'     => "Dashboard" ,
+            'ITEMS'         => "Items" ,
+            'COMMENTS'         => "Comments" ,
+            'ACCOUNT'          => "my account",
+            'EDIT'      => "Edit Profile",
+            'VISIT_SHOP'      => "Visit Shop",
+            'SITTING'    => "Sittings",
+            'LOGOUT'     => "Logout" ,
+            'EN' => "EN" ,
+            'AR' => "AR" ,
+            'TR' => "TR" ,
+            //END  NavbarPages Page   //
+            //Start  Memper Pages Page   //
+            'CATIGORIES_CHILD' => 'Categories Child' ,
+
+            'None' => 'None' ,
+            '' => '' ,
+            //           END  Categories Pages Page   //
+            //           Start  Categories Pages Page   //
+
         );
         return $trlang[$phrase];
     };

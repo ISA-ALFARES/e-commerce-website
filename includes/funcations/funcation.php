@@ -17,7 +17,7 @@
     ** Get All Function v2.0
     ** Function To Get All Records From Any Database Table
     */
-     function getAllFrom($field, $table, $where = NULL, $and = NULL, $orderFiled = '' , $ordering = "DESC") {
+     function getAllFrom($field, $table, $where = NULL, $and = NULL, $orderFiled = '' , $ordering = "ASC") {
 
         global $connection;
 

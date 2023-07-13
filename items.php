@@ -50,27 +50,27 @@ global $tpl, $connection, $items, $temp;
                         <ul class="list-unstyled">
                             <li>
                                 <i class="fa fa-calendar fa-fw"></i>
-                                <span>Added Date</span> : <?php echo $item['Add_Data'] ?>
+                                <span>Tarih Ekle</span> : <?php echo $item['Add_Data'] ?>
                             </li>
                             <li>
                                 <i class="fa fa-magic  fa-fw"></i>
-                                <span>Price</span> : <?php echo $item['Price'] ?>
+                                <span>Fiat</span> : <?php echo $item['Price'] ?>
                             </li>
                             <li>
                                 <i class="fa fa-building fa-fw"></i>
-                                <span>Made In</span> : <?php echo $item['Country'] ?>
+                                <span>ülke</span> : <?php echo $item['Country'] ?>
                             </li>
                             <li>
                                 <i class="fa fa-tags fa-fw"></i>
-                                <span>Category</span> : <a href="catigories.php?cat_id=<?php echo $item['Cat_ID'] ?>"><?php echo $item['category_name'] ?></a>
+                                <span>Katigori</span> : <a href="catigories.php?cat_id=<?php echo $item['Cat_ID'] ?>"><?php echo $item['category_name'] ?></a>
                             </li>
                             <li>
                                 <i class="fa fa-user fa-fw"></i>
-                                <span>Added By</span> : <a href="#"><?php echo $item['Username'] ?></a>
+                                <span>Satıcı</span> : <a href="#"><?php echo $item['Username'] ?></a>
                             </li>
                             <li class="tags-items">
                                 <i class="fa fa-user fa-fw"></i>
-                                <span>Tags</span> :
+                                <span>Etiketler</span> :
                                     <?php
                                     $allTags = explode(",", $item['brand']);
                                     foreach ($allTags as $tag) {
@@ -91,7 +91,7 @@ global $tpl, $connection, $items, $temp;
                     <div class="row">
                         <div class="col-md-9 offset-md-3">
                             <div class="add-comment">
-                                <h3 class="mb-4">Add Your Comment</h3>
+                                <h3 class="mb-4">Yorum Ekle</h3>
                                 <form action="<?php echo $_SERVER['PHP_SELF'] . '?item_ID=' . $item['Item_ID'] ?>" method="POST">
                                     <div class="mb-3">
                                         <textarea class="form-control" name="comment" required></textarea>
@@ -115,7 +115,7 @@ global $tpl, $connection, $items, $temp;
                                         ));
 
                                         if ($stmt) {
-                                            echo '<div class="alert alert-success">Comment Added</div>';
+                                            echo '<div class="alert alert-success">Yorum ekleendi</div>';
                                         }
                                     } else {
                                         echo '<div class="alert alert-danger">You Must Add Comment</div>';

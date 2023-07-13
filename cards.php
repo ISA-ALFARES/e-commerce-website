@@ -126,7 +126,7 @@ session_start();
                                             $totalPrice += $price;
                                         }
 
-                                        if ($totalPrice >= 150){
+                                        if ($totalPrice >= 200){
 
                                             echo $totalPrice ." TL";
                                             echo '</h3>';
@@ -161,7 +161,7 @@ session_start();
 
             }
              $item = chekNewcart('*','cart','Item_id',$Item_ID);{
-                 if ($item == 1){
+                 if ($item == 0){
                      $statement = $connection->prepare("INSERT INTO cart (CartDate, Item_id, User_id,Quantity, Price)
                                                      VALUES (NOW(), :insert_item_id, :insert_user_id, 1 , :insert_price)
                                                      ");

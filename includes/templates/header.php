@@ -72,7 +72,7 @@
     <?php } ?>
     <nav class="navbar navbar-expand-lg nav-bar" style="background-color: #007bffd9;">
         <div class="container-fluid">
-            <a class="navbar-brand text-dark" href="index.php"><?php echo lang('HOMEPAGE')?></a>
+            <a class="navbar-brand text-white" href="index.php"><?php echo lang('HOMEPAGE')?></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fa-solid fa-bars"></i>
             </button>
@@ -80,7 +80,7 @@
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0  ">
                     <?php  foreach (getCat() as  $cat){
 
-                        echo '<li class="nav-item dropdown"><a class="nav-link" href="catigories.php?cat_id='.$cat['ID'].'">'.$cat['Name'].'</a></li>';
+                        echo '<li class="nav-item dropdown cat-lınk"><a class="nav-link cat-lınk" href="catigories.php?cat_id='.$cat['ID'].'">'.$cat['Name'].'</a></li>';
 
                     } ?>
                 </ul>
