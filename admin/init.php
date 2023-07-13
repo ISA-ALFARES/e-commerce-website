@@ -14,7 +14,7 @@
 
             $language = $_GET['language'];
 
-            $_SESSION['language'] = $language;
+            $language = $_SESSION['language']  ;
 
 
 
@@ -23,7 +23,7 @@
             $language = 'english.php';
 
         }
-    include   $lang .$language; // 1-Languages Directory --olwes firset file
+    include   $lang . $language; // 1-Languages Directory --olwes firset file
     include   $temp ."header.php";     // 2-header Directory
 
     //include navbar all pages Expect The one with $navbar variable

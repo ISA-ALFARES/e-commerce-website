@@ -7,7 +7,7 @@ include 'init.php';
 <div class="container">
     <div class="row">
         <?php
-            echo '<div class="col-md-12">';
+            echo '<div class="col-md-12 mt-4">';
                 echo '<div class="row">';
                     $allItems = getAllFrom('*', 'items', 'Approve = 1', '', 'Item_ID');
                     foreach ($allItems as $item) {

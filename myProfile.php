@@ -1,7 +1,7 @@
 <?php
 global $connection, $items;
 session_start();
-if (isset($_SESSION['user'])){
+if (isset($_SESSION['user']) ){
     global $temp;
     include  "init.php";
     $userStatment=$connection->prepare("SELECT *  FROM users WHERE Username = ? ");

@@ -4,7 +4,7 @@ session_start();
     $no_navbar ='';//Giriş (index.php) sayfasında gezinme çubuğu görünmemeli
     $page_title = 'LOGIN';
     //Kullanıcı zaten oturum açmışsa, onları uygun sayfaya yönlendirin
-    if (isset($_SESSION['username'])) {
+    if (isset($_SESSION['username']) ) {
       header('Location: dashboard.php');
       exit;
   }

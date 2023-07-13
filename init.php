@@ -26,7 +26,7 @@
 
         $language = $_GET['language'];
 
-        $_SESSION['language'] = $language;
+        $language = $_SESSION['language'] ;
 
 
 

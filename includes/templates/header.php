@@ -66,13 +66,13 @@
         <div class="d-flex justify-content-end">
             <a href="login.php" class="uber_bar text-white" ><button  class="btn-lg btn btn-primary">
                     <i class="fa-solid fa-user ">  </i>
-                    <?php echo lang("LOGIN_SIGNUP"); ?></button>
+                    LOGIN_SIGNUP</button>
             </a>
         </div>
     <?php } ?>
     <nav class="navbar navbar-expand-lg nav-bar" style="background-color: #007bffd9;">
         <div class="container-fluid">
-            <a class="navbar-brand text-white" href="index.php"><?php echo lang('HOMEPAGE')?></a>
+            <a class="navbar-brand text-white" href="index.php">Home page</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fa-solid fa-bars"></i>
             </button>

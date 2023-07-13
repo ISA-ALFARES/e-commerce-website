@@ -26,7 +26,7 @@ session_start();
                 ?>
                 <nav class="navbar  cartnav navbar-expand-lg navbar-light bg-white">
                     <div class="container">
-                        <a class="navbar-brand" href="#"><i class="fa fa-shopping-cart text-colors"></i>cart</a>
+                        <a class="navbar-brand" href="#"><i class="fa fa-shopping-cart text-colors"></i>Sepete</a>
                         <ul class="navbar-nav">
                             <li class="nav-item">
                                 <a class=" text-colors" href="#">Ürünler Sil</a>
@@ -71,7 +71,6 @@ session_start();
                                             <div class="col-md-2 mb-2">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <!-- العنصر الثاني - صورة داخل الـ card -->
                                                         <?php
                                                         if (empty($cart['itemAvatar'])){
 
@@ -89,7 +88,6 @@ session_start();
                                                 <p><?php  echo  '<b>'.$cart['Name'].'</b>'.$cart['Description']; ?></p>
                                             </div>
                                             <div class="col-md-2 mb-2">
-                                                <!-- العنصر الرابع - رقم قابل للزيادة والنقصان -->
                                                 <input type="number"
                                                        min="0"
                                                        max="100"
@@ -97,11 +95,9 @@ session_start();
                                                        class="custom-input">
                                             </div>
                                             <div class="col-md-2 mb-2">
-                                                <!-- العنصر الخامس - السعر -->
                                                 <span class="text-colors font-weight-bold"><?php  echo  $cart['Price'] .'TL'; ?></span>
                                             </div>
                                             <div class="col-md-1 mb-1">
-                                                <!-- العنصر السادس - رابط مع كلمة -->
                                                 <a href="?do=Delete&cartid=<?php echo  $cartid ?>"><i class="fa fa-trash-alt text-colors"></i></a>
                                             </div>
                                         </div>
